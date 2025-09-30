@@ -1,0 +1,20 @@
+======= A short introduction to uncertainty quantification and sensitivity analysis with applications =======
+
+In this git we have collected a number of notebooks aiming at
+introducing you to the application of uncertainty quantification and
+sensitivity analysis (UQSA).
+
+Below you find a hyperlinked overview which will take you to the various subtopics we have found to be useful in UQSA. 
+
+  * "Preliminaries": "preliminaries.ipynb" tries to present the
+    statistical relations and laws needed to derive the Sobol indices
+  * "Local versus global sensitivity analysis": "local_vs_global.ipynb"
+  * "Introduction to sensitivity analysis": "sensitivity_introduction.ipynb"
+  * "Higher order sensitivity indices":"sensitivity_higher_order.ipynb"
+  * "Sensitivity indices for Sobol's G function": "interactive_g_function.ipynb"
+  * "Monte Carlo methods for UQSA": "monte_carlo.ipynb"
+  * "Polynomial chaos expansion methods for UQSA": "introduction_gpc.ipynb"
+  * "Exercises": "exercises.ipynb"
+    * "UQSA of Arterial Wall models": "wall_models.ipynb"
+    * "UQSA of the Ishigami function": "ishigami_example.ipynb"
+
