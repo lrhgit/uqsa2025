@@ -1,6 +1,9 @@
 # UQSA2025
 
 
+https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/interactive_gstar_function.ipynb
+
+
 
 ## Getting started
 
