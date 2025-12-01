@@ -1,0 +1,15 @@
+name: uqsa
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.10
+  - numpy
+  - scipy
+  - pandas
+  - matplotlib
+  - ipywidgets
+  - chaospy
+  - pip
+  - pip:
+      - chaospy   # fallback for pip install
+
