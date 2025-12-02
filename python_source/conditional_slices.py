@@ -2,80 +2,82 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 import pandas as pd
+import chaospy as cp
 
-import ipywidgets as widgets
-from ipywidgets import VBox, HBox, IntSlider, Dropdown, Checkbox, Output
+from ipywidgets import (
+    VBox, HBox, IntSlider, Dropdown, Checkbox, Output
+)
 from IPython.display import display, clear_output
 
-# ====================================================================
-# 1) Core plotting function (clean, no duplicated output)
-# ====================================================================
+
+# -------------------------------------------------------------
+#  Core computation (no display)
+# -------------------------------------------------------------
 
 def plot_slices_core(Z, Y, w, Ndz, show_model=True,
                      ymin=None, ymax=None):
     """
-    Compute equal-width slices in Z_k, compute slice means,
-    optionally overlay linear model, return (fig, df_spoor).
+    Returns (fig, df_spoor).
+    Does NOT display the figure (wrapper does that).
     """
 
     Nrv = Z.shape[0]
 
-    # Determine y-axis limits if not given
+    # y-limits auto
     if ymin is None or ymax is None:
         span = float(np.max(Y) - np.min(Y))
-        pad = 0.05 * (span if span > 0 else 1.0)
+        pad  = 0.05 * (span if span > 0 else 1.0)
         ymin = float(np.min(Y) - pad)
         ymax = float(np.max(Y) + pad)
 
-    # Layout: 2 columns, enough rows
+    # layout
     ncols = 2
     nrows = math.ceil(Nrv / ncols)
     fig, axes = plt.subplots(nrows, ncols,
-                             figsize=(10, 4.6 * nrows),
+                             figsize=(10, 4.5 * nrows),
                              squeeze=False)
 
     YsliceMean = np.full((Nrv, Ndz), np.nan)
 
+    # For each variable Z_k
     for k in range(Nrv):
         ax = axes[k // ncols, k % ncols]
 
-        # Sort by Z_k
+        # sort samples
         sidx = np.argsort(Z[k, :])
-        Zsorted_k = Z[k, sidx]
-        Ysorted = Y[sidx]
+        Zs = Z[k, sidx]
+        Ys = Y[sidx]
 
-        # Slice boundaries
-        zmin, zmax = float(np.min(Zsorted_k)), float(np.max(Zsorted_k))
-        if zmax == zmin:     # avoid degeneracy
+        # slice boundaries
+        zmin, zmax = np.min(Zs), np.max(Zs)
+        if zmax == zmin:
             zmin -= 0.5
             zmax += 0.5
 
         ZB = np.linspace(zmin, zmax, Ndz + 1)
         Zmid = 0.5 * (ZB[:-1] + ZB[1:])
 
-        # Vertical lines
+        # vertical boundaries
         for edge in ZB:
             ax.axvline(edge, linestyle='--', color='.75')
 
-        # Slice means
+        # slice means
         for i in range(Ndz):
             if i < Ndz - 1:
-                mask = (Zsorted_k >= ZB[i]) & (Zsorted_k < ZB[i+1])
+                mask = (Zs >= ZB[i]) & (Zs <  ZB[i+1])
             else:
-                mask = (Zsorted_k >= ZB[i]) & (Zsorted_k <= ZB[i+1])
-
+                mask = (Zs >= ZB[i]) & (Zs <= ZB[i+1])
             if np.any(mask):
-                YsliceMean[k, i] = np.mean(Ysorted[mask])
+                YsliceMean[k, i] = np.mean(Ys[mask])
 
-        # Plot slice means
         ax.plot(Zmid, YsliceMean[k, :], 'o-', label="slice mean")
 
-        # Linear model overlay (vary dimension k only)
+        # optional linear model
         if show_model:
-            zvals = np.linspace(zmin, zmax, 30)
-            Zinp = np.zeros((len(zvals), Nrv))
-            Zinp[:, k] = zvals
-            Ymodel = np.sum(Zinp * w, axis=1)
+            zvals = np.linspace(zmin, zmax, 40)
+            Ztmp = np.zeros((len(zvals), Nrv))
+            Ztmp[:, k] = zvals
+            Ymodel = np.sum(Ztmp * w, axis=1)
             ax.plot(zvals, Ymodel, label="linear model")
 
         ax.set_xlabel(f"Z{k+1}")
@@ -83,176 +85,142 @@ def plot_slices_core(Z, Y, w, Ndz, show_model=True,
         ax.grid(True, alpha=0.25)
         ax.legend(frameon=False)
 
-    # Remove unused axes
-    for idx in range(Nrv, nrows * ncols):
+    # remove empty axes
+    for idx in range(Nrv, nrows*ncols):
         fig.delaxes(axes[idx // ncols, idx % ncols])
 
     fig.tight_layout()
 
-    # SpoorMan-like metric: var(E[Y|Zi]) / var(Y)
+    # SpoorMan metric
     VarY = np.var(Y)
-    if VarY == 0:
-        spoor = [np.nan] * Nrv
-    else:
-        spoor = [np.nanvar(YsliceMean[k, :]) / VarY for k in range(Nrv)]
+    spoor = [np.nanvar(YsliceMean[k, :]) / VarY for k in range(Nrv)]
+    df_spoor = pd.DataFrame(
+        {"Ssl": np.round(spoor, 3)},
+        index=[f"Z{i+1}" for i in range(Nrv)]
+    )
 
-    df_spoor = pd.DataFrame({"Ssl": np.round(spoor, 3)},
-                            index=[f"Z{i+1}" for i in range(Nrv)])
     return fig, df_spoor
 
 
-# ====================================================================
-# 2) Sampling helper (method = "Chaospy" or "NumPy")
-# ====================================================================
+# -------------------------------------------------------------
+# Helper functions for sampling
+# -------------------------------------------------------------
 
-def sample_data(N, method, zm, jpdf, w):
+def sample_inputs(zm, jpdf, N, method):
     """
-    Generate (Z, Y) using chosen sampling method.
-    method ∈ {"Chaospy", "NumPy"}.
-    Returns Z (Nrv x N) and Y (length N).
+    Return Z (Nrv x N) and Y (N values)
     """
-
-    Nrv = zm.shape[0]
+    w = np.ones(zm.shape[0]) * 2  # same as notebook
 
     if method == "Chaospy":
-        # jpdf is a Joint distribution from chaospy
         Z = jpdf.sample(N)
         Y = np.sum(Z.T * w, axis=1)
         return Z, Y
 
     elif method == "NumPy":
-        # Independent Gaussians using zm[:,1] as std deviations
-        Z = np.array([
-            np.random.normal(loc=0.0, scale=zm[i, 1], size=N)
-            for i in range(Nrv)
-        ])
+        means = zm[:, 0]
+        stds  = zm[:, 1]
+        Z = np.random.normal(means[:, None], stds[:, None], size=(len(means), N))
         Y = np.sum(Z.T * w, axis=1)
         return Z, Y
 
     else:
-        raise ValueError(f"Unknown method: {method}")
+        raise ValueError("Unknown sampling method")
 
 
-# ====================================================================
-# 3) Interactive demo widget
-# ====================================================================
+# -------------------------------------------------------------
+# Interactive UI
+# -------------------------------------------------------------
 
 def conditional_slices_interactive(zm, w, jpdf):
-    """
-    Interactive demo:
-      - Slider for N (samples)
-      - Slider for Ndz (slices)
-      - Dropdown: sampling method
-      - Dropdown: which rule to use for Ndz_max (N//20, sqrt(N), manual)
-      - Checkbox for model overlay
-
-    Displays:
-      - slice figure
-      - SpoorMan DataFrame
-    """
 
     out = Output()
 
-    # --- Widgets ---
-
-    slider_N = IntSlider(
-        value=500, min=50, max=4000, step=50,
-        description="N", continuous_update=False
-    )
-
-    slider_Ndz = IntSlider(
-        value=10, min=2, max=25, step=1,
-        description="Ndz", continuous_update=False
-    )
-
-    dropdown_limit = Dropdown(
-        options=[
-            ("N//20 (stable)", "N20"),
-            ("sqrt(N)", "sqrt"),
-            ("manual", "manual")
-        ],
-        value="N20",
-        description="Limit rule"
-    )
-
-    dropdown_method = Dropdown(
+    # Top controls
+    ui_method = Dropdown(
         options=["Chaospy", "NumPy"],
         value="Chaospy",
-        description="Sample via"
+        description="Sampling:"
     )
 
-    cb_model = Checkbox(
+    ui_ndzrule = Dropdown(
+        options=["N//20", "sqrt(N)", "Manual"],
+        value="N//20",
+        description="Slices rule:"
+    )
+
+    ui_showmodel = Checkbox(
         value=True,
         description="Show model"
     )
 
-    # ==============================================================
-    # Helper: compute Ndz_max according to rule
-    # ==============================================================
+    # Sample size slider
+    ui_N = IntSlider(
+        value=500, min=50, max=5000, step=50,
+        description="N"
+    )
 
-    def compute_Ndz_max(N, rule):
-        if rule == "N20":
-            return max(2, N // 20)
-        elif rule == "sqrt":
-            return max(2, int(np.sqrt(N)))
-        elif rule == "manual":
-            return 200  # allow large values, manual override
-        else:
-            return 20
+    # Ndz slider will be updated dynamically
+    ui_Ndz = IntSlider(
+        value=10, min=2, max=50,
+        description="Ndz"
+    )
 
-    # ==============================================================
-    # Update function
-    # ==============================================================
+    # ---------------------------------------------------------
+    # Update logic
+    # ---------------------------------------------------------
 
-    def _update(change=None):
+    def update(*args):
         with out:
             clear_output(wait=True)
 
-            N = slider_N.value
-            rule = dropdown_limit.value
-            method = dropdown_method.value
+            # 1. sample Z and Y
+            Z, Y = sample_inputs(zm, jpdf, ui_N.value, ui_method.value)
 
-            # Recompute Ndz_max and adjust slider
-            Ndz_max = compute_Ndz_max(N, rule)
-            if rule != "manual":
-                slider_Ndz.max = Ndz_max
-                if slider_Ndz.value > Ndz_max:
-                    slider_Ndz.value = Ndz_max
+            # 2. update Ndz.max depending on rule
+            if ui_ndzrule.value == "N//20":
+                ui_Ndz.max = max(2, ui_N.value // 20)
 
-            Ndz = slider_Ndz.value
+            elif ui_ndzrule.value == "sqrt(N)":
+                ui_Ndz.max = max(2, int(np.sqrt(ui_N.value)))
 
-            # --- Sampling ---
-            Z, Y = sample_data(N, method, zm, jpdf, w)
+            # else Manual: keep slider as-is
 
-            # --- Plot slices ---
+            # 3. ensure slider value fits new max
+            if ui_Ndz.value > ui_Ndz.max:
+                ui_Ndz.value = ui_Ndz.max
+
+            # 4. compute figure
             fig, df_spoor = plot_slices_core(
                 Z, Y, w,
-                Ndz=Ndz,
-                show_model=cb_model.value
+                Ndz=ui_Ndz.value,
+                show_model=ui_showmodel.value
             )
 
             display(fig)
             display(df_spoor)
 
-    # ==============================================================
-    # Link widgets to update
-    # ==============================================================
+    # ---------------------------------------------------------
+    # Bind widget change events
+    # ---------------------------------------------------------
 
-    slider_N.observe(_update, "value")
-    slider_Ndz.observe(_update, "value")
-    dropdown_limit.observe(_update, "value")
-    dropdown_method.observe(_update, "value")
-    cb_model.observe(_update, "value")
+    ui_method.observe(update, "value")
+    ui_ndzrule.observe(update, "value")
+    ui_showmodel.observe(update, "value")
+    ui_N.observe(update, "value")
+    ui_Ndz.observe(update, "value")
 
-    # Initial call
-    _update()
+    # initial draw
+    update()
 
-    # Layout UI
+    # layout group
+    controls_top = VBox([ui_method, ui_ndzrule, ui_showmodel])
+    controls_bottom = VBox([ui_N, ui_Ndz])
+
     ui = VBox([
-        HBox([slider_N, slider_Ndz]),
-        HBox([dropdown_limit, dropdown_method, cb_model]),
+        controls_top,
+        controls_bottom,
         out
     ])
 
     return ui
-
