@@ -2,6 +2,7 @@ import numpy as np, math, matplotlib.pyplot as plt
 import ipywidgets as widgets
 from IPython.display import display
 from matplotlib.figure import Figure
+from ipywidgets import HBox, VBox, HTML
 
 def _pie(N):
     vol = math.pi**(N/2) / math.gamma(N/2 + 1)
@@ -15,28 +16,7 @@ def _pie(N):
     ax.set_title(f"Hypersphere–Hypercube ratio in {N}D")
     return fig
 
-
 def hypercube_demo():
     slider = widgets.IntSlider(
-        min=1, max=20, value=2,
-        description='', continuous_update=False
-    )
-
-    out = widgets.Output()
-
-    def _update(N):
-        with out:
-            out.clear_output(wait=True)
-            fig = _pie(N)
-            display(fig)
-
-    slider.observe(lambda c: _update(c["new"]), names='value')
-    _update(slider.value)      # initial plot
-
-    # --- Slider below the figure ---
-    ui = widgets.VBox([
-        out,
-        slider
-    ])
-
-    display(ui)
+        min=1, max=20, value=4,
+        description='', continuous_upda_
