@@ -35,17 +35,20 @@ def hypercube_demo():
     slider.observe(lambda c: _update(c["new"]), names='value')
     _update(slider.value)
 
+
     ui = VBox([
         out,
         HBox(
             [label, slider],
             layout=widgets.Layout(
-                justify_content='flex-start',   # left-align horizontally
-                align_items='center',           # center vertically (optional)
-                column_gap='12px'               # spacing between label and slider
+                justify_content='flex-start',    # left align
+                align_items='center',
+                width='100%',                    # take full available width
+                padding='0px 20px'               # optional left padding
             )
         )
     ])
+
 
     
     display(ui)
