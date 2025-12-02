@@ -19,4 +19,32 @@ def _pie(N):
 def hypercube_demo():
     slider = widgets.IntSlider(
         min=1, max=20, value=4,
-        description='', continuous_upda_
+        description='', continuous_update=False,
+        layout=widgets.Layout(width='220px')
+    )
+
+    label = HTML("<b>Number of dimensions (N):</b>")
+
+    out = widgets.Output()
+
+    def _update(N):
+        with out:
+            out.clear_output(wait=True)
+            display(_pie(N))
+
+    slider.observe(lambda c: _update(c["new"]), names='value')
+    _update(slider.value)
+
+    ui = VBox([
+        out,
+        HBox(
+            [label, slider],
+            layout=widgets.Layout(
+                justify_content='center',   # center horizontally
+                align_items='center',        # center vertically
+                column_gap='12px'            # nice spacing
+            )
+        )
+    ])
+
+    display(ui)
