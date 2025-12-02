@@ -1,108 +1,120 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import ipywidgets as widgets
-from IPython.display import display, clear_output
+from ipywidgets import VBox, HBox, Output
+
 
 # ------------------------------------------------------------
-#  Core computation: compute slice means for Zi vs Y
+# Compute slices and slice means
 # ------------------------------------------------------------
-
-def compute_slice_stats(Z, Y, Ndz):
+def compute_slices(Z, Y, Nd):
     """
-    Return:
-        slice_centers: shape (Ndz,)
-        slice_means:   shape (Ndz,)
+    Z : array shape (N,)
+    Y : array shape (N,)
+    Nd : number of slices
     """
 
-    zi = Z
-    ymin = np.min(Y)
-    ymax = np.max(Y)
+    # Compute quantile-based slice boundaries
+    qs = np.linspace(0, 1, Nd + 1)
+    edges = np.quantile(Z, qs)
 
-    # Equidistant slice boundaries
-    zmin, zmax = np.min(zi), np.max(zi)
-    edges = np.linspace(zmin, zmax, Ndz+1)
-    centers = 0.5*(edges[:-1] + edges[1:])
-
-    slice_means = np.zeros(Ndz)
-    for k in range(Ndz):
-        mask = (zi >= edges[k]) & (zi < edges[k+1])
-        if np.any(mask):
-            slice_means[k] = np.mean(Y[mask])
+    slice_means = []
+    for i in range(Nd):
+        lo, hi = edges[i], edges[i+1]
+        mask = (Z >= lo) & (Z <= hi)
+        if np.sum(mask) > 0:
+            slice_means.append((np.mean([lo, hi]), np.mean(Y[mask])))
         else:
-            slice_means[k] = np.nan
+            slice_means.append((np.mean([lo, hi]), np.nan))
 
-    return centers, slice_means, edges
+    return edges, np.array(slice_means)
+
 
 # ------------------------------------------------------------
-#  Plotting for one variable Zi
+# Plot ONE variable Zi as a scatter + slice means
 # ------------------------------------------------------------
+def plot_one_axis(Zi, Y, Nd, ax, label):
+    """
+    Draw scatter + equidistant slices + slice mean points.
+    """
 
-def plot_one_slice(Z, Y, i, Ndz):
-    zi = Z[i, :]
-    centers, slice_means, edges = compute_slice_stats(zi, Y, Ndz)
+    # Scatter
+    ax.scatter(Zi, Y, color="steelblue", alpha=0.35, s=12)
 
-    fig, ax = plt.subplots(figsize=(6,3))
+    # Compute slices + slice means
+    edges, slice_means = compute_slices(Zi, Y, Nd)
 
-    # Raw scatter
-    ax.scatter(zi, Y, s=12, alpha=0.25)
+    # Vertical lines
+    for x in edges:
+        ax.axvline(x, color="lightgray", linestyle="--", linewidth=1)
 
-    # Vertical slice boundaries
-    for e in edges:
-        ax.axvline(e, color="gray", ls="--", lw=1, alpha=0.5)
+    # Slice mean line
+    ax.plot(slice_means[:, 0], slice_means[:, 1], "-o",
+            color="red", markersize=4, label="Slice mean")
 
-    # Mean in each slice
-    ax.plot(centers, slice_means, "ro-", lw=2, label="Slice mean")
-
-    ax.set_xlabel(f"Z{i+1}")
+    ax.set_xlabel(label)
     ax.set_ylabel("Y")
-    ax.set_title(f"Conditional slices for Z{i+1}")
     ax.legend()
 
-    fig.tight_layout()
-    return fig
 
 # ------------------------------------------------------------
-#  Interactive UI
+# Main UI function
 # ------------------------------------------------------------
-
-def conditional_slices_interactive(zm, w, jpdf, Ns=500):
+def conditional_slices_interactive(zm, w, jpdf):
     """
-    Compute samples, evaluate model and provide interactive slicing UI.
+    zm  : (Nrv, 2)   means and std dev
+    w   : (Nrv,)     weights
+    jpdf: chaospy joint distribution
     """
 
-    # Sampling
-    Z = jpdf.sample(Ns)      # shape (Nrv, Ns)
-    Y = np.sum(w[:,None] * Z, axis=0)
-
-    Nrv = Z.shape[0]
+    Nrv = zm.shape[0]
 
     # Widgets
-    slider_var = widgets.IntSlider(
-        min=1, max=Nrv, value=1,
-        description="Variable", continuous_update=False
+    Ns_slider = widgets.IntSlider(
+        value=400, min=50, max=2000, step=50,
+        description="Samples"
     )
 
-    slider_ndz = widgets.IntSlider(
-        min=2, max=20, value=5,
-        description="N slices", continuous_update=False
+    Nd_slider = widgets.IntSlider(
+        value=10, min=2, max=25, step=1,
+        description="N slices"
     )
 
-    out = widgets.Output()
+    out = Output()
 
+    # --------------------------------------------------------
     # Update function
+    # --------------------------------------------------------
     def update(*args):
         with out:
-            clear_output(wait=True)
-            fig = plot_one_slice(Z, Y, slider_var.value-1, slider_ndz.value)
-            display(fig)
+            out.clear_output(wait=True)
 
-    slider_var.observe(update, "value")
-    slider_ndz.observe(update, "value")
+            # Draw new samples
+            Z = jpdf.sample(Ns_slider.value)         # shape (Nrv, Ns)
+            Z = np.asarray(Z)
+            Y = np.sum(w[:, None] * Z, axis=0)
 
+            # Make the grid figure
+            fig, axs = plt.subplots(2, 2, figsize=(10, 8))
+            axs = axs.flatten()
+
+            for i in range(4):
+                plot_one_axis(Z[i, :], Y, Nd_slider.value,
+                              axs[i], f"Z{i+1}")
+
+            fig.tight_layout()
+            plt.show()
+
+    # Trigger updates
+    Ns_slider.observe(update, "value")
+    Nd_slider.observe(update, "value")
+
+    # Initial call
     update()
 
-    ui = widgets.VBox([
-        widgets.HBox([slider_var, slider_ndz]),
+    # UI layout
+    ui = VBox([
+        HBox([Ns_slider, Nd_slider]),
         out
     ])
     return ui
