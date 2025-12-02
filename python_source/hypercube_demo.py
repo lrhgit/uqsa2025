@@ -13,20 +13,30 @@ def _pie(N):
     ax.pie([vol, rem], labels=["Hypersphere", "Remaining"],
            autopct='%1.1f%%', explode=[0.05,0], startangle=140)
     ax.set_title(f"Hypersphere–Hypercube ratio in {N}D")
-    return fig                # <--- important
+    return fig
+
 
 def hypercube_demo():
-    slider = widgets.IntSlider(min=1, max=20, value=2, description='')
+    slider = widgets.IntSlider(
+        min=1, max=20, value=2,
+        description='', continuous_update=False
+    )
+
     out = widgets.Output()
 
     def _update(N):
         with out:
             out.clear_output(wait=True)
             fig = _pie(N)
-            display(fig)       # <--- no plt.show(), no Figure X
+            display(fig)
 
     slider.observe(lambda c: _update(c["new"]), names='value')
     _update(slider.value)      # initial plot
 
-    display(slider)
-    display(out)
+    # --- Slider below the figure ---
+    ui = widgets.VBox([
+        out,
+        slider
+    ])
+
+    display(ui)
