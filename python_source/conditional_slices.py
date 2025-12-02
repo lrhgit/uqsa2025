@@ -95,7 +95,10 @@ def conditional_slices_interactive(zm, w, jpdf):
       - Calls plot_slices_core
       - Avoids duplicate plotting
     """
-    out = widgets.Output()
+    
+    out_table = widgets.Output()
+    out_plot = widgets.Output()
+
 
     # Default values
     Nrv = len(w)
@@ -152,6 +155,7 @@ def conditional_slices_interactive(zm, w, jpdf):
         Y = np.sum(w * Z, axis=1)
 
         # Plot
+
         with out:
             clear_output(wait=True)
             fig, slice_means = plot_slices_core(
@@ -182,4 +186,7 @@ def conditional_slices_interactive(zm, w, jpdf):
         HBox([N_slider, Ndz_slider]),
     ])
 
-    return VBox([controls, out])
+
+    return VBox([controls, out_table, out_plot])
+
+
