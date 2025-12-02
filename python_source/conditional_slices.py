@@ -2,120 +2,107 @@ import numpy as np
 import matplotlib.pyplot as plt
 import ipywidgets as widgets
 from IPython.display import display, clear_output
-from ipywidgets import VBox, HBox
 
+# ------------------------------------------------------------
+#  Core computation: compute slice means for Zi vs Y
+# ------------------------------------------------------------
 
-# --------------------------------------------------------------
-# Core plotting function (no interactivity)
-# --------------------------------------------------------------
-def plot_slices_core(Z, Y, w, Ndz, show_model=True):
+def compute_slice_stats(Z, Y, Ndz):
     """
-    Plots 4 scatterplots and vertical equidistant slice lines.
-    Returns: figure, slice_midpoints (as DataFrame-like dict)
+    Return:
+        slice_centers: shape (Ndz,)
+        slice_means:   shape (Ndz,)
     """
 
-    import pandas as pd
+    zi = Z
+    ymin = np.min(Y)
+    ymax = np.max(Y)
 
-    Nrv = Z.shape[0]          # number of random variables
-    Ns  = Z.shape[1]          # number of samples
+    # Equidistant slice boundaries
+    zmin, zmax = np.min(zi), np.max(zi)
+    edges = np.linspace(zmin, zmax, Ndz+1)
+    centers = 0.5*(edges[:-1] + edges[1:])
 
-    fig, axs = plt.subplots(2, 2, figsize=(11, 8))
-    axs = axs.flatten()
+    slice_means = np.zeros(Ndz)
+    for k in range(Ndz):
+        mask = (zi >= edges[k]) & (zi < edges[k+1])
+        if np.any(mask):
+            slice_means[k] = np.mean(Y[mask])
+        else:
+            slice_means[k] = np.nan
 
-    slice_info = {}
+    return centers, slice_means, edges
 
-    for i in range(Nrv):
+# ------------------------------------------------------------
+#  Plotting for one variable Zi
+# ------------------------------------------------------------
 
-        zi = Z[i, :]
-        ax = axs[i]
+def plot_one_slice(Z, Y, i, Ndz):
+    zi = Z[i, :]
+    centers, slice_means, edges = compute_slice_stats(zi, Y, Ndz)
 
-        # ---- Equidistant slicing (simple and clean) ----
-        zmin, zmax = np.min(zi), np.max(zi)
-        edges = np.linspace(zmin, zmax, Ndz + 1)
-        mids  = 0.5 * (edges[:-1] + edges[1:])
+    fig, ax = plt.subplots(figsize=(6,3))
 
-        slice_info[f"Z{i+1}"] = mids
+    # Raw scatter
+    ax.scatter(zi, Y, s=12, alpha=0.25)
 
-        # ---- Scatter plot ----
-        ax.scatter(zi, Y, alpha=0.5, s=12)
+    # Vertical slice boundaries
+    for e in edges:
+        ax.axvline(e, color="gray", ls="--", lw=1, alpha=0.5)
 
-        # ---- Linear model line (optional) ----
-        if show_model:
-            Ymodel = np.mean(Y) + (zi - np.mean(zi)) * (w[i])
-            ax.plot(zi, Ymodel, 'r-', lw=2)
+    # Mean in each slice
+    ax.plot(centers, slice_means, "ro-", lw=2, label="Slice mean")
 
-        # ---- Draw vertical slice lines ----
-        for e in edges:
-            ax.axvline(e, color='gray', lw=1, ls='--', alpha=0.5)
-
-        ax.set_xlabel(f"Z{i+1}")
-        ax.set_ylabel("Y")
+    ax.set_xlabel(f"Z{i+1}")
+    ax.set_ylabel("Y")
+    ax.set_title(f"Conditional slices for Z{i+1}")
+    ax.legend()
 
     fig.tight_layout()
+    return fig
 
-    df = pd.DataFrame(slice_info)
-    return fig, df
+# ------------------------------------------------------------
+#  Interactive UI
+# ------------------------------------------------------------
 
-
-# --------------------------------------------------------------
-# Interactive wrapper
-# --------------------------------------------------------------
-def conditional_slices_interactive(zm, w, jpdf):
+def conditional_slices_interactive(zm, w, jpdf, Ns=500):
     """
-    Creates sliders:
-      - Ndz: number of slices
-      - Ns:  number of samples (also limits Ndz)
-      - factor index (1..4)
+    Compute samples, evaluate model and provide interactive slicing UI.
     """
 
-    import pandas as pd
+    # Sampling
+    Z = jpdf.sample(Ns)      # shape (Nrv, Ns)
+    Y = np.sum(w[:,None] * Z, axis=0)
 
-    # Initial sampling
-    Nrv = len(zm)
-    Ns_default = 500
-
-    Z = jpdf.sample(Ns_default)
-    Z = np.asarray(Z)
-    w = np.asarray(w)
-    Y = np.sum(w[:, None] * Z, axis=0)
+    Nrv = Z.shape[0]
 
     # Widgets
-    Ndz_slider = widgets.IntSlider(min=2, max=20, value=6,
-                                  description="Slices:", continuous_update=False)
-    Ns_slider = widgets.IntSlider(min=100, max=2000, value=Ns_default,
-                                 description="Samples:", continuous_update=False)
-    show_model_check = widgets.Checkbox(value=True, description="Show model line")
+    slider_var = widgets.IntSlider(
+        min=1, max=Nrv, value=1,
+        description="Variable", continuous_update=False
+    )
+
+    slider_ndz = widgets.IntSlider(
+        min=2, max=20, value=5,
+        description="N slices", continuous_update=False
+    )
 
     out = widgets.Output()
 
-    def update(_):
+    # Update function
+    def update(*args):
         with out:
             clear_output(wait=True)
-
-            # Resample if Ns changed
-            Ns = Ns_slider.value
-            Znew = jpdf.sample(Ns)
-            Znew = np.asarray(Znew)
-            Ynew = np.sum(w[:, None] * Znew, axis=0)
-
-            fig, df = plot_slices_core(Znew, Ynew, w,
-                                       Ndz_slider.value,
-                                       show_model_check.value)
-
+            fig = plot_one_slice(Z, Y, slider_var.value-1, slider_ndz.value)
             display(fig)
-            display(df)
 
-    # Connect widgets
-    Ndz_slider.observe(update, "value")
-    Ns_slider.observe(update, "value")
-    show_model_check.observe(update, "value")
+    slider_var.observe(update, "value")
+    slider_ndz.observe(update, "value")
 
-    # Initial update
-    update(None)
+    update()
 
-    ui = VBox([
-        HBox([Ndz_slider, Ns_slider, show_model_check]),
+    ui = widgets.VBox([
+        widgets.HBox([slider_var, slider_ndz]),
         out
     ])
-
     return ui
