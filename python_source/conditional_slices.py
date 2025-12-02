@@ -88,105 +88,79 @@ def plot_slices_core(Z, Y, w, Ndz, show_model=True):
 #  Interactive UI
 # ----------------------------------------------------
 def conditional_slices_interactive(zm, w, jpdf):
-    """
-    Builds a UI that:
-      - Generates samples (Chaospy or Standard)
-      - Computes Y
-      - Calls plot_slices_core
-      - Avoids duplicate plotting
-    """
-    
-    out_table = widgets.Output()
-    out_plot = widgets.Output()
 
-
-    # Default values
-    Nrv = len(w)
-    default_N = 1000
-    default_Ndz = min(20, default_N // 10)
+    # Precompute global quantities
+    Nrv = len(zm)
+    Z = jpdf.sample(2000)
+    Z = np.asarray(Z)
+    w = np.asarray(w)
+    Y = np.sum(w[:,None] * Z, axis=0)
 
     # Widgets
-    sampling_dd = widgets.Dropdown(
-        options=["Standard", "Chaospy"],
-        value="Chaospy",
-        description="Sampling:",
-    )
-
-    N_slider = widgets.IntSlider(
-        min=100,
-        max=3000,
-        value=default_N,
-        step=50,
-        description="N",
-        continuous_update=False,
-        readout=True,
-    )
-
     Ndz_slider = widgets.IntSlider(
-        min=2,
-        max=default_N // 10,
-        value=default_Ndz,
-        step=1,
-        description="Slices:",
-        continuous_update=False,
+        value=4, min=2, max=20, step=1, description="Slices:"
+    )
+    show_model_chk = widgets.Checkbox(
+        value=True, description="Show model mean"
     )
 
-    show_model_cb = widgets.Checkbox(
-        value=True,
-        description="Show model",
-    )
+    # --- IMPORTANT: create an Output widget ---
+    out = widgets.Output()
 
-    # ------------------------------------------------
-    #  Update function (redraws plot)
-    # ------------------------------------------------
-    def update(*args):
-        N = N_slider.value
-        Ndz_slider.max = max(2, N // 10)  # automatic adjustment
-
-        # Regenerate samples
-        if sampling_dd.value == "Chaospy":
-            Z = jpdf.sample(N).T  # Chaospy gives (Nrv, N); transpose → (N, Nrv)
-        else:
-            Z = np.zeros((N, Nrv))
-            for i, (mu, sigma) in enumerate(zm):
-                Z[:, i] = np.random.normal(mu, sigma, size=N)
-
-        # Compute Y
-        Y = np.sum(w * Z, axis=1)
-
-        # Plot
-
+    # Update function
+    def update(change=None):
         with out:
-            clear_output(wait=True)
-            fig, slice_means = plot_slices_core(
-                Z, Y, w,
-                Ndz=Ndz_slider.value,
-                show_model=show_model_cb.value
-            )
+            out.clear_output(wait=True)
+            fig, df_spoor = plot_slices_core(Z, Y, w, Ndz_slider.value, show_model_chk.value)
             display(fig)
-            plt.close(fig)
+            display(df_spoor)
 
-            df = pd.DataFrame({
-                f"Z{i+1}": [round(np.nanvar(slice_means[i]) / np.var(Y), 3)]
-                for i in range(Nrv)
-            })
-            display(df)
+    # Trigger update on changes
+    Ndz_slider.observe(update, names='value')
+    show_model_chk.observe(update, names='value')
 
-    # Attach callbacks
-    sampling_dd.observe(update, names="value")
-    N_slider.observe(update, names="value")
-    Ndz_slider.observe(update, names="value")
-    show_model_cb.observe(update, names="value")
+    # Initial plot
+    update(None)
 
-    # Initial draw
-    update()
-
-    controls = VBox([
-        HBox([sampling_dd, show_model_cb]),
-        HBox([N_slider, Ndz_slider]),
-    ])
+    return widgets.VBox([Ndz_slider, show_model_chk, out])
 
 
-    return VBox([controls, out_table, out_plot])
+
+def conditional_slices_interactive(zm, w, jpdf):
+
+    # Precompute global quantities
+    Nrv = len(zm)
+    Z = jpdf.sample(2000)
+    Z = np.asarray(Z)
+    w = np.asarray(w)
+    Y = np.sum(w[:,None] * Z, axis=0)
+
+    # Widgets
+    Ndz_slider = widgets.IntSlider(
+        value=4, min=2, max=20, step=1, description="Slices:"
+    )
+    show_model_chk = widgets.Checkbox(
+        value=True, description="Show model mean"
+    )
+
+    # --- IMPORTANT: create an Output widget ---
+    out = widgets.Output()
+
+    # Update function
+    def update(change=None):
+        with out:
+            out.clear_output(wait=True)
+            fig, df_spoor = plot_slices_core(Z, Y, w, Ndz_slider.value, show_model_chk.value)
+            display(fig)
+            display(df_spoor)
+
+    # Trigger update on changes
+    Ndz_slider.observe(update, names='value')
+    show_model_chk.observe(update, names='value')
+
+    # Initial plot
+    update(None)
+
+    return widgets.VBox([Ndz_slider, show_model_chk, out])
 
 
