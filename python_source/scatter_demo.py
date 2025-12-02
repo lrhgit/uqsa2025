@@ -22,13 +22,13 @@ def scatter_demo(Z):
         for i in range(Nrv)
     ]
 
-    # --- Figure setup ---
-    fig, axs = plt.subplots(2, 2, figsize=(10, 8))
-    axs = axs.flatten()
-
     def update(**weights):
         w = np.array([weights[f"w{i}"] for i in range(Nrv)])
         Y = linear_model(w, Z.T)
+
+        # Create figure *inside* update to avoid blank first display
+        fig, axs = plt.subplots(2, 2, figsize=(10, 8))
+        axs = axs.flatten()
 
         # shared y-limits
         ymin, ymax = float(np.min(Y)), float(np.max(Y))
