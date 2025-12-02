@@ -40,11 +40,13 @@ def hypercube_demo():
         HBox(
             [label, slider],
             layout=widgets.Layout(
-                justify_content='center',   # center horizontally
-                align_items='center',        # center vertically
-                column_gap='12px'            # nice spacing
+                justify_content='flex-start',   # left-align horizontally
+                align_items='center',           # center vertically (optional)
+                column_gap='12px'               # spacing between label and slider
             )
         )
     ])
 
+    
     display(ui)
+    
