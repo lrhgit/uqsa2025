@@ -1,137 +1,146 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from ipywidgets import IntSlider, Checkbox, HBox, VBox, Output
+from IPython.display import display
 import pandas as pd
-import ipywidgets as widgets
-from IPython.display import display, clear_output
 
 
-# -----------------------------------------------------------
-# CORE plotting function (no widgets, no display)
-# -----------------------------------------------------------
+# ============================================================
+# Core plotting function (pure computation – no widgets)
+# ============================================================
+
 def plot_slices_core(Z, Y, w, Ndz, show_model=True):
     """
-    Z  : (Nrv, Ns)   samples
-    Y  : (Ns,)       output
-    w  : (Nrv,)      weights
+    Compute equidistant slices along each Zi axis and plot Y distributions.
+
+    Z: array shape (Nrv, Ns)
+    Y: array shape (Ns,)
     Ndz: number of slices
     """
+
     Nrv, Ns = Z.shape
 
-    # Compute slice boundaries
-    zvals = np.linspace(0, 1, Ndz+1)
+    # --- Compute slice edges: equidistant in Zi ---
+    slice_edges = np.zeros((Nrv, Ndz + 1))
+    slice_centers = np.zeros((Nrv, Ndz))
 
-    # Output figure
-    fig, axs = plt.subplots(1, Nrv, figsize=(4*Nrv, 4), sharey=True)
+    for i in range(Nrv):
+        zmin, zmax = Z[i, :].min(), Z[i, :].max()
+        slice_edges[i, :] = np.linspace(zmin, zmax, Ndz + 1)
+        slice_centers[i, :] = 0.5 * (slice_edges[i, :-1] + slice_edges[i, 1:])
+
+    # --- Compute slice means table ---
+    df_vals = {}
+    for i in range(Nrv):
+        means = []
+        for j in range(Ndz):
+            idx = (Z[i, :] >= slice_edges[i, j]) & (Z[i, :] < slice_edges[i, j + 1])
+            if np.sum(idx) > 0:
+                means.append(np.mean(Y[idx]))
+            else:
+                means.append(np.nan)
+        df_vals[f"Z{i+1}"] = means
+
+    df = pd.DataFrame(df_vals).T
+    df.columns = [f"Slice {k+1}" for k in range(Ndz)]
+
+    # --- Plotting ---
+    fig, axs = plt.subplots(1, Nrv, figsize=(4*Nrv, 5))
 
     if Nrv == 1:
         axs = [axs]
 
-    # DataFrame to show slice means
-    df_rows = []
-
-    # Loop over each variable Z_i
     for i in range(Nrv):
-        Zi = Z[i, :]
         ax = axs[i]
+        ax.scatter(Z[i, :], Y, s=8, alpha=0.35)
 
-        # plot scatter
-        ax.scatter(Zi, Y, s=8, alpha=0.3)
+        # vertical slice lines
+        for edge in slice_edges[i, :]:
+            ax.axvline(edge, color='gray', alpha=0.35, linestyle='--')
+
+        # model curve: linear model Y = sum(w_j Z_j)
+        if show_model:
+            # compute E[Z_not_i] for each sample
+            Z_not_i = np.delete(Z, i, axis=0)
+            E_rest = np.sum(np.delete(w, i)[:, None] * Z_not_i, axis=0)
+            # compute model prediction with Zi varying
+            Yi_model = w[i] * Z[i, :] + E_rest
+            # Sort for display
+            order = np.argsort(Z[i, :])
+            ax.plot(Z[i, :][order], Yi_model[order], color='black')
+
         ax.set_title(f"Z{i+1}")
         ax.set_xlabel(f"Z{i+1}")
-        if i == 0:
-            ax.set_ylabel("Y")
+        ax.set_ylabel("Y")
 
-        # Compute slice means
-        slice_means = []
-        for k in range(Ndz):
-            z_low = np.quantile(Zi, zvals[k])
-            z_high = np.quantile(Zi, zvals[k+1])
-            idx = (Zi >= z_low) & (Zi < z_high)
-            Yslice = Y[idx]
-
-            m = np.mean(Yslice) if len(Yslice) > 0 else np.nan
-            slice_means.append(m)
-
-            # vertical slice boundary markers
-            ax.axvline(z_low, linestyle="--", color="gray", alpha=0.4)
-
-        # final right boundary
-        ax.axvline(np.quantile(Zi, zvals[-1]), linestyle="--", color="gray", alpha=0.4)
-
-        # Optional model line
-        if show_model:
-            # Create model curve along Z_i, fixing others at mean
-            Z_input = np.zeros((Ndz, Nrv))
-            Z_input[:, i] = [np.quantile(Zi, zvals[k]) for k in range(Ndz)]
-            Ymodel = np.sum(w * Z_input, axis=1)
-
-            ax.plot([np.quantile(Zi, zvals[k]) for k in range(Ndz)],
-                    Ymodel,
-                    '-k', lw=2, label="Linear model")
-            ax.legend()
-
-        # Store row for dataframe
-        df_rows.append(slice_means)
-
-    # Build DataFrame with shape (Nrv, Ndz)
-    df = pd.DataFrame(df_rows,
-                      index=[f"Z{i+1}" for i in range(Nrv)],
-                      columns=[f"Slice {k+1}" for k in range(Ndz)])
-
+    fig.tight_layout()
     return fig, df
 
 
-# -----------------------------------------------------------
-# INTERACTIVE WRAPPER (widgets)
-# -----------------------------------------------------------
+# ============================================================
+# Interactive wrapper
+# ============================================================
+
 def conditional_slices_interactive(zm, w, jpdf):
     """
-    zm   : array of shape (Nrv, 2)
-    w    : array (Nrv,)
-    jpdf : chaospy joint distribution
+    Full widget interface for conditional slices.
+    Returns a VBox UI object.
     """
 
-    Nrv = len(zm)
+    # -----------------------
+    # Monte Carlo sampling
+    # -----------------------
+    Ns = 800  # fixed cost
+    Z = jpdf.sample(Ns)
+    if Z.ndim == 1:
+        Z = Z.reshape(1, -1)
+    Y = np.sum(w[:, None] * Z, axis=0)
 
-    # --- Precompute sample data ---
-    Ns = 2000
-    Z = jpdf.sample(Ns)   # shape (Nrv, Ns)
-    Z = np.asarray(Z)
-    w = np.asarray(w)
-    Y = np.sum(w[:, None] * Z, axis=0)    # shape (Ns,)
+    Nrv, Ns = Z.shape
 
-    # --- Widgets ---
-    Ndz_slider = widgets.IntSlider(min=2, max=20, value=4, description="Slices:")
-    show_model_chk = widgets.Checkbox(value=True, description="Show model curve")
+    # Widgets
+    s_slider = IntSlider(
+        min=3, max=20, value=10,
+        description="Slices:", continuous_update=False
+    )
+    chk_model = Checkbox(value=True, description="Show model curve")
 
-    out = widgets.Output()
-    table_out = widgets.Output()   # <--- To show table right BELOW sliders
+    # Outputs
+    out_table = Output()
+    out_fig = Output()
 
-    # update function
-    def update(change=None):
-        with out:
-            clear_output(wait=True)
-            fig, df = plot_slices_core(Z, Y, w, Ndz_slider.value, show_model_chk.value)
+    # -----------------------
+    # Update routine
+    # -----------------------
+    def update(_=None):
+        Ndz = s_slider.value
+        show_model = chk_model.value
+
+        # Compute plots and table
+        fig, df = plot_slices_core(Z, Y, w, Ndz, show_model)
+
+        # Render table
+        with out_table:
+            out_table.clear_output(wait=True)
+            display(df.round(6))
+
+        # Render figure
+        with out_fig:
+            out_fig.clear_output(wait=True)
             display(fig)
 
-        with table_out:
-            clear_output(wait=True)
-            display(df)
+    # trigger once
+    s_slider.observe(update, "value")
+    chk_model.observe(update, "value")
 
-    # bind widget events
-    Ndz_slider.observe(update, names="value")
-    show_model_chk.observe(update, names="value")
+    update()
 
-    # initial draw
-    update(None)
-
-    # return layout: sliders stacked, table right below them, figure under that
-    controls = widgets.VBox([
-        Ndz_slider,
-        show_model_chk,
-        table_out
+    # -----------------------
+    # Final layout
+    # -----------------------
+    ui = VBox([
+        HBox([s_slider, chk_model]),
+        out_table,       # table appears directly under slider – as you wanted
+        out_fig
     ])
-
-    ui = widgets.VBox([controls, out])
     return ui
-
