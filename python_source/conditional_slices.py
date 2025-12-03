@@ -6,6 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from ipywidgets import VBox, HBox, IntSlider, Dropdown, Output
 from IPython.display import display
+from linear_model import linear_model 
 
 # ---------------------------------------------------------
 # Helper: compute slice means for a single Z_i
