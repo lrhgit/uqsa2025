@@ -11,8 +11,14 @@ import numpy as np
 import chaospy as cp
 from monte_carlo import generate_sample_matrices_mc
 from monte_carlo import calculate_sensitivity_indices_mc
-from xlwt.Utils import col_by_name
- 
+
+def col_by_name(name):
+    """Convert Excel column name (A, B, AA) to zero-based index."""
+    name = name.upper()
+    col = 0
+    for char in name:
+        col = col * 26 + (ord(char) - ord('A') + 1)
+    return col - 1
 
 
 # start the linear model
