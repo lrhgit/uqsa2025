@@ -5,75 +5,88 @@ from ipywidgets import VBox, HBox, Output
 from linear_model import linear_model
 
 
-def conditional_slices_interactive(zm, w, jpdf, slices=8, Ns=500):
+def conditional_slices_interactive(zm, w, jpdf, Ns=500, n_slices=8):
     """
     Interactive conditional slices viewer.
+
+    Shows:
+      • Scatter plot of (Zi, Y)
+      • Vertical slice boundaries
+      • Conditional mean in each slice (red dots + line)
+    Controls:
+      • Ns slider (total samples)
+      • n_slices slider (number of slices)
     """
 
     Nrv = zm.shape[0]
 
-    # --- Sample once ---
-    Z = jpdf.sample(Ns)
-    Y = linear_model(w, Z.T)
+    # --- widgets ---
+    Ns_slider = widgets.IntSlider(
+        value=Ns, min=100, max=5000, step=100,
+        description="Ns"
+    )
 
-    # --- Output widget for all plots ---
+    n_slices_slider = widgets.IntSlider(
+        value=n_slices, min=3, max=25, step=1,
+        description="Slices"
+    )
+
     out = Output()
 
-    # --- Sliders ---
-    sliders = []
-    for i in range(Nrv):
-        sliders.append(
-            widgets.IntSlider(
-                value=slices // 2,
-                min=0,
-                max=slices - 1,
-                step=1,
-                description=f"Z{i+1}"
-            )
-        )
+    # --- Update function ---
+    def update(*_):
+        Ns_val = Ns_slider.value
+        n_val = n_slices_slider.value
 
-    def update(*args):
+        # sample fresh each time
+        Z = jpdf.sample(Ns_val)        # shape (Nrv, Ns)
+        Y = linear_model(w, Z.T)       # shape (Ns,)
+
         with out:
             out.clear_output(wait=True)
 
-            fig, axes = plt.subplots(Nrv, 1, figsize=(6, 2.5*Nrv))
+            fig, axes = plt.subplots(Nrv, 1, figsize=(6, 2.5 * Nrv))
             if Nrv == 1:
                 axes = [axes]
 
             for i in range(Nrv):
                 ax = axes[i]
                 zi = Z[i, :]
+
+                # scatter
                 ax.scatter(zi, Y, s=8, alpha=0.35)
 
-                # Slice grid
-                zmin, zmax = np.min(zi), np.max(zi)
-                grid = np.linspace(zmin, zmax, slices + 1)
-                for g in grid:
-                    ax.axvline(g, color='gray', linestyle='--', linewidth=0.8, alpha=0.6)
+                # slice boundaries
+                zmin, zmax = float(np.min(zi)), float(np.max(zi))
+                grid = np.linspace(zmin, zmax, n_val + 1)
 
-                # Highlight slice
-                k = sliders[i].value
-                mask = (zi >= grid[k]) & (zi < grid[k+1])
-                if np.sum(mask) > 0:
-                    ym = np.mean(Y[mask])
-                    ax.scatter(
-                        (grid[k] + grid[k+1]) / 2,
-                        ym,
-                        s=120,
-                        color='red'
-                    )
+                for g in grid:
+                    ax.axvline(g, color="gray", linestyle="--",
+                               linewidth=0.8, alpha=0.6)
+
+                # conditional means (one per slice)
+                centers = []
+                means = []
+                for k in range(n_val):
+                    mask = (zi >= grid[k]) & (zi < grid[k+1])
+                    if np.any(mask):
+                        centers.append(0.5 * (grid[k] + grid[k+1]))
+                        means.append(np.mean(Y[mask]))
+
+                if centers:
+                    ax.plot(centers, means, "o-", color="red")
 
                 ax.set_ylabel("Y")
-                ax.set_xlabel("Z")
-                ax.set_title(f"Z{i+1}")
+                ax.set_xlabel(f"Z{i+1}")
 
+            fig.tight_layout()
             plt.show()
 
-    # Connect sliders
-    for s in sliders:
-        s.observe(update, "value")
+    # connect sliders
+    Ns_slider.observe(update, "value")
+    n_slices_slider.observe(update, "value")
 
-    # Initial draw
+    # initial render
     update()
 
-    return VBox(sliders + [out])
+    return VBox([HBox([Ns_slider, n_slices_slider]), out])
