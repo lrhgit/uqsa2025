@@ -79,8 +79,10 @@ def conditional_slices_interactive(zm, w, jpdf):
 
             # --- Resample Z only when Ns changes ---
             Z = jpdf.sample(Ns)              # shape: (Nrv, Ns)
-            Z = np.asarray(Z)
-            Y = np.sum(w * Z, axis=1)        # correct shape: (Ns,)
+            Y = linear_model(w, Z.T)   # FIX: correct orientation
+
+            #Z = np.asarray(Z)
+            #Y = np.sum(w * Z, axis=1)        # correct shape: (Ns,)
 
             fig, axs = plt.subplots(2, 2, figsize=(10, 8))
             axs = axs.flatten()

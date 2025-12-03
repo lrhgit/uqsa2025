@@ -2,8 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 from ipywidgets import FloatSlider, HBox, VBox, interactive_output
 
-def linear_model(w, z):
-    return np.sum(w * z, axis=1)
+# def linear_model(w, z):
+#     return np.sum(w * z, axis=1)
+
+from linear_model import linear_model   # NEW
 
 def scatter_demo(Z):
     """
