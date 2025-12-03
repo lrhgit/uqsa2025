@@ -89,4 +89,20 @@ def conditional_slices_interactive(zm, w, jpdf, Ns=500, n_slices=8):
     # initial render
     update()
 
-    return VBox([HBox([Ns_slider, n_slices_slider]), out])
+
+    # --- stable Colab layout ---
+    controls = VBox(
+        [Ns_slider, n_slices_slider],
+        layout=widgets.Layout(
+            min_height="80px",
+            padding="5px"
+        )
+    )
+
+  
+    return VBox([controls, out])
+
+
+
+
+
