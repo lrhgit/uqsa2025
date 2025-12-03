@@ -13,11 +13,41 @@ Interactive notebooks and tools for uncertainty quantification and sensitivity a
 |--------|--------|
 | Sensitivity introduction demo | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/sensitivity_introduction_interactive_clean.ipynb) |
 
+
+
+# Sensitivity Analysis – Interactive Colab Notebook
+
+This repository contains an interactive Python/Colab notebook introducing 
+key concepts in global sensitivity analysis (GSA) using both Monte Carlo 
+methods and Polynomial Chaos Expansions (PCE).  
+The material accompanies the examples presented in *Saltelli et al. (2008)* 
+and is designed for use in teaching and workshops.
+
+---
+
+Colab runs everything in the cloud — no installation required.
+
+---
+
+## 📦 Package setup
+
+The notebook automatically installs the required versions of:
+- `numpoly==1.3.8`
+- `chaospy==4.3.21`
+
+These versions are fully compatible with Python 3.12 (Colab runtime).
+
+---
+
+## 📁 Repository structure
+
+
+
+
+
 ---
 
 ### ⬇ Install locally
-
-
 
 
 https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/interactive_gstar_function.ipynb
