@@ -44,8 +44,12 @@ def conditional_slices_interactive(zm, w, jpdf, Ns=500, n_slices=8):
 
         with out:
             out.clear_output(wait=True)
+            
+            rows, cols = 2, 2
+            fig, axes = plt.subplots(rows, cols, figsize=(10, 8))
+            axes = axes.flatten()
 
-            fig, axes = plt.subplots(Nrv, 1, figsize=(6, 2.5 * Nrv))
+            
             if Nrv == 1:
                 axes = [axes]
 
