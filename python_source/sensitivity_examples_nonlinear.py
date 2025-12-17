@@ -88,17 +88,23 @@ def evaluate_non_additive_linear_model(X_A, X_B, X_C):
 # polynomial chaos sensitivity analysis
 def polynomial_chaos_sens(Ns_pc, jpdf, polynomial_order, poly=None, return_reg=False):
     N_terms = int(len(jpdf) / 2)
-    # 1. generate orthogonal polynomials
-    poly = poly or cp.orth_ttr(polynomial_order, jpdf)
+    
+    # 1. generate orthogonal polynomialsN
+    #    poly = poly or cp.orth_ttr(polynomial_order, jpdf)
+    poly = poly or cp.expansion.stieltjes(polynomial_order, jpdf)
+    
     # 2. generate samples with random sampling
     samples_pc = jpdf.sample(size=Ns_pc, rule='R')
+    
     # 3. evaluate the model, to do so transpose samples and hash input data
     transposed_samples = samples_pc.transpose()
     samples_z = transposed_samples[:, :N_terms]
     samples_w = transposed_samples[:, N_terms:]
     model_evaluations = linear_model(samples_w, samples_z)
+
     # 4. calculate generalized polynomial chaos expression
     gpce_regression = cp.fit_regression(poly, samples_pc, model_evaluations)
+
     # 5. get sensitivity indices
     Spc = cp.Sens_m(gpce_regression, jpdf)
     Stpc = cp.Sens_t(gpce_regression, jpdf)
@@ -167,6 +173,7 @@ if __name__ == '__main__':
 
     # definition of mu and sig for z and w
     N_terms = 4
+    
     c = 0.5
     zm = np.array([[0., i] for i in range(1, N_terms+1)])
     wm = np.array([[i * c, i] for i in range(1, N_terms+1)])
