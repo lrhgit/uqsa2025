@@ -1,0 +1,6 @@
+---
+title: "Seminar agenda – Global Sensitivity Analysis"
+format: html
+---
+
+{{< include agenda.md >}}
