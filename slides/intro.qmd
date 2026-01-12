@@ -1,0 +1,145 @@
+---
+title: "Global Sensitivity Analysis"
+subtitle: "Motivation, concepts, and intuition"
+author: "Leif Rune Hellevik"
+institute: "NTNU and Politecnico di Milano (PoliMi) — Seminar, 3–4 February 2026"
+date: "2026-02-03"
+format:
+  revealjs:
+    width: 1600
+    height: 900
+    margin: 0.05
+---
+
+## Welcome & framing
+
+**Format**
+
+* Short conceptual introductions
+* Interactive notebook demonstrations
+* Discussion-oriented, not tool-heavy
+
+
+::: notes
+Welcome everyone and thank them for coming.
+
+Briefly introduce yourself and your affiliation with NTNU and PoliMi LaBS.
+
+Explain that this seminar is meant to be practical and concept-driven:
+not a full course, not a software tutorial, but a guided exploration of
+how global sensitivity analysis helps us reason about uncertainty in models.
+
+Emphasize that notebooks are used as a medium for explanation and exploration,
+not something participants are expected to run line-by-line during the seminar.
+
+Set expectations for interaction and questions throughout the sessions.
+:::
+
+
+## Why sensitivity analysis?
+
+::: {.incremental}
+- Models are nonlinear
+- Parameters are uncertain
+- Local derivatives fail
+:::
+
+
+
+::: notes
+Here I motivate why local sensitivity analysis is insufficient.
+Emphasize uncertainty and nonlinearity, and connect to real models.
+:::
+
+
+## What we will do today
+
+- Revisit basic statistics
+- Introduce variance-based SA
+- Explore interactive notebooks
+
+## From a VUCA world to uncertainty-aware modelling
+::: {.incremental}
+* Engineering decisions are increasingly made in a **VUCA context**
+  *(Volatility, Uncertainty, Complexity, Ambiguity)*
+* Models are essential tools for reasoning under uncertainty
+* However, models are:
+  * based on uncertain inputs
+  * built on simplifying assumptions
+  * often nonlinear and high-dimensional
+* **Uncertainty quantification (UQ)** provides a systematic framework
+  to represent, propagate, and interpret uncertainty in models
+:::
+
+## Digital twins need global sensitivity analysis
+::: {.incremental}
+* **Digital twins** rely on models to support monitoring, prediction, and decision-making
+* In practice, digital twins operate under:
+  * uncertain data
+  * uncertain parameters
+  * evolving system states
+* **Global sensitivity analysis (GSA)** is a key component of UQ:
+
+  * identifies which uncertainties matter most
+  * reveals interactions and nonlinear effects
+  * supports robust and transparent decisions
+* Without GSA, digital twins risk being precise but **not reliable**
+:::
+
+
+
+
+## Main objectives of sensitivity
+
+::: {.incremental}
+- **Factor prioritisation**  
+  Identify which uncertain inputs contribute most to output uncertainty
+- **Factor fixing (screening)**  
+  Identify non-influential inputs that can be fixed without affecting results
+- **Understanding model behaviour**  
+  Reveal nonlinear effects and interactions between inputs
+- **Supporting robust decisions**  
+  Focus modelling, data collection, and calibration effort where it matters
+:::
+
+
+
+## Why sensitivity analysis?
+
+- Models are nonlinear
+- Parameters are uncertain
+- Local derivatives are limited
+
+## From local to global sensitivity analysis
+
+- Local (derivative-based) measures
+- One-factor-at-a-time (OAT)
+- Why they fail for nonlinear models
+
+## Variance as a measure of importance
+
+- Output variability as information
+- Conditional expectation and variance
+- Total variance decomposition
+
+## Sobol indices – idea, not formulas
+
+- First-order effects
+- Total effects
+- Interaction effects
+
+## What notebooks will show
+
+- Scatterplots vs derivatives
+- Monte Carlo estimation
+- Polynomial chaos estimation
+
+## How to read sensitivity indices
+
+- What they mean
+- What they do not mean
+- Typical pitfalls
+
+
+
+
