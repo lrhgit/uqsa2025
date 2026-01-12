@@ -64,38 +64,93 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="seminar-agenda" class="level1">
-<h1>Seminar agenda</h1>
-<p><strong>Global Sensitivity Analysis: concepts, intuition, and practice</strong></p>
-<p>This seminar provides an applied and intuitive introduction to global sensitivity analysis (GSA), with a focus on variance-based methods and their role in uncertainty quantification for computational models.</p>
-<p>The seminar combines short conceptual explanations with interactive exploration using Jupyter/Colab notebooks.</p>
-<hr>
-<section id="agenda" class="level2">
-<h2 class="anchored" data-anchor-id="agenda">Agenda</h2>
-<ol type="1">
-<li><p><strong>Motivation and context</strong> Why uncertainty and sensitivity analysis matter in nonlinear and high-dimensional models, with examples from engineering and computational science.</p></li>
-<li><p><strong>A short refresher on probability and variance</strong> Random variables, variance, conditional variance, and the total law of variance — the statistical foundation underlying variance-based sensitivity analysis.</p></li>
-<li><p><strong>From local to global sensitivity analysis</strong> Limitations of derivative-based (local) sensitivity measures and the intuition behind variance-based global methods.</p></li>
-<li><p><strong>Variance-based sensitivity indices</strong> Conceptual introduction to Sobol indices and what they measure (first-order and total effects), without heavy formalism.</p></li>
-<li><p><strong>Interactive notebook walkthrough</strong> Guided exploration of a Jupyter/Colab notebook illustrating:</p>
+<p><em>Organiser:</em> NTNU and Politecnico di Milano (PoliMi)<br>
+<em>Dates:</em> 3–4 February 2026<br>
+<em>Instructor:</em> Leif Rune Hellevik<br>
+<em>Location:</em> Politecnico di Milano, Milan, Italy</p>
+<p>The timetable below gives an overview of the seminar structure. Short descriptions of each block are provided further down.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Time</th>
+<th>Block</th>
+<th>Duration</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>09:00–09:15</td>
+<td>Welcome and overview</td>
+<td>15 min</td>
+</tr>
+<tr class="even">
+<td>09:15–10:00</td>
+<td>Motivation and context</td>
+<td>45 min</td>
+</tr>
+<tr class="odd">
+<td>10:00–10:30</td>
+<td>Probability and variance</td>
+<td>30 min</td>
+</tr>
+<tr class="even">
+<td>10:30–10:45</td>
+<td>Coffee break</td>
+<td>15 min</td>
+</tr>
+<tr class="odd">
+<td>10:45–11:30</td>
+<td>From local to global SA</td>
+<td>45 min</td>
+</tr>
+</tbody>
+</table>
+<section id="description-of-programme-blocks" class="level2">
+<h2 class="anchored" data-anchor-id="description-of-programme-blocks">Description of programme blocks</h2>
+<section id="welcome-and-overview" class="level3">
+<h3 class="anchored" data-anchor-id="welcome-and-overview">Welcome and overview</h3>
+<p>Introduction to the seminar goals, structure, and practical information.</p>
+</section>
+<section id="motivation-and-context" class="level3">
+<h3 class="anchored" data-anchor-id="motivation-and-context">Motivation and context</h3>
+<p>Why uncertainty and sensitivity analysis matter in nonlinear and high-dimensional models, with examples from engineering and computational science.</p>
+</section>
+<section id="probability-and-variance" class="level3">
+<h3 class="anchored" data-anchor-id="probability-and-variance">Probability and variance</h3>
+<p>A short refresher on random variables, variance, conditional variance, and the total law of variance — the statistical foundation underlying variance-based sensitivity analysis.</p>
+</section>
+<section id="from-local-to-global-sensitivity-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="from-local-to-global-sensitivity-analysis">From local to global sensitivity analysis</h3>
+<p>Limitations of derivative-based (local) sensitivity measures and the intuition behind variance-based global methods.</p>
+</section>
+<section id="variance-based-sensitivity-indices" class="level3">
+<h3 class="anchored" data-anchor-id="variance-based-sensitivity-indices">Variance-based sensitivity indices</h3>
+<p>Conceptual introduction to Sobol indices and what they measure (first-order and total effects), focusing on interpretation rather than formal derivations.</p>
+</section>
+<section id="interactive-notebook-walkthrough-hands-on" class="level3">
+<h3 class="anchored" data-anchor-id="interactive-notebook-walkthrough-hands-on">Interactive notebook walkthrough (hands-on)</h3>
+<p>Guided exploration of selected Jupyter/Colab notebooks. Participants are invited to run and experiment with prepared examples illustrating:</p>
 <ul>
 <li>sampling of input parameter spaces</li>
 <li>scatterplots and conditional behavior</li>
 <li>computation and interpretation of sensitivity indices</li>
-</ul></li>
-<li><p><strong>Methods and comparison</strong> Brief comparison of Monte Carlo–based and polynomial chaos–based approaches for computing sensitivity indices.</p></li>
-<li><p><strong>Discussion and pointers</strong> Interpretation, limitations, and suggestions for further reading and practical use.</p></li>
-</ol>
-<hr>
+</ul>
+<p>Participation in the hands-on part is encouraged but not mandatory.</p>
+</section>
+<section id="methods-and-comparison" class="level3">
+<h3 class="anchored" data-anchor-id="methods-and-comparison">Methods and comparison</h3>
+<p>Brief comparison of Monte Carlo–based and polynomial chaos–based approaches for computing sensitivity indices.</p>
+</section>
+<section id="discussion-and-pointers" class="level3">
+<h3 class="anchored" data-anchor-id="discussion-and-pointers">Discussion and pointers</h3>
+<p>Interpretation, limitations, and suggestions for further reading and practical use.</p>
+</section>
 </section>
 <section id="practical-information" class="level2">
 <h2 class="anchored" data-anchor-id="practical-information">Practical information</h2>
-<ul>
-<li>The seminar is primarily demonstration-based; participants are <strong>not expected to run code during the session</strong>.</li>
-<li>Interactive notebooks and slides will be shared after the seminar.</li>
-<li>Familiarity with basic probability and numerical modeling is helpful, but no prior experience with sensitivity analysis is assumed.</li>
-</ul>
-</section>
+<p>The seminar combines demonstration with a short, structured hands-on session. Participants who wish to run code will be provided with ready-to-use notebooks and instructions.</p>
+<p>Interactive notebooks and slides will be shared after the seminar.</p>
+<p>Familiarity with basic probability and numerical modeling is helpful, but no prior experience with sensitivity analysis is assumed.</p>
 </section>
 
 </main>

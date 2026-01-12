@@ -1,16 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Build only the seminar agenda
-# Usage:
-#   ./make.sh
+# Simple build script for uqsa2025
+# Targets:
 #   ./make.sh agenda
-#
-# Assumes:
-#   - Quarto is installed and available on PATH
-#   - Repo structure:
-#       seminar/agenda.md
-#       (optional) seminar/agenda.qmd
+#   ./make.sh slides
+#   ./make.sh all
+#   ./make.sh        (defaults to agenda)
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$ROOT_DIR"
@@ -18,37 +14,56 @@ cd "$ROOT_DIR"
 need_cmd() {
   command -v "$1" >/dev/null 2>&1 || {
     echo "Error: '$1' not found on PATH."
-    echo "Install Quarto first (e.g. 'brew install quarto') and try again."
+    echo "Install it and try again."
     exit 1
   }
 }
 
 build_agenda() {
   need_cmd quarto
+  echo "▶ Building seminar agenda"
 
   if [[ -f "seminar/agenda.qmd" ]]; then
-    echo "Building agenda from seminar/agenda.qmd ..."
-    quarto render "seminar/agenda.qmd"
+    quarto render seminar/agenda.qmd
   elif [[ -f "seminar/agenda.md" ]]; then
-    echo "Building agenda from seminar/agenda.md ..."
-    quarto render "seminar/agenda.md" --to html
+    quarto render seminar/agenda.md --to html
   else
-    echo "Error: Could not find seminar/agenda.qmd or seminar/agenda.md"
+    echo "Error: agenda source not found"
     exit 1
   fi
 
-  # Helpful output location(s)
-  if [[ -f "seminar/agenda.html" ]]; then
-    echo "✓ Built: seminar/agenda.html"
+  echo "✓ Agenda built"
+}
+
+build_slides() {
+  need_cmd quarto
+  echo "▶ Building slides"
+
+  if [[ -f "slides/intro.qmd" ]]; then
+    quarto render slides/intro.qmd
   else
-    echo "Note: build finished, but seminar/agenda.html not found. Check Quarto output."
+    echo "Error: slides/intro.qmd not found"
+    exit 1
   fi
+
+  echo "✓ Slides built"
 }
 
 TARGET="${1:-agenda}"
 
 case "$TARGET" in
-  agenda) build_agenda ;;
-  *)     echo "Usage: $0 [agenda]"; exit 2 ;;
+  agenda)
+    build_agenda
+    ;;
+  slides)
+    build_slides
+    ;;
+  all)
+    build_agenda
+    build_slides
+    ;;
+  *)
+    echo "Usage: $0 [agenda|slides|all]"
+    exit 2
+    ;;
 esac
-
