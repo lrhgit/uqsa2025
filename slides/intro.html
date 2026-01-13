@@ -170,27 +170,6 @@ Leif Rune Hellevik
           display:block!important;
       }</style></aside>
 </section>
-<section id="why-sensitivity-analysis" class="slide level2">
-<h2>Why sensitivity analysis?</h2>
-<ul>
-<li class="fragment">Models are nonlinear</li>
-<li class="fragment">Parameters are uncertain</li>
-<li class="fragment">Local derivatives fail</li>
-</ul>
-<aside class="notes">
-<p>Here I motivate why local sensitivity analysis is insufficient. Emphasize uncertainty and nonlinearity, and connect to real models.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
 <section id="what-we-will-do-today" class="slide level2">
 <h2>What we will do today</h2>
 <ul>
@@ -212,6 +191,24 @@ Leif Rune Hellevik
 </ul></li>
 <li class="fragment"><strong>Uncertainty quantification (UQ)</strong> provides a systematic framework to represent, propagate, and interpret uncertainty in models</li>
 </ul>
+<aside class="notes">
+<p><strong>VUCA</strong> stands for <strong>Volatility, Uncertainty, Complexity, and Ambiguity</strong>. It describes the kind of world where many engineering and decision problems exist today.</p>
+<p>In a VUCA world, systems change over time, data are uncertain, and many factors interact in complex ways. Decisions often have to be made even when information is incomplete.</p>
+<p>Models help us reason in this situation, but models are never perfect. They are based on assumptions, simplified descriptions of reality, and uncertain inputs. This means model results are always uncertain.</p>
+<p><strong>Uncertainty quantification (UQ)</strong> helps us describe and propagate this uncertainty. It tells us <em>how uncertain</em> the model output is.</p>
+<p>But, as emphasized by <strong>Saltelli</strong>, this is not enough for decision-making. In practice, we also need to know <strong>which uncertainties matter most</strong>.</p>
+<p>This is why <strong>sensitivity analysis</strong> is essential in a VUCA context: it helps us understand which inputs drive the uncertainty in the results, and where modelling effort, data collection, or attention should be focused.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="digital-twins-need-global-sensitivity-analysis" class="slide level2">
 <h2>Digital twins need global sensitivity analysis</h2>
@@ -231,9 +228,75 @@ Leif Rune Hellevik
 </ul></li>
 <li class="fragment"><p>Without GSA, digital twins risk being precise but <strong>not reliable</strong></p></li>
 </ul>
+<aside class="notes">
+<p>A <strong>digital twin</strong> is a model that represents a real system and is used to monitor, predict, or support decisions during operation.</p>
+<p>Digital twins rely heavily on models, but these models are never exact. They use data that can be noisy or incomplete, and parameters that are often uncertain.</p>
+<p>In practice, a digital twin must deal with:</p>
+<ul>
+<li>uncertain measurements,</li>
+<li>uncertain model parameters,</li>
+<li>and systems that change over time.</li>
+</ul>
+<p>Because of this, model outputs can look very precise, but still be unreliable.</p>
+<p><strong>Global Sensitivity Analysis (GSA)</strong> is important for digital twins because it tells us:</p>
+<ul>
+<li>which uncertainties have the largest impact on the results,</li>
+<li>whether interactions between inputs are important,</li>
+<li>and which parameters really matter for decisions.</li>
+</ul>
+<p>Without sensitivity analysis, we may trust a digital twin too much. With sensitivity analysis, we understand <strong>how robust</strong> the results are and <strong>where to focus effort</strong>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="main-objectives-of-sensitivity" class="slide level2">
-<h2>Main objectives of sensitivity</h2>
+<section id="what-problem-sensitivity-analysis-solves" class="slide level2">
+<h2>What problem sensitivity analysis solves?</h2>
+<ul>
+<li><p><strong>Models are used under uncertainty</strong></p>
+<ul>
+<li>Inputs are not known exactly</li>
+</ul></li>
+<li><p><strong>Complexity defeats intuition</strong></p>
+<ul>
+<li>Nonlinearity and interactions matter</li>
+</ul></li>
+<li><p><strong>Decisions require prioritisation</strong></p>
+<ul>
+<li>Not all uncertainties are equally important</li>
+</ul></li>
+<li><p><strong>Sensitivity analysis = relevance</strong></p>
+<ul>
+<li>Identifies what really drives uncertainty</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>We have already seen the first two points on the previous slides.</p>
+<p>We use models under uncertainty: inputs are not known exactly. And when models become nonlinear and high-dimensional, our intuition is no longer reliable. So these points are important, but not very controversial.</p>
+<p>The real motivation for sensitivity analysis is in the last two points.</p>
+<p>Decisions require prioritisation. In practice, we cannot reduce all uncertainties. We do not have unlimited time, data, or resources. Sensitivity analysis helps us decide where to focus our effort: which uncertain inputs deserve better data, calibration, or modelling. This is what Saltelli calls factor prioritisation and factor fixing.</p>
+<p>Sensitivity analysis is about relevance. The goal is not to fully explain how the model works in every detail. The goal is to explain where the output uncertainty comes from. In that sense, sensitivity analysis is a decision-support tool: it tells us which uncertainties matter for the question we are asking, and which ones matter less.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="main-objectives-of-sensitivity-analysis" class="slide level2">
+<h2>Main objectives of sensitivity analysis</h2>
 <ul>
 <li class="fragment"><strong>Factor prioritisation</strong><br>
 Identify which uncertain inputs contribute most to output uncertainty</li>
@@ -244,14 +307,25 @@ Reveal nonlinear effects and interactions between inputs</li>
 <li class="fragment"><strong>Supporting robust decisions</strong><br>
 Focus modelling, data collection, and calibration effort where it matters</li>
 </ul>
-</section>
-<section id="why-sensitivity-analysis-1" class="slide level2">
-<h2>Why sensitivity analysis?</h2>
-<ul>
-<li>Models are nonlinear</li>
-<li>Parameters are uncertain</li>
-<li>Local derivatives are limited</li>
-</ul>
+<aside class="notes">
+<p>On this slide, I want to explain why we do sensitivity analysis.</p>
+<p>The first objective is factor prioritisation. This means: among all uncertain inputs, which ones matter the most for the model output? If one parameter explains most of the output uncertainty, it deserves more attention.</p>
+<p>The second objective is factor fixing, also called screening. Here we look for inputs that have almost no effect on the output. If an input is not important, we can fix it to a constant value and simplify the model.</p>
+<p>The third objective is understanding model behaviour. Many models are nonlinear, and inputs can interact with each other. Sensitivity analysis helps us see these interactions and understand how the model really works.</p>
+<p>The last objective is supporting robust decisions. Instead of improving everything, we focus effort where it matters most. This helps decide where to collect better data, where to improve the model, and where uncertainty really affects decisions.</p>
+<p>So overall, sensitivity analysis is not only about numbers. It is a tool for learning, simplifying, and making better decisions under uncertainty.</p>
+<p>One important point is that <strong>different sensitivity analysis methods serve different objectives</strong>. There is no single “best” method for all purposes.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="from-local-to-global-sensitivity-analysis" class="slide level2">
 <h2>From local to global sensitivity analysis</h2>
@@ -260,6 +334,30 @@ Focus modelling, data collection, and calibration effort where it matters</li>
 <li>One-factor-at-a-time (OAT)</li>
 <li>Why they fail for nonlinear models</li>
 </ul>
+<aside class="notes">
+<p>The key message of this slide is very simple:</p>
+<p><strong>Local sensitivity looks at the model in one point. Global sensitivity looks at the model over the whole input space.</strong></p>
+<p>Local sensitivity methods use derivatives or small changes around a single reference point. They can be useful when the model is almost linear and uncertainty is very small.</p>
+<p>But in most real problems:</p>
+<ul>
+<li>parameters are uncertain over wide ranges</li>
+<li>models are nonlinear</li>
+<li>parameters interact with each other</li>
+</ul>
+<p>In these cases, local methods can be misleading. They may say an input is unimportant just because the derivative is small at that one point.</p>
+<p>Global sensitivity analysis takes uncertainty seriously. Inputs are varied over their full ranges, and we study how they affect the output variability.</p>
+<p>So the important shift here is: we move from <strong>“What happens if I change one parameter a little bit?”</strong> to <strong>“Which uncertainties matter most for the overall behaviour of the model?”</strong></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="variance-as-a-measure-of-importance" class="slide level2">
 <h2>Variance as a measure of importance</h2>
@@ -268,6 +366,26 @@ Focus modelling, data collection, and calibration effort where it matters</li>
 <li>Conditional expectation and variance</li>
 <li>Total variance decomposition</li>
 </ul>
+<aside class="notes">
+<p>Variance is fundamental in global sensitivity analysis because it measures <strong>uncertainty in the model output</strong>.</p>
+<p>If a model output has large variance, it means the prediction is uncertain. If the variance is small, the prediction is more stable. So variance gives us a natural way to quantify how uncertain the model result is.</p>
+<p>The key idea in sensitivity analysis is to ask: <em>How much of this output variance is caused by each input?</em></p>
+<p>This is why variance is so useful. It can be <strong>decomposed</strong> into contributions from individual inputs and from their interactions. This is a central idea in Saltelli’s work.</p>
+<p>Conditional expectation and conditional variance help us formalize this. If fixing one input significantly reduces the output variance, then that input is important. If fixing it changes little, then it is not very important.</p>
+<p>So variance is not just a statistical choice. It directly connects uncertainty in the inputs to uncertainty in the output, and it allows us to rank inputs by how much they contribute to that uncertainty.</p>
+<p>This is what makes variance the natural foundation for variance-based sensitivity measures, such as Sobol indices.</p>
+<p>So once we agree that variance measures output uncertainty, the next step is to ask how this variance can be attributed to individual inputs this is exactly what Sobol indices do.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="sobol-indices-idea-not-formulas" class="slide level2">
 <h2>Sobol indices – idea, not formulas</h2>
@@ -276,22 +394,53 @@ Focus modelling, data collection, and calibration effort where it matters</li>
 <li>Total effects</li>
 <li>Interaction effects</li>
 </ul>
+<aside class="notes">
+<p>Sobol indices are the most common variance-based sensitivity measures.</p>
+<p>The important point is not the formulas, but the <strong>idea</strong> behind them.</p>
+<p>The <strong>first-order Sobol index</strong> measures how much of the output variance is explained by one input <em>alone</em>, on average. If this value is large, the input has a strong direct effect on the output.</p>
+<p>The <strong>total Sobol index</strong> measures the overall effect of an input. This includes both its direct effect and all interactions with other inputs. If the total index is much larger than the first-order index, it means interactions are important.</p>
+<p>Sobol indices also allow us to quantify <strong>interaction effects</strong> explicitly. This is something local or one-factor-at-a-time methods cannot capture.</p>
+<p>So Sobol indices give us a clear and interpretable answer to the key question: which inputs, alone or in interaction, drive the uncertainty in the model output?</p>
+<p>This is why they are so central in global sensitivity analysis, especially in complex and nonlinear models.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="what-notebooks-will-show" class="slide level2">
 <h2>What notebooks will show</h2>
 <ul>
-<li>Scatterplots vs derivatives</li>
-<li>Monte Carlo estimation</li>
-<li>Polynomial chaos estimation</li>
+<li><p><strong>Scatterplots and Sobol indices</strong> Complementary ways to understand sensitivity</p></li>
+<li><p><strong>Simple linear model (Saltelli)</strong> Build intuition in the simplest case</p></li>
+<li><p><strong>Benchmark nonlinear models</strong> G-function and Ishigami function</p></li>
+<li><p><strong>Applied example</strong> Wall model for blood flow simulation</p></li>
 </ul>
-</section>
-<section id="how-to-read-sensitivity-indices" class="slide level2">
-<h2>How to read sensitivity indices</h2>
-<ul>
-<li>What they mean</li>
-<li>What they do not mean</li>
-<li>Typical pitfalls</li>
-</ul>
+<aside class="notes">
+<p>The purpose of the notebooks is to show how the concepts we discussed work in practice.</p>
+<p>We will mainly use <strong>scatterplots</strong> and <strong>Sobol sensitivity indices</strong> as two complementary tools. Scatterplots help us see input–output relationships directly, while Sobol indices give a quantitative measure of how important each input is for output uncertainty.</p>
+<p>We start with a <strong>simple linear model</strong>, as used in the book by Saltelli. This is the simplest case and helps build intuition about variance and sensitivity.</p>
+<p>Then we move to standard <strong>benchmark models</strong>: the G-function and the Ishigami function. These models are nonlinear and include strong interaction effects, so they clearly show why global sensitivity analysis is needed.</p>
+<p>Finally, we look at an <strong>applied example</strong>: a wall model for blood flow simulation. This shows how the same ideas apply in a realistic engineering context.</p>
+<p>In the notebooks, we will compute sensitivity indices using both <strong>Monte Carlo sampling</strong> and <strong>polynomial chaos expansion (PCE)</strong>. Both methods estimate the same quantities: the output variance and the Sobol indices. The difference is efficiency, not interpretation.</p>
+<p>The goal is not to teach software or implementation details. The goal is to build intuition about uncertainty propagation and about how sensitivity analysis supports modelling and decision-making.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 
 </section>
     </div>
