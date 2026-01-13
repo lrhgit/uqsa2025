@@ -37,6 +37,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="agenda_files/libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
+<link rel="stylesheet" href="agenda.css">
 </head>
 
 <body class="fullcontent quarto-light">
@@ -67,8 +68,11 @@ ul.task-list li input[type="checkbox"] {
 <p><em>Organiser:</em> NTNU and Politecnico di Milano (PoliMi)<br>
 <em>Dates:</em> 3–4 February 2026<br>
 <em>Instructor:</em> Leif Rune Hellevik<br>
-<em>Location:</em> Politecnico di Milano, Milan, Italy</p>
-<p>The timetable below gives an overview of the seminar structure. Short descriptions of each block are provided further down.</p>
+<em>Location:</em> Politecnico di Milano, Milan, Italy (Natta-tav)</p>
+<p>The seminar is structured over two half-days, combining conceptual lectures with interactive notebook-based demonstrations. The timetable respects the confirmed room reservations.</p>
+<section id="day-1-tuesday-3-february-2026" class="level3">
+<h3 class="anchored" data-anchor-id="day-1-tuesday-3-february-2026">Day 1 — Tuesday 3 February 2026</h3>
+<p>Time: 10:00–15:00</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -79,32 +83,93 @@ ul.task-list li input[type="checkbox"] {
 </thead>
 <tbody>
 <tr class="odd">
-<td>09:00–09:15</td>
+<td>10:00–10:15</td>
 <td>Welcome and overview</td>
 <td>15 min</td>
 </tr>
 <tr class="even">
-<td>09:15–10:00</td>
+<td>10:15–11:00</td>
 <td>Motivation and context</td>
 <td>45 min</td>
 </tr>
 <tr class="odd">
-<td>10:00–10:30</td>
+<td>11:00–11:30</td>
 <td>Probability and variance</td>
 <td>30 min</td>
 </tr>
 <tr class="even">
-<td>10:30–10:45</td>
+<td>11:30–11:45</td>
 <td>Coffee break</td>
 <td>15 min</td>
 </tr>
 <tr class="odd">
-<td>10:45–11:30</td>
-<td>From local to global SA</td>
+<td>11:45–12:30</td>
+<td>From local to global sensitivity analysis</td>
 <td>45 min</td>
+</tr>
+<tr class="even">
+<td>12:30–13:15</td>
+<td>Variance-based sensitivity indices</td>
+<td>45 min</td>
+</tr>
+<tr class="odd">
+<td>13:15–14:00</td>
+<td>Lunch break</td>
+<td>45 min</td>
+</tr>
+<tr class="even">
+<td>14:00–15:00</td>
+<td>Interactive notebook walkthrough (I)</td>
+<td>60 min</td>
 </tr>
 </tbody>
 </table>
+</section>
+<section id="day-2-wednesday-4-february-2026" class="level3">
+<h3 class="anchored" data-anchor-id="day-2-wednesday-4-february-2026">Day 2 — Wednesday 4 February 2026</h3>
+<p>Time: 10:00–13:00</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Time</th>
+<th>Block</th>
+<th>Duration</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>10:00–10:15</td>
+<td>Recap and framing of day 2</td>
+<td>15 min</td>
+</tr>
+<tr class="even">
+<td>10:15–11:00</td>
+<td>Interactive notebook walkthrough (II)</td>
+<td>45 min</td>
+</tr>
+<tr class="odd">
+<td>11:00–11:30</td>
+<td>Methods and comparison</td>
+<td>30 min</td>
+</tr>
+<tr class="even">
+<td>11:30–11:45</td>
+<td>Coffee break</td>
+<td>15 min</td>
+</tr>
+<tr class="odd">
+<td>11:45–12:30</td>
+<td>Discussion, interpretation, limitations</td>
+<td>45 min</td>
+</tr>
+<tr class="even">
+<td>12:30–13:00</td>
+<td>Pointers, outlook, and closing discussion</td>
+<td>30 min</td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="description-of-programme-blocks" class="level2">
 <h2 class="anchored" data-anchor-id="description-of-programme-blocks">Description of programme blocks</h2>
 <section id="welcome-and-overview" class="level3">
@@ -125,17 +190,17 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="variance-based-sensitivity-indices" class="level3">
 <h3 class="anchored" data-anchor-id="variance-based-sensitivity-indices">Variance-based sensitivity indices</h3>
-<p>Conceptual introduction to Sobol indices and what they measure (first-order and total effects), focusing on interpretation rather than formal derivations.</p>
+<p>Conceptual introduction to Sobol indices and what they measure (first-order and total effects), with emphasis on interpretation rather than formal derivations.</p>
 </section>
-<section id="interactive-notebook-walkthrough-hands-on" class="level3">
-<h3 class="anchored" data-anchor-id="interactive-notebook-walkthrough-hands-on">Interactive notebook walkthrough (hands-on)</h3>
-<p>Guided exploration of selected Jupyter/Colab notebooks. Participants are invited to run and experiment with prepared examples illustrating:</p>
+<section id="interactive-notebook-walkthrough" class="level3">
+<h3 class="anchored" data-anchor-id="interactive-notebook-walkthrough">Interactive notebook walkthrough</h3>
+<p>Guided exploration of selected Jupyter/Colab notebooks illustrating:</p>
 <ul>
 <li>sampling of input parameter spaces</li>
-<li>scatterplots and conditional behavior</li>
+<li>scatterplots and conditional behaviour</li>
 <li>computation and interpretation of sensitivity indices</li>
 </ul>
-<p>Participation in the hands-on part is encouraged but not mandatory.</p>
+<p>Participants are welcome to run the notebooks, but this is not required.</p>
 </section>
 <section id="methods-and-comparison" class="level3">
 <h3 class="anchored" data-anchor-id="methods-and-comparison">Methods and comparison</h3>
@@ -144,13 +209,14 @@ ul.task-list li input[type="checkbox"] {
 <section id="discussion-and-pointers" class="level3">
 <h3 class="anchored" data-anchor-id="discussion-and-pointers">Discussion and pointers</h3>
 <p>Interpretation, limitations, and suggestions for further reading and practical use.</p>
+<hr>
 </section>
 </section>
 <section id="practical-information" class="level2">
 <h2 class="anchored" data-anchor-id="practical-information">Practical information</h2>
-<p>The seminar combines demonstration with a short, structured hands-on session. Participants who wish to run code will be provided with ready-to-use notebooks and instructions.</p>
+<p>The seminar combines demonstration with interactive exploration. Participants who wish to run code will be provided with ready-to-use notebooks and instructions.</p>
 <p>Interactive notebooks and slides will be shared after the seminar.</p>
-<p>Familiarity with basic probability and numerical modeling is helpful, but no prior experience with sensitivity analysis is assumed.</p>
+<p>Familiarity with basic probability and numerical modelling is helpful, but no prior experience with sensitivity analysis is assumed.</p>
 </section>
 
 </main>

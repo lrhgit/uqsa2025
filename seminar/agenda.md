@@ -1,23 +1,38 @@
----
-title: "Seminar agenda – Global Sensitivity Analysis"
----
 
 *Organiser:* NTNU and Politecnico di Milano (PoliMi)  
 *Dates:* 3–4 February 2026  
 *Instructor:* Leif Rune Hellevik  
-*Location:* Politecnico di Milano, Milan, Italy
+*Location:* Politecnico di Milano, Milan, Italy (Natta-tav)  
 
-The timetable below gives an overview of the seminar structure. Short descriptions of each block are provided further down.
+The seminar is structured over two half-days, combining conceptual lectures with interactive notebook-based demonstrations. The timetable respects the confirmed room reservations.
 
+### Day 1 — Tuesday 3 February 2026
 
+Time: 10:00–15:00
 
-| Time        | Block                     | Duration |
-|-------------|---------------------------|----------|
-| 09:00–09:15 | Welcome and overview      | 15 min   |
-| 09:15–10:00 | Motivation and context    | 45 min   |
-| 10:00–10:30 | Probability and variance  | 30 min   |
-| 10:30–10:45 | Coffee break              | 15 min   |
-| 10:45–11:30 | From local to global SA   | 45 min   |
+| Time        | Block                                     | Duration |
+| ----------- | ----------------------------------------- | -------- |
+| 10:00–10:15 | Welcome and overview                      | 15 min   |
+| 10:15–11:00 | Motivation and context                    | 45 min   |
+| 11:00–11:30 | Probability and variance                  | 30 min   |
+| 11:30–11:45 | Coffee break                              | 15 min   |
+| 11:45–12:30 | From local to global sensitivity analysis | 45 min   |
+| 12:30–13:15 | Variance-based sensitivity indices        | 45 min   |
+| 13:15–14:00 | Lunch break                               | 45 min   |
+| 14:00–15:00 | Interactive notebook walkthrough (I)      | 60 min   |
+
+### Day 2 — Wednesday 4 February 2026
+
+Time: 10:00–13:00
+
+| Time        | Block                                     | Duration |
+| ----------- | ----------------------------------------- | -------- |
+| 10:00–10:15 | Recap and framing of day 2                | 15 min   |
+| 10:15–11:00 | Interactive notebook walkthrough (II)     | 45 min   |
+| 11:00–11:30 | Methods and comparison                    | 30 min   |
+| 11:30–11:45 | Coffee break                              | 15 min   |
+| 11:45–12:30 | Discussion, interpretation, limitations   | 45 min   |
+| 12:30–13:00 | Pointers, outlook, and closing discussion | 30 min   |
 
 
 ## Description of programme blocks
@@ -40,17 +55,17 @@ Limitations of derivative-based (local) sensitivity measures and the intuition b
 
 ### Variance-based sensitivity indices
 
-Conceptual introduction to Sobol indices and what they measure (first-order and total effects), focusing on interpretation rather than formal derivations.
+Conceptual introduction to Sobol indices and what they measure (first-order and total effects), with emphasis on interpretation rather than formal derivations.
 
-### Interactive notebook walkthrough (hands-on)
+### Interactive notebook walkthrough
 
-Guided exploration of selected Jupyter/Colab notebooks. Participants are invited to run and experiment with prepared examples illustrating:
+Guided exploration of selected Jupyter/Colab notebooks illustrating:
 
 * sampling of input parameter spaces
-* scatterplots and conditional behavior
+* scatterplots and conditional behaviour
 * computation and interpretation of sensitivity indices
 
-Participation in the hands-on part is encouraged but not mandatory.
+Participants are welcome to run the notebooks, but this is not required.
 
 ### Methods and comparison
 
@@ -60,10 +75,12 @@ Brief comparison of Monte Carlo–based and polynomial chaos–based approaches 
 
 Interpretation, limitations, and suggestions for further reading and practical use.
 
+---
+
 ## Practical information
 
-The seminar combines demonstration with a short, structured hands-on session. Participants who wish to run code will be provided with ready-to-use notebooks and instructions.
+The seminar combines demonstration with interactive exploration. Participants who wish to run code will be provided with ready-to-use notebooks and instructions.
 
 Interactive notebooks and slides will be shared after the seminar.
 
-Familiarity with basic probability and numerical modeling is helpful, but no prior experience with sensitivity analysis is assumed.
+Familiarity with basic probability and numerical modelling is helpful, but no prior experience with sensitivity analysis is assumed.
