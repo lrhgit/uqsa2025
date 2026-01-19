@@ -1,0 +1,22 @@
+project:
+  type: website
+
+format:
+  revealjs:
+    width: 1600
+    height: 900
+    margin: 0.05
+    center: false
+
+    theme:
+      - default
+      - slides/assets/ntnu.scss
+
+    logo: slides/assets/ntnu-logo.svg
+    footer: "NTNU • Global Sensitivity Analysis • 3–4 Feb 2026"
+    slide-number: true
+
+    progress: true
+    controlsLayout: edges
+    navigationMode: linear
+    html-math-method: mathjax

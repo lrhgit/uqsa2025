@@ -2,7 +2,7 @@
 title: "Seminar agenda – Global Sensitivity Analysis"
 format:
   html:
-    css: agenda.css
+    css: assets/agenda.css
 
 ---
 

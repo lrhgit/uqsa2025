@@ -4,12 +4,10 @@ subtitle: "Motivation, concepts, and intuition"
 author: "Leif Rune Hellevik"
 institute: "NTNU and Politecnico di Milano (PoliMi) — Seminar, 3–4 February 2026"
 date: "2026-02-03"
-format:
-  revealjs:
-    width: 1600
-    height: 900
-    margin: 0.05
+
 ---
+
+
 
 ## Welcome & framing
 
@@ -46,14 +44,14 @@ Set expectations for interaction and questions throughout the sessions.
 
 ## From a VUCA world to uncertainty-aware modelling
 ::: {.incremental}
-* Engineering decisions are increasingly made in a **VUCA context**
-  *(Volatility, Uncertainty, Complexity, Ambiguity)*
-* Models are essential tools for reasoning under uncertainty
-* However, models are:
-  * based on uncertain inputs
-  * built on simplifying assumptions
-  * often nonlinear and high-dimensional
-* **Uncertainty quantification (UQ)** provides a systematic framework
+* Engineering decisions are increasingly made in a **VUCA context**  
+  *(Volatility, Uncertainty, Complexity, Ambiguity)*  
+* Models are essential tools for reasoning under uncertainty  
+* However, models are:  
+  * based on uncertain inputs  
+  * built on simplifying assumptions  
+  * often nonlinear and high-dimensional  
+* **Uncertainty quantification (UQ)** provides a systematic framework 
   to represent, propagate, and interpret uncertainty in models
 :::
 
@@ -76,46 +74,99 @@ it helps us understand which inputs drive the uncertainty in the results, and wh
 :::
 
 
+## From uncertainty-aware models to credible evidence
 
-## Digital twins need global sensitivity analysis
 ::: {.incremental}
-* **Digital twins** rely on models to support monitoring, prediction, and decision-making
-* In practice, digital twins operate under:
-  * uncertain data
-  * uncertain parameters
-  * evolving system states
-* **Global sensitivity analysis (GSA)** is a key component of UQ:
+* Models increasingly support or replace experiments
+  → **in silico trials** and virtual cohorts
 
-  * identifies which uncertainties matter most
-  * reveals interactions and nonlinear effects
-  * supports robust and transparent decisions
-* Without GSA, digital twins risk being precise but **not reliable**
+* In silico trials aim to:
+
+  * reduce animal testing
+  * limit human exposure
+  * explore infeasible or rare scenarios
+
+* **Key question:** when is a computational result credible - and why should we trust it?
+
+* Credibility requires understanding uncertainty
+
+  * not all uncertainties matter equally
+
+* **Global sensitivity analysis (GSA)** operationalises credibility
+
+  * connects uncertainty to decision relevance
+  * identifies dominant sources of risk
+  * informs where validation and modelling effort matter
 :::
 
 ::: notes
-A **digital twin** is a model that represents a real system and is used to monitor, predict, or support decisions during operation.
+One key reason why uncertainty and sensitivity analysis have become so important is the rise of **in silico trials**.
 
-Digital twins rely heavily on models, but these models are never exact.
-They use data that can be noisy or incomplete, and parameters that are often uncertain.
+In many areas — especially medical devices and biomechanics — models increasingly support, or partially replace, physical experiments. This is driven by ethics, cost, time, and feasibility: we want to reduce animal testing, limit human exposure, and explore rare or infeasible scenarios.
 
-In practice, a digital twin must deal with:
+This raises the key question on this slide: *when is a computational result credible — and why should we trust it?*
+Here, **credibility** is used in the ASME sense. A result is *credible* when there is sufficient evidence that the model is adequate for its **context of use**. **Trust** is the consequence — we trust a result because we understand why it is credible.
 
-* uncertain measurements,
-* uncertain model parameters,
-* and systems that change over time.
+Crucially, credibility is not about removing uncertainty everywhere. It is about understanding **which uncertainties matter for the decision**, and which do not. This point is central in ASME V&V and in Aldieri’s work on credibility assessment.
 
-Because of this, model outputs can look very precise, but still be unreliable.
+Uncertainty quantification tells us *how uncertain* a model result is.
+Global sensitivity analysis tells us *why* it is uncertain — by identifying the dominant sources of uncertainty and risk.
 
-**Global Sensitivity Analysis (GSA)** is important for digital twins because it tells us:
+In this sense, **global sensitivity analysis operationalises credibility**: it links uncertainty to decision relevance and shows where evidence and modelling effort actually matter.
+:::
 
-* which uncertainties have the largest impact on the results,
-* whether interactions between inputs are important,
-* and which parameters really matter for decisions.
 
-Without sensitivity analysis, we may trust a digital twin too much.
-With sensitivity analysis, we understand **how robust** the results are and **where to focus effort**.
+## Digital twins need global sensitivity analysis
+
+::: {.incremental}
+* **Digital twins** rely on models for monitoring, prediction, and decision support
+
+* They operate continuously under uncertainty
+
+  * uncertain and evolving data
+  * uncertain model parameters
+  * changing system states
+
+* Decisions must be made despite uncertainty
+
+  * not all uncertainties can be reduced
+
+* **Global sensitivity analysis (GSA)** supports credible digital twins
+
+  * identifies decision-relevant uncertainties
+  * assesses robustness to uncertainty
+  * supports credibility for the intended context of use
+
+* Without GSA, digital twins risk being precise but **not reliable**
+
+  * apparent accuracy may hide sensitivity to decision-relevant uncertain inputs
 
 :::
+
+::: notes
+Digital twins are a useful example of why credibility under uncertainty really matters.
+
+A digital twin is a model used continuously to monitor, predict, or support decisions about a real system. Because of this, it operates under persistent uncertainty: data are noisy or incomplete, parameters are uncertain, and the system itself may evolve over time.
+
+At the same time, decisions still have to be made. We cannot remove all uncertainty, so the key question again becomes: *which uncertainties matter for the decisions the digital twin is used to support?*
+
+In the ASME sense, a digital twin is credible only if its results are robust for its **intended context of use**. Apparent precision is not enough.
+
+Global sensitivity analysis provides this link. It identifies which uncertainties are decision-relevant and where the model is sensitive or fragile. In that way, GSA supports credibility rather than just numerical accuracy.
+
+This example sets the stage for the more general question: what problem sensitivity analysis actually solves.
+
+Here, *precise* means producing sharp, detailed outputs, often with many digits.
+*Reliable* means that those outputs are robust to uncertainty in data, parameters, and assumptions.
+
+Without GSA, a digital twin may look accurate, while being highly sensitive to **decision-relevant uncertainties**. Apparent precision can therefore be misleading.
+
+Transition to next slide: 
+Digital twins are just one example. The underlying issue is much more general.
+In any complex model used for decisions, we need to know which uncertainties actually matter.
+
+:::
+
 
 
 ## What problem sensitivity analysis solves?
@@ -138,30 +189,28 @@ With sensitivity analysis, we understand **how robust** the results are and **wh
 
 
 ::: notes
-We have already seen the first two points on the previous slides.
+We have already seen the first two points on earlier slides.
 
-We use models under uncertainty: inputs are not known exactly.
-And when models become nonlinear and high-dimensional, our intuition is no longer reliable.
-So these points are important, but not very controversial.
+We use models under uncertainty: inputs are not known exactly. And as
+models become nonlinear and high-dimensional, our intuition is no
+longer reliable. These points are important, but they are not very
+controversial.
 
-The real motivation for sensitivity analysis is in the last two points.
+The real motivation for sensitivity analysis lies in the last two
+points.
 
-Decisions require prioritisation.
-In practice, we cannot reduce all uncertainties.
-We do not have unlimited time, data, or resources.
-Sensitivity analysis helps us decide where to focus our effort:
-which uncertain inputs deserve better data, calibration, or modelling.
-This is what Saltelli calls factor prioritisation and factor fixing.
+Decisions require prioritisation. In practice, we cannot reduce all
+uncertainties. We do not have unlimited time, data, or resources, so
+we must decide where effort actually matters.
 
-Sensitivity analysis is about relevance.
-The goal is not to fully explain how the model works in every detail.
-The goal is to explain where the output uncertainty comes from.
-In that sense, sensitivity analysis is a decision-support tool:
-it tells us which uncertainties matter for the question we are asking,
-and which ones matter less.
+This is why sensitivity analysis is fundamentally about **relevance**.
+It tells us which uncertainties really drive the uncertainty in the
+model output, and which ones matter less for the question we are
+asking.
+
+In other words, sensitivity analysis is not about explaining every
+detail of a model. It is about identifying what matters for decisions.
 :::
-
-
 
 
 ## Main objectives of sensitivity analysis
@@ -178,29 +227,32 @@ and which ones matter less.
 :::
 
 ::: notes
-On this slide, I want to explain why we do sensitivity analysis.
+Now that the problem is clear, let me be explicit about what
+sensitivity analysis is actually used for.
 
-The first objective is factor prioritisation.
-This means: among all uncertain inputs, which ones matter the most for the model output?
-If one parameter explains most of the output uncertainty, it deserves more attention.
+The first objective is **factor prioritisation**.  Among all uncertain
+inputs, which ones contribute most to the uncertainty in the model
+output? These are the parameters that deserve attention, better data,
+or careful calibration.
 
-The second objective is factor fixing, also called screening.
-Here we look for inputs that have almost no effect on the output.
-If an input is not important, we can fix it to a constant value and simplify the model.
+The second objective is **factor fixing**, also called screening.
+Here we identify inputs that have little influence on the output. If
+an input is not important, it can be fixed to a constant value without
+affecting the results, which simplifies the model.
 
-The third objective is understanding model behaviour.
-Many models are nonlinear, and inputs can interact with each other.
-Sensitivity analysis helps us see these interactions and understand how the model really works.
+The third objective is **understanding model behaviour**.  Many models
+are nonlinear and include interactions between inputs. Sensitivity
+analysis helps reveal these effects and gives insight into how the
+model actually responds to uncertainty.
 
-The last objective is supporting robust decisions.
-Instead of improving everything, we focus effort where it matters most.
-This helps decide where to collect better data, where to improve the model, and where uncertainty really affects decisions.
+The final objective is **supporting robust decisions**.  Instead of
+trying to improve everything, sensitivity analysis helps focus
+modelling, data collection, and validation effort where it matters
+most.
 
-So overall, sensitivity analysis is not only about numbers.
-It is a tool for learning, simplifying, and making better decisions under uncertainty.
-
-One important point is that **different sensitivity analysis methods serve different objectives**.
-There is no single “best” method for all purposes.
+These objectives will guide the rest of the seminar. Different
+sensitivity analysis methods support different objectives, and there
+is no single “best” method for all purposes.
 :::
 
 

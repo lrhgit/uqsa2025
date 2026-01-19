@@ -5,6 +5,7 @@ set -euo pipefail
 # Targets:
 #   ./make.sh agenda
 #   ./make.sh slides
+#   ./make.sh appendix
 #   ./make.sh all
 #   ./make.sh        (defaults to agenda)
 
@@ -49,6 +50,20 @@ build_slides() {
   echo "✓ Slides built"
 }
 
+build_appendix() {
+  need_cmd quarto
+  echo "▶ Building technical appendix"
+
+  if [[ -f "slides/technical_appendix.qmd" ]]; then
+    quarto render slides/technical_appendix.qmd
+  else
+    echo "Error: slides/technical_appendix.qmd not found"
+    exit 1
+  fi
+
+  echo "✓ Technical appendix built"
+}
+
 TARGET="${1:-agenda}"
 
 case "$TARGET" in
@@ -58,12 +73,16 @@ case "$TARGET" in
   slides)
     build_slides
     ;;
+  appendix)
+    build_appendix
+    ;;
   all)
     build_agenda
     build_slides
+    build_appendix
     ;;
   *)
-    echo "Usage: $0 [agenda|slides|all]"
+    echo "Usage: $0 [agenda|slides|appendix|all]"
     exit 2
     ;;
 esac
