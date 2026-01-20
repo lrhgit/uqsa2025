@@ -1,3 +1,10 @@
+---
+format:
+  revealjs:
+    css: assets/agenda.css
+---
+
+
 # References — Global Sensitivity Analysis seminar
 
 This document lists the main references used throughout the seminar

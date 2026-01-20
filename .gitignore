@@ -7,3 +7,5 @@ _site/
 slides/*_files/
 slides/intro_files/
 *.html
+
+**/*.quarto_ipynb

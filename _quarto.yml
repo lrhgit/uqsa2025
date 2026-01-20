@@ -1,5 +1,8 @@
 project:
   type: website
+  resources:
+    - assets
+    - seminar/assets
 
 format:
   revealjs:
@@ -10,9 +13,9 @@ format:
 
     theme:
       - default
-      - ./slides/assets/ntnu.scss
+      - assets/ntnu.scss
 
-    logo: ./slides/assets/ntnu-logo.svg
+    logo: assets/ntnu-logo.svg
     footer: "NTNU • Global Sensitivity Analysis • 3–4 Feb 2026"
     slide-number: true
 
