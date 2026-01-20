@@ -1,0 +1,135 @@
+/* NTNU-ish Reveal theme overlay for Quarto
+   Goal: PowerPoint-like feel: blue top bar, clean typography, footer/slide nr.
+*/
+
+/* ---- basic variables ---- */
+:root{
+  --ntnu-blue: #005AA7;
+  --ntnu-blue-dark: #004A87;
+  --ntnu-text: #1a1a1a;
+  --ntnu-muted: #5a5f66;
+  --ntnu-light: #f6f8fb;
+  --ntnu-rule: rgba(0,0,0,0.10);
+}
+
+/* ---- typography ---- */
+.reveal{
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, sans-serif;
+  color: var(--ntnu-text);
+}
+
+.reveal .slides{
+  text-rendering: optimizeLegibility;
+}
+
+.reveal h1, .reveal h2, .reveal h3{
+  letter-spacing: -0.01em;
+  line-height: 1.12;
+  margin: 0 0 0.45em 0;
+}
+
+.reveal h1{ font-size: 2.15em; }
+.reveal h2{ font-size: 1.65em; }
+.reveal h3{ font-size: 1.20em; }
+
+.reveal p, .reveal li{
+  font-size: 0.95em;
+  line-height: 1.35;
+}
+
+.reveal a{
+  color: var(--ntnu-blue);
+  text-decoration: none;
+}
+.reveal a:hover{
+  text-decoration: underline;
+}
+
+/* ---- spacing / lists ---- */
+.reveal section{
+  padding-top: 0.2em;
+}
+
+.reveal ul{
+  margin-top: 0.35em;
+}
+.reveal li{
+  margin: 0.35em 0;
+}
+
+/* ---- top bar (NTNU-ish) ---- */
+.reveal .slides section::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 10px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--ntnu-blue) 0%, var(--ntnu-blue-dark) 100%);
+}
+
+/* ---- logo placement ---- */
+.reveal .slide-logo{
+  height: 42px !important;
+  max-height: 42px !important;
+  width: auto !important;
+  left: 18px !important;
+  top: 16px !important;
+  right: auto !important;
+  bottom: auto !important;
+  opacity: 0.95;
+}
+
+/* ---- footer & slide number ---- */
+.reveal .footer{
+  color: var(--ntnu-muted);
+  font-size: 0.55em;
+  left: 18px;
+  bottom: 10px;
+  position: fixed;
+}
+
+.reveal .slide-number{
+  color: var(--ntnu-muted);
+  font-size: 0.55em;
+  right: 18px;
+  bottom: 10px;
+}
+
+/* ---- subtle content framing ---- */
+.reveal .slides section{
+  /* give content a little breathing room away from the bar/logo */
+  padding-top: 0.6em;
+}
+
+/* ---- “box” utility (optional) ---- */
+.reveal .box{
+  background: var(--ntnu-light);
+  border: 1px solid var(--ntnu-rule);
+  border-left: 6px solid var(--ntnu-blue);
+  border-radius: 10px;
+  padding: 0.7em 0.85em;
+  margin: 0.6em 0;
+}
+
+.reveal .muted{
+  color: var(--ntnu-muted);
+}
+
+/* ---- section title slides (optional) ---- */
+.reveal section.section-slide{
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.reveal section.section-slide h2{
+  font-size: 2.0em;
+  margin: 0;
+}
+
+.reveal section.section-slide .subtitle{
+  margin-top: 0.5em;
+  color: var(--ntnu-muted);
+  font-size: 0.85em;
+}
