@@ -6,6 +6,6 @@ format:
 
 ---
 
-{{< include agenda.md >}}
+{{< include content_agenda.md >}}
 
 
