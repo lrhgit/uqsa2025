@@ -427,4 +427,5 @@ Saltelli et al., Comput. Phys. Commun., 2010.
 **General overview and terminology**
   *Sensitivity analysis.* Wikipedia — [https://en.wikipedia.org/wiki/Sensitivity_analysis](https://en.wikipedia.org/wiki/Sensitivity_analysis)
 
-Full reference list: see `references.md` in the seminar repository.
+
+Full reference list:  <a href="../seminar/references.html" target="_blank" rel="noopener">Seminar references </a>
