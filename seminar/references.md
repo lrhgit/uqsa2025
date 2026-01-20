@@ -1,12 +1,11 @@
 ---
+title: "References — Global Sensitivity Analysis seminar"
 format:
-  revealjs:
-    slide-level: 1
+  html:
+    toc: true
     css: assets/agenda.css
 ---
 
-
-# References — Global Sensitivity Analysis seminar
 
 This document lists the main references used throughout the seminar
 *Global Sensitivity Analysis: Motivation, concepts, and intuition*
