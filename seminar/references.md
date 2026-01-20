@@ -1,6 +1,7 @@
 ---
 format:
   revealjs:
+    slide-level: 3
     css: assets/agenda.css
 ---
 
