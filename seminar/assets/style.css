@@ -1,0 +1,21 @@
+/* NTNU-style, light and neutral */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.95em;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: 600;
+  border-bottom: 2px solid #ccc;
+}
+
+td {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+tr:nth-child(even) td {
+  background-color: #fafafa;
+}

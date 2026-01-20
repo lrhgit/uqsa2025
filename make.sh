@@ -6,6 +6,7 @@ set -euo pipefail
 #   ./make.sh agenda
 #   ./make.sh slides
 #   ./make.sh appendix
+#   ./make.sh references
 #   ./make.sh all
 #   ./make.sh        (defaults to agenda)
 
@@ -64,6 +65,22 @@ build_appendix() {
   echo "✓ Technical appendix built"
 }
 
+build_references() {
+  need_cmd quarto
+  echo "▶ Building references"
+
+  if [[ -f "seminar/references.qmd" ]]; then
+    quarto render seminar/references.qmd
+  elif [[ -f "seminar/references.md" ]]; then
+    quarto render seminar/references.md --to html
+  else
+    echo "Error: seminar/references source not found"
+    exit 1
+  fi
+
+  echo "✓ References built"
+}
+
 TARGET="${1:-agenda}"
 
 case "$TARGET" in
@@ -76,13 +93,17 @@ case "$TARGET" in
   appendix)
     build_appendix
     ;;
+  references)
+    build_references
+    ;;
   all)
     build_agenda
     build_slides
     build_appendix
+    build_references
     ;;
   *)
-    echo "Usage: $0 [agenda|slides|appendix|all]"
+    echo "Usage: $0 [agenda|slides|appendix|references|all]"
     exit 2
     ;;
 esac

@@ -404,4 +404,27 @@ and about how sensitivity analysis supports modelling and decision-making.
 
 
 
+## Selected references
 
+**Foundations of global sensitivity analysis**
+  *Global Sensitivity Analysis: The Primer.* Saltelli et al., Wiley, 2008.
+  *Sensitivity estimates for nonlinear mathematical models.* Sobol’, I. M., Math. Model. Comput. Exp., 1993.
+
+<br>
+
+**Variance-based methods and practice**
+  *Variance-based sensitivity analysis of model output: Design and estimator for the total sensitivity index.*
+Saltelli et al., Comput. Phys. Commun., 2010.
+
+<br>
+
+**Credibility, uncertainty, and modelling practice**
+  *Why so many published sensitivity analyses are false.* Saltelli et al., Environ. Model. Softw., 2019.
+  *Model credibility assessment and uncertainty quantification in in silico trials.* Aldieri et al. (ASME V&V).
+
+<br>
+
+**General overview and terminology**
+  *Sensitivity analysis.* Wikipedia — [https://en.wikipedia.org/wiki/Sensitivity_analysis](https://en.wikipedia.org/wiki/Sensitivity_analysis)
+
+Full reference list: see `references.md` in the seminar repository.
