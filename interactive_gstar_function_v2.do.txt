@@ -1,0 +1,26 @@
+======= Sensitivity indices for Sobol's $G^{*}$ function  =======
+
+AUTHOR: Leif Rune Hellevik
+
+
+======= Setup  =======
+
+
+@@@CODE ./python_source/colab_setup.py fromto:^# --- cell: install_chaospy ---$@^# --- endcell: install_chaospy ---$
+
+@@@CODE ./python_source/colab_setup.py fromto:^# --- cell: repo_setup ---$@^# --- endcell: repo_setup ---$
+
+@@@CODE ./python_source/colab_setup.py fromto:^# --- cell: layout_and_numpy_patch ---$@^# --- endcell: layout_and_numpy_patch ---$
+
+======= Sobol's $G^{*}$ function  =======
+
+@@@CODE ./python_source/colab_gstar_source.py fromto:^# --- cell: gstar_statistics ---@# --- endcell: gstar_statistics ---
+
+
+
+**Note on the parameter $\delta$**
+
+The parameters $\delta_i$ are included only to keep the slider interface consistent with other Sobol test-function notebooks.
+For Sobol’s $G^*$ function, the sensitivity indices depend only on $(a_i,\alpha_i)$, and $\delta_i$ does **not** enter the analytical expressions for $S_i$ or $S_i^T$.
+
+@@@CODE ./python_source/colab_gstar_source.py fromto:^# --- cell: gstar_sliders_colab ---@# --- endcell: gstar_sliders_colab ---
