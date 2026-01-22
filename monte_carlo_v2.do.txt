@@ -1,0 +1,79 @@
+<!-- File automatically generated using DocOnce (https://github.com/doconce/doconce/):
+doconce format ipynb monte_carlo.do.txt --encoding=utf-8 --ipynb_admon=hrule --ipynb_disable_mpl_inline --ipynb_cite=latex-plain
+-->
+
+# Monte Carlo sensitivity analysis (Sobol indices)
+
+**Leif Rune Hellevik**
+
+Date: **January 22, 2026**
+
+
+======= Setup  =======
+
+@@@CODE ./python_source/colab_setup.py fromto:^# --- cell: install_chaospy ---$@^# --- endcell: install_chaospy ---$
+
+@@@CODE ./python_source/colab_setup.py fromto:^# --- cell: repo_setup ---$@^# --- endcell: repo_setup ---$
+
+@@@CODE ./python_source/colab_setup.py fromto:^# --- cell: layout_and_numpy_patch ---$@^# --- endcell: layout_and_numpy_patch ---$
+
+
+======= Monte Carlo: skeleton  =======
+
+# (fill in later)
+
+
+
+@@@CODE ./python_source/linear_model.py fromto:^# --- cell: linear_model ---$@^# --- endcell: linear_model ---$
+
+
+@@@CODE ./python_source/colab_monte_carlo.py fromto:^# --- cell: load_problem_helpers ---$@^# --- endcell: load_problem_helpers ---$
+
+@@@CODE ./python_source/colab_monte_carlo.py fromto:^# --- cell: define_problem_and_jpdf ---$@^# --- endcell: define_problem_and_jpdf ---$
+
+
+@@@CODE ./python_source/colab_monte_carlo.py fromto:^# --- cell: mc_setup ---$@^# --- endcell: mc_setup ---$
+
+@@@CODE ./python_source/colab_monte_carlo.py fromto:^# --- cell: saltelli_matrices ---$@^# --- endcell: saltelli_matrices ---$
+
+@@@CODE ./python_source/colab_monte_carlo.py fromto:^# --- cell: model_evaluation_saltelli ---$@^# --- endcell: model_evaluation_saltelli ---$
+
+@@@CODE ./python_source/colab_monte_carlo.py fromto:^# --- cell: sobol_estimators ---$@^# --- endcell: sobol_estimators ---$
+
+
+
+
+!bc ipynb
+# --- cell: imports ---
+# (optional additional imports specific to MC notebook)
+!ec
+
+!bc ipynb
+# --- cell: problem_definition ---
+# Define model, parameters, and joint distribution (jpdf)
+!ec
+
+!bc ipynb
+# --- cell: sampling_matrices ---
+# Generate A, B, (and C_i) matrices for Saltelli / Sobol estimation
+!ec
+
+!bc ipynb
+# --- cell: model_evaluation ---
+# Evaluate model on sample matrices
+!ec
+
+!bc ipynb
+# --- cell: sobol_estimators ---
+# Compute S and ST (first-order and total) from the evaluations
+!ec
+
+!bc ipynb
+# --- cell: postprocess_tables ---
+# Build a summary table (e.g. pandas DataFrame) and print/pretty display
+!ec
+
+!bc ipynb
+# --- cell: plots ---
+# Plot indices and (optionally) convergence diagnostics
+!ec

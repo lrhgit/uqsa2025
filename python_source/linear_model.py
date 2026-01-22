@@ -1,4 +1,5 @@
-# linear_model.py
+# --- cell: linear_model ---
+
 import numpy as np
 
 def linear_model(w, z):
@@ -20,3 +21,5 @@ def linear_model(w, z):
         Model outputs for each sample.
     """
     return np.sum(w * z, axis=1)
+
+# --- endcell: linear_model ---

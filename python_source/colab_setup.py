@@ -97,6 +97,11 @@ import chaospy as cp
 import numpoly
 import pandas as pd
 
+
+# Pretty-print helpers (used across notebooks)
+from pretty_printing import section_title, pretty_table, pretty_print_sobol_mc
+
+
 # --- NumPy reshape compatibility patch for numpoly ---
 _old_reshape = np.reshape
 

@@ -12,6 +12,27 @@ AUTHOR: Leif Rune Hellevik
 
 @@@CODE ./python_source/colab_setup.py fromto:^# --- cell: layout_and_numpy_patch ---$@^# --- endcell: layout_and_numpy_patch ---$
 
+
+
+======= Background =======
+
+This notebook assumes familiarity with basic concepts in uncertainty propagation
+and surrogate modelling, in particular
+
+* Monte Carlo methods (MC)
+* Polynomial Chaos Expansion (PCE)
+
+These methods are introduced and discussed in detail in the notebook
+`sensitivity_introduction.ipynb`.
+
+The examples and results presented here reuse the concepts and notation
+established in that introduction.
+
+
+
+
+
+
 ======= Sobol's $G^{*}$ function  =======
 
 @@@CODE ./python_source/colab_gstar_source.py fromto:^# --- cell: gstar_statistics ---@# --- endcell: gstar_statistics ---

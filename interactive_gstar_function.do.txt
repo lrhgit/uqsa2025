@@ -7,6 +7,20 @@ Run the first cell to initialise plotting and printing modules for later use (an
 
 @@@CODE ./python_source/notebook_setup.py
 
+### Background
+
+This notebook builds on the introduction of
+
+- Monte Carlo methods for uncertainty propagation
+- Polynomial Chaos Expansion (PCE) for surrogate modelling
+
+as presented in:
+
+👉 `sensitivity_introduction.ipynb`
+
+Please review these sections if you are unfamiliar with MC or PCE.
+
+
 ======= Sobol's $G^{*}$ function  =======
 label{sec:G_functions}
 

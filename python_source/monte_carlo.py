@@ -50,56 +50,97 @@ def generate_sample_matrices_mc(Ns, number_of_parameters, jpdf, sample_method='R
 # end sample matrices
 
 
-# mc algorithm for variance based sensitivity coefficients
-def calculate_sensitivity_indices_mc(y_a, y_b, y_c):
 
-    # single output value y_a for one set of samples
-    if len(y_c.shape) == 2:
-        Ns, n_parameters = y_c.shape
+import numpy as np
 
-        # for the first order index
-        f0sq_first = np.sum(y_a*y_b)/ Ns 
-        y_var_first = np.sum(y_b**2.)/(Ns-1) - f0sq_first
+import numpy as np
 
-        # for the total index
-        f0sq_total = (sum(y_a)/Ns)**2
-        y_var_total = np.sum(y_a**2.)/(Ns-1) - f0sq_total
+def calculate_sensitivity_indices_mc(y_a, y_b, y_c, ddof=1, clip=True):
+    """
+    First-order (S) and total-order (ST) Sobol indices from Saltelli sampling.
 
-        s = np.zeros(n_parameters)
-        st = np.zeros(n_parameters)
+    Inputs
+    ------
+    y_a : array, shape (Ns,)
+        Model evaluations on matrix A.
+    y_b : array, shape (Ns,)
+        Model evaluations on matrix B.
+    y_c : array, shape (Ns, P) or (P, Ns)
+        Model evaluations on C_i matrices.
+        Either:
+          - y_c[:, i] is Y(C_i)  -> shape (Ns, P)
+          - y_c[i, :] is Y(C_i)  -> shape (P, Ns)
 
-        for i in range(n_parameters):
-            # first order index
-            cond_var_X = np.sum(y_a*y_c[:, i])/(Ns - 1) - f0sq_first
-            s[i] = cond_var_X/y_var_first
+    Parameters
+    ----------
+    ddof : int
+        Degrees of freedom for variance (1 gives unbiased sample variance).
+    clip : bool
+        If True, clips S and ST to [0, 1] (helpful for small Ns / noise).
 
-            # total index
-            cond_exp_not_X = np.sum(y_b*y_c[:, i])/(Ns - 1) - f0sq_total
-            st[i] = 1 - cond_exp_not_X/y_var_total
+    Returns
+    -------
+    S  : array, shape (P,)
+        First-order Sobol indices.
+    ST : array, shape (P,)
+        Total-order Sobol indices.
+    """
+    y_a = np.asarray(y_a).reshape(-1)
+    y_b = np.asarray(y_b).reshape(-1)
+    y_c = np.asarray(y_c)
 
-    # vector output value y_a,.. for one set of samples
-    elif len(y_c.shape) == 3:
-        n_y, Ns, n_parameters = y_c.shape
-        # for the first order index
-        f0sq_first = np.sum(y_a*y_b, axis=1) / Ns
-        y_var_first = np.sum(y_b ** 2., axis=1) / (Ns - 1) - f0sq_first
+    Ns = y_a.size
+    if y_b.size != Ns:
+        raise ValueError(f"y_b has length {y_b.size}, expected {Ns}")
+    if y_c.ndim != 2:
+        raise ValueError(f"y_c must be 2D, got shape {y_c.shape}")
 
-        # for the total index
-        f0sq_total = (np.sum(y_a, axis=1) / Ns) ** 2
-        y_var_total = np.sum(y_a ** 2., axis=1) / (Ns - 1) - f0sq_total
+    # Normalize y_c to shape (P, Ns), so row i corresponds to C_i
+    if y_c.shape[0] == Ns:
+        # (Ns, P) -> transpose to (P, Ns)
+        y_c = y_c.T
+    elif y_c.shape[1] == Ns:
+        # already (P, Ns)
+        pass
+    else:
+        raise ValueError(
+            f"y_c has incompatible shape {y_c.shape}. "
+            f"Expected (Ns,P) or (P,Ns) with Ns={Ns}."
+        )
 
-        s = np.zeros((n_parameters, n_y))
-        st = np.zeros((n_parameters, n_y))
+    P = y_c.shape[0]
 
-        for i in range(n_parameters):
-            # first order index
-            cond_var_X = np.sum(y_a * y_c[:, :, i], axis=1) / (Ns - 1) - f0sq_first
+    # Variance of Y (use A; you can also use np.r_[y_a, y_b] if you prefer)
+    VY = np.var(y_a, ddof=ddof)
+    if not np.isfinite(VY) or VY <= 0:
+        raise ValueError(f"Non-positive or invalid variance VY={VY}")
 
-            s[i, :] = cond_var_X / y_var_first
+    # Saltelli estimators (common, robust form)
+    #
+    # First order:
+    #   S_i = (1/N) * sum( y_b * (y_c_i - y_a) ) / V(Y)
+    #
+    # Total order:
+    #   ST_i = (1/(2N)) * sum( (y_a - y_c_i)^2 ) / V(Y)
+    #
+    # Notes:
+    # - These assume C_i is A with column i replaced by B (or equivalent).
+    # - If your C_i uses the opposite convention (B with one col from A),
+    #   you can swap y_a and y_b in the S-estimator.
 
-            # total index
-            cond_exp_not_X = np.sum(y_b * y_c[:, :, i], axis=1) / (Ns - 1) - f0sq_total
-            st[i, :] = 1 - cond_exp_not_X / y_var_total
+    S = np.empty(P, dtype=float)
+    ST = np.empty(P, dtype=float)
 
-    return s, st
-# end mc algorithm for variance based sensitivity coefficients
+    for i in range(P):
+        y_ci = y_c[i, :].reshape(-1)
+        if y_ci.size != Ns:
+            raise ValueError(f"y_c row {i} has length {y_ci.size}, expected {Ns}")
+
+        S[i]  = np.mean(y_b * (y_ci - y_a)) / VY
+        ST[i] = 0.5 * np.mean((y_a - y_ci) ** 2) / VY
+
+    if clip:
+        S = np.clip(S, 0.0, 1.0)
+        ST = np.clip(ST, 0.0, 1.0)
+
+    return S, ST

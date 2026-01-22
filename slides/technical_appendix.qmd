@@ -1,0 +1,91 @@
+---
+title: "Technical appendix – variance decomposition"
+format:
+  revealjs:
+    slide-level: 2
+    width: 1600
+    height: 900
+    html-math-method: mathjax
+---
+
+## Law of total variance (step 1: complete the square)
+
+::: {.fragment}
+Start from the definition:
+$$
+\operatorname{Var}(Y)=\mathbb{E}\!\left[(Y-\mathbb{E}[Y])^2\right].
+$$
+:::
+
+::: {.fragment}
+Expand (complete the square) to get a simpler identity:
+$$
+\operatorname{Var}(Y)=\mathbb{E}[Y^2]-\mathbb{E}[Y]^2.
+$$
+:::
+
+## Law of total variance (step 2: conditional forms)
+
+::: {.fragment}
+Conditional variance (by the same identity, conditional on $X$):
+$$
+\operatorname{Var}(Y\mid X)=\mathbb{E}[Y^2\mid X]-\mathbb{E}[Y\mid X]^2.
+$$
+:::
+
+::: {.fragment}
+Take expectation of both sides:
+$$
+\mathbb{E}[\operatorname{Var}(Y\mid X)]
+=\mathbb{E}\!\left[\mathbb{E}[Y^2\mid X]\right]
+-\mathbb{E}\!\left[\mathbb{E}[Y\mid X]^2\right].
+$$
+:::
+
+::: {.fragment}
+Use the tower property $\mathbb{E}[\mathbb{E}[Y^2\mid X]]=\mathbb{E}[Y^2]$:
+$$
+\mathbb{E}[\operatorname{Var}(Y\mid X)]
+=\mathbb{E}[Y^2]-\mathbb{E}\!\left[\mathbb{E}[Y\mid X]^2\right].
+$$
+:::
+
+## Law of total variance (step 3: finish)
+
+::: {.fragment}
+Variance of the conditional mean:
+$$
+\operatorname{Var}(\mathbb{E}[Y\mid X])
+=\mathbb{E}\!\left[\mathbb{E}[Y\mid X]^2\right]
+-\mathbb{E}[\mathbb{E}[Y\mid X]]^2.
+$$
+:::
+
+::: {.fragment}
+Again by tower property $\mathbb{E}[\mathbb{E}[Y\mid X]]=\mathbb{E}[Y]$:
+$$
+\operatorname{Var}(\mathbb{E}[Y\mid X])
+=\mathbb{E}\!\left[\mathbb{E}[Y\mid X]^2\right]-\mathbb{E}[Y]^2.
+$$
+:::
+
+::: {.fragment}
+Add the two expressions:
+$$
+\mathbb{E}[\operatorname{Var}(Y\mid X)]
++\operatorname{Var}(\mathbb{E}[Y\mid X])
+=\mathbb{E}[Y^2]-\mathbb{E}[Y]^2
+=\operatorname{Var}(Y).
+$$
+:::
+
+::: {.fragment}
+So,
+$$
+\boxed{
+\operatorname{Var}(Y)
+=\mathbb{E}[\operatorname{Var}(Y\mid X)]
++\operatorname{Var}(\mathbb{E}[Y\mid X]).
+}
+$$
+:::
