@@ -1,11 +1,10 @@
 ---
-title: "Global Sensitivity Analysis"
-subtitle: "Motivation, concepts, and intuition"
+title: "Global Sensitivity Analysis for Cardiovascular Models"
+subtitle: "Motivation, concepts, and intuition -- Seminar at PoliMi 3–4 February 2026" 
 author: "Leif Rune Hellevik"
-institute: "NTNU and Politecnico di Milano (PoliMi) — Seminar, 3–4 February 2026"
-date: "2026-02-03"
-
+institute: "NTNU and Politecnico di Milano (PoliMi)"
 ---
+
 
 
 
