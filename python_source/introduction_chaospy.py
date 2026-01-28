@@ -13,7 +13,7 @@ import math
 cp.Uniform?
 
 # show help for sample generation
-cp.samplegen?
+cp.Distribution.sample?
 # end help
 
 # === Distributions ===

@@ -24,11 +24,15 @@ Date: **January 23, 2026**
 ======= Chaospy =======
 label{sec:chaospy}
 
-An introductory paper to the package `chaospy` including a comparison
-to other software packages for polynomial chaos expansions may be
-found in (cite{feinberg_2015}).  A generic introduction, tutorials and
-the source code for `chaospy` is available at:
-https://github.com/jonathf/chaospy.
+A comprehensive "user
+guide":"https://chaospy.readthedocs.io/en/master/user_guide/index.html"
+with step-by-step tutorials is available and provides a good starting
+point for learning.
+
+For a more in-depth background, includig a comparison with other
+software packages for polynomial expansions, see the introductory
+paper (cite{feinberg_2015}).
+
 
 Once the package is installed at your sysstem you may import it simply by 
 !bc
