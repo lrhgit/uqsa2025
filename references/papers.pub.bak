@@ -1,0 +1,118 @@
+* articles
+** {The Identification of Model Effective Dimensions Using Global Sensitivity Analysis}
+   key:       Kucherenko2011
+   author:    Sergei Kucherenko, Balazs Feil, Nilay Shah, Wolfgang Mauntz
+   year:      2011
+   journal:   Reliability Engineering {\&} System Safety
+   publisher: Elsevier
+   volume:    96
+   number:    4
+   pages:     440--449
+   doi:       10.1016/J.RESS.2010.11.003
+   url:       https://www.sciencedirect.com/science/article/pii/S0951832010002437/
+   status:    published
+   abstract:  It is shown that the effective dimensions can be estimated at reasonable computational costs using variance based global sensitivity analysis. Namely, the effective dimension in the truncation sense can be found by using the Sobol' sensitivity indices for subsets of variables. The effective dimension in the superposition sense can be estimated by using the first order effects and the total Sobol' sensitivity indices. The classification of some important classes of integrable functions based on their effective dimension is proposed. It is shown that it can be used for the prediction of the QMC efficiency. Results of numerical tests verify the prediction of the developed techniques.
+   entrytype: article
+   issn:      0951-8320
+   month:     apr
+** A Guide to Uncertainty Quantification and Sensitivity Analysis for Cardiovascular Applications
+   key:          eck2015guide
+   author:       V. G. Eck, W. P. Donders, J. Sturdy, J. Feinberg, T. Delhaas, L. T. Hellevik, W. Huberts
+   year:         2015
+   journal:      International Journal for Numerical Methods in Biomedical Engineering
+   status:       published
+   entrytype:    article
+   issn:         2040-7947
+   keywords:     arterial compliance, cardiovascular modeling, fractional flow reserve, Monte Carlo, Polynomial chaos, sensitivity analysis, Uncertainty quantification
+   optdoi:       10.1002/cnm.2755
+   opturl:       http://onlinelibrary.wiley.com/optdoi/10.1002/cnm.2755/abstract
+   rights:       Copyright © 2015 John Wiley \& Sons, Ltd.
+   shortjournal: Int. J. Numer. Meth. Biomed. Engng.
+** Stochastic Sensitivity Analysis for Timing and Amplitude of Pressure Waves in the Arterial System
+   key:       eck2015stochastic
+   author:    V. G. Eck, J. Feinberg, H. P. Langtangen, L. R. Hellevik
+   year:      2015
+   journal:   International Journal for Numerical Methods in Biomedical Engineering
+   volume:    31
+   number:    4
+   status:    published
+   entrytype: article
+   optdoi:    10.1002/cnm.2711
+** One-Dimensional Modelling of Vascular Network in Space-Time Variables
+   key:       sherwin2003
+   author:    S. Sherwin, V. Franke, J. Peir{\'{o}}, K. Parker
+   year:      2003
+   journal:   Journal of Engineering Mathematics
+   volume:    47
+   number:    3-4
+   pages:     217-233
+   status:    published
+   entrytype: article
+** Stiffness and Elastic Behavior of Human Intracranial and Extracranial Arteries
+   key:       Hayashi1980
+   author:    K. Hayashi, H. Handa, S. Nagasawa, A. Okumura, K. Moritake
+   year:      1980
+   journal:   Journal of Biomechanics
+   volume:    13
+   number:    2
+   pages:     175-184
+   status:    published
+   entrytype: article
+   issn:      0021-9290
+   optdoi:    http://dx.optdoi.org/10.1016/0021-9290(80)90191-8
+** A Benchmark Study of Numerical Schemes for One-Dimensional Arterial Blood Flow Modelling
+   key:       boileau_benchmark_2015
+   author:    E. Boileau, P. Nithiarasu, P. J. Blanco, L. O. Mueller, F. E. Fossan, L. R. Hellevik, W. P. Donders, W. Huberts, M. Willemet, J. Alastruey
+   year:      2015
+   journal:   International Journal for Numerical Methods in Biomedical Engineering
+   volume:    31
+   number:    10
+   pages:     n/a--n/a
+   status:    published
+   entrytype: article
+   issn:      2040-7947
+   optdoi:    10.1002/cnm.2732
+** Chaospy: an Open Source Tool for Designing Methods of Uncertainty Quantification
+   key:       feinberg_2015
+   author:    Jonathan Feinberg, Hans Petter Langtangen
+   year:      2015
+   journal:   Journal of Computational Science
+   volume:    11
+   pages:     46-57
+   status:    published
+   entrytype: article
+   issn:      2040-7947
+   optdoi:    10.1016/j.jocs.2015.08.008.
+* books
+** Numerical Methods for Stochastic Computations: a Spectral Method Approach
+   key:        xiu_numerical_2010
+   author:     Dongbin Xiu
+   year:       2010
+   publisher:  Princeton University Press
+   status:     published
+   address:    Princeton, N.J
+   entrytype:  book
+   isbn:       978-0-691-14212-8
+   keywords:   Approximation theory, Numerical solutions, Probabilities, Spectral theory (Mathematics), Stochastic differential equations, Stochastic processes
+   shorttitle: Numerical methods for stochastic computations
+** Uncertainty Quantification: Theory, Implementation, and Applications
+   key:        smith_uncertainty_2013
+   author:     Ralph C. Smith
+   year:       2013
+   publisher:  Society for Industrial and Applied Mathematics
+   status:     published
+   address:    Philadelphia
+   entrytype:  book
+   isbn:       978-1-61197-321-1
+   keywords:   estimation theory, Measurement uncertainty (Statistics)
+   series:     Computational science and engineering series
+   shorttitle: Uncertainty quantification
+** Global Sensitivity Analysis : the Primer
+   key:        saltelli_global_2008
+   author:     Andrea Saltelli
+   year:       2008
+   publisher:  John Wiley
+   status:     published
+   address:    Chichester, England
+   entrytype:  book
+   shorttitle: Global sensitivity analysis

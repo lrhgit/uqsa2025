@@ -1,0 +1,338 @@
+<!-- File automatically generated using DocOnce (https://github.com/doconce/doconce/):
+doconce format ipynb introduction_gpc_v2.do.txt --encoding=utf-8 --ipynb_admon=hrule --ipynb_disable_mpl_inline --ipynb_cite=latex-plain
+-->
+
+# Polynomial chaos med chaospy 
+
+**Leif Rune Hellevik**
+
+Date: **January 23, 2026**
+
+
+======= Setup =======
+
+@@@CODE ./python_source/colab_setup.py fromto:^# --- cell: install_chaospy ---$@^# --- endcell: install_chaospy ---$
+
+@@@CODE ./python_source/colab_setup.py fromto:^# --- cell: repo_setup ---$@^# --- endcell: repo_setup ---$
+
+@@@CODE ./python_source/colab_setup.py fromto:^# --- cell: layout_and_numpy_patch ---$@^# --- endcell: layout_and_numpy_patch ---$
+
+@@@CODE ./python_source/introduction_chaospy.py fromto:^# imports for gpc$@^# end imports for gpc$
+
+
+
+======= Chaospy =======
+label{sec:chaospy}
+
+An introductory paper to the package `chaospy` including a comparison
+to other software packages for polynomial chaos expansions may be
+found in (cite{feinberg_2015}).  A generic introduction, tutorials and
+the source code for `chaospy` is available at:
+https://github.com/jonathf/chaospy.
+
+Once the package is installed at your sysstem you may import it simply by 
+!bc
+import chaospy as cp
+!ec
+
+It is common practice ot "import as cp" as every funtion from chaospy
+must be prefixed with `cp.` and in this way it will be convenient to
+see whenever a method of the package is applied.
+
+The package `chaospy` is doc-string annotated which means that every method provides a short help text with small examples.
+To show the method documentation simply type a `?` after the method name in a ipython console or notebook.
+As shown in the following two examples:
+@@@CODE ./python_source/introduction_chaospy.py fromto: # show help for uniform distributions@# end help
+
+
+
+
+===== Steps for polynomial chaos analysis with chaospy =====
+label{sec:StepsCP}
+
+To conduct UQSA analysis with polynomial chaos we need to follow the following steps:
+
+* Definition of the marginal and joint distributions
+* Generation of the orthogonal polynomials
+* Linear regression
+  * Generation of samples
+  * `Evaluation of the model for all samples`
+  * Generation of the polynomial chaos expansion
+* Pseudo-spectral projection
+  * Generation of integration nodes and weights
+  * `Evaluation of the model for all nodes`
+  * Generation of the polynomial chaos expansion
+* Calculations of all statistics
+
+Note, that steps  _3 Linear regression_  and _4 Pseudo-spectral projection_ are interchangeable. They are simply different methods of cacluating the expansion coefficients. In both cases
+generate a set of points in the parameter space where the model must be evaluated (steps 3.b and 4.b, respectively).
+
+
+===== Step 1: Definition of marginal and joint distributions =====
+label{sec:distributions}
+
+The analysis of a each model starts with the definition of the marginal distributions for each random model input, i.e. describing it as
+random variable.
+Univariate random variables can be defined with `chaospy` by calling the class-constructor of a distribution type, e.g `cp.Normal()`, with arguments to describe the particular distribution, e.g. mean value and standard deviation for `cp.Normal`.
+The help function can be used to find out more about the required arguments, e.g. `help(cp.Normal)`.
+
+In the following an example for 3 random variables with uniform, normal and log-normal distribution:
+@@@CODE ./python_source/introduction_chaospy.py fromto: # simple distributions@# end simple distributions
+
+After all random input variables are defined with univariate random variables a multi-variate random variable and its joint distribution
+can be constructed with the following command:
+@@@CODE ./python_source/introduction_chaospy.py fromto: # joint distributions@# end joint distributions
+
+It is also possible to construct independent identical distributed random variables from any univariate variable:
+@@@CODE ./python_source/introduction_chaospy.py fromto: # creating iid variables@# end creating iid variables
+
+===== Steps for polynomial chaos analysis with chaospy =====
+label{sec:uqsaChaospy}
+
+To conduct UQSA analysis with polynomial chaos we need to follow the following steps:
+
+* Definition of the marginal and joint distributions
+* Generation of the orthogonal polynomials
+* Linear regression
+  * Generation of samples
+  * `Evaluation of the model for all samples`
+  * Generation of the polynomial chaos expansion
+* Pseudo-spectral projection
+  * Generation of integration nodes and weights
+  * `Evaluation of the model for all nodes`
+  * Generation of the polynomial chaos expansion
+* Calculations of all statistics
+
+Note, that steps  _3 Linear regression_  and _4 Pseudo-spectral projection_ are interchangeable. They are simply different methods of cacluating the expansion coefficients. In both cases
+generate a set of points in the parameter space where the model must be evaluated (steps 3.b and 4.b, respectively).
+
+
+===== Step 1: Definition of marginal and joint distributions =====
+label{sec:marg_istributions}
+
+The analysis of a each model starts with the definition of the marginal distributions for each random model input, i.e. describing it as
+random variable.
+Univariate random variables can be defined with `chaospy` by calling the class-constructor of a distribution type, e.g `cp.Normal()`, with arguments to describe the particular distribution, e.g. mean value and standard deviation for `cp.Normal`.
+The help function can be used to find out more about the required arguments, e.g. `help(cp.Normal)`.
+
+In the following an example for 3 random variables with uniform, normal and log-normal distribution:
+@@@CODE ./python_source/introduction_chaospy.py fromto: # simple distributions@# end simple distributions
+
+After all random input variables are defined with univariate random variables a multi-variate random variable and its joint distribution
+can be constructed with the following command:
+#@@@CODE ./python_source/introduction_chaospy.py fromto: # joint distributions@# end joint distributions
+
+It is also possible to construct independent identical distributed random variables from any univariate variable:
+#@@@CODE ./python_source/introduction_chaospy.py fromto: # creating iid variables@# end creating iid variables
+
+
+===== Step 2: Orthogonal Polynomials =====
+label{sec:orthogonalPolynomials}
+
+The orthogonal polynomials can be generated with different methods, in `chaospy` there are 4 methods implemented. The
+most stable method, and therefore most advised is the *three terms recursion* method.
+
+|------------c-------------------------------c--------------------------------------|
+| Orthogonalization Method                  | chaospy function                      |
+|------------c-------------------------------c--------------------------------------|
+| Cholesky decomposition                   | cp.expansion.cholesky                 |
+| Three terms recursion (Stieltjes method) | cp.expansion.stieltjes                |
+| Modified Gram–Schmidt                    | cp.expansion.gram_schmidt             |
+|-------------------------------------------------------------------------------|
+
+
+Regarding the *three terms recursion* method:
+For the distributions Normal, Uniform, Gamma, Log-normal, Triangle, Beta and stochastic independent variable combinations of those,
+the three terms recursion coefficients are known.
+For all other distributions the coefficients are estimated numerically.
+The *three terms recursion* method is then also called _discretized stieltjes method_.
+
+The most stable method and therefore most applied method is the _three terms recursion_ (_discretized stieltjes method_) method.
+
+We will look at all in a small example, try to increase the polynomial order and the instabilities of the methods become visible.
+
+@@@CODE ./python_source/introduction_chaospy.py fromto: # example orthogonalization schemes@# end example orthogonalization schemes
+
+
+===== Step 3.: Linear regression =====
+
+The linear regression method requires to conduct the three following steps:
+
+o Generation of samples
+o `Evaluation of the model for all samples`
+o Generation of the polynomial chaos expansion
+
+In the following we will not consider the model evaluation.
+
+=== Step 3.a: Sampling ===
+label{sec:sampling}
+
+Once a random variable is defined or a joint random variable, also referred as distribution here, the following
+method can be used to generate as set of samples:
+@@@CODE ./python_source/introduction_chaospy.py fromto: # sampling in chaospy@# end sampling chaospy
+
+The method takes the arguments _size_ which is the number of samples and _rule_ which is the applied sampling scheme.
+The following example shows the creation of 2 set of samples for the sampling schemes *(Pseudo-)Random* and *Hammersley*.
+
+@@@CODE ./python_source/introduction_chaospy.py fromto:# example sampling with plots@# end example sampling with plots	
+
+
+All sampling schemes implemented in chaospy are listed in the following table:
+
+|--------c------------------c------------------c---------|
+| Key              | Name             | Nested           |
+|--------c------------------c------------------c---------|
+| C                | Chebyshev nodes  | no               |
+| NC               | Nested Chebyshev | yes              |
+| K                | Korobov          | no               |
+| R                | (Pseudo-)Random  | no               |
+| RG               | Regular grid     | no               |
+| NG               | Nested grid      | yes              |
+| L                | Latin hypercube  | no               |
+| S                | Sobol            | yes              |
+| H                | Halton           | yes              |
+| M                | Hammersley       | yes              |
+|--------------------------------------------------------|
+
+
+
+=== Step 3.c: Polynomial Chaos Expansion ===
+
+After the model is evaluated for all samples, the polynomial chaos expansion can be generated with the following method:
+@@@CODE ./python_source/introduction_chaospy.py fromto: # linear regression in chaospy@# end linear regression in chaospy
+
+In the following we show a complete example for polynomial chaos expansion using the linear regression.
+The model applied the very simple mathematical expression:
+!bt
+\begin{equation}
+ y(z_1, z_2) = z_1 + z_1 z_2
+label{eq:dummy_model}
+\end{equation}
+!et
+The random variables for $Z_1, Z_2$ are defined as simple uniform random variables:
+!bt
+\begin{equation}
+Z_1 = \mbox{U}(0,1), \quad Z_2 = \mbox{U}(0,1)
+label{eq:dummy_rv}
+\end{equation}
+!et
+
+The mean of this should be $\frac{3}{4}$, the variance should be $\frac{31}{144}$ and the sensitivites to $Z_1$ and $Z_2$ are respectively $\frac{3}{31}$ and $\frac{27}{31}$.
+
+Here is the annotated example code with all steps required to generate a polynomial chaos expansion with
+linear regression:
+@@@CODE ./python_source/introduction_chaospy.py fromto: # example linear regression@# end example linear regression
+
+
+===== Step 4: Pseudo-spectral projection =====
+
+=== Step 4.a: Quadrature nodes and weights ===
+label{sec:quadrature}
+
+Once a random variable is defined or joint random variables, also referred as distribution here, the following
+method can be used to generate nodes and weights for different quadrature methods:
+
+@@@CODE ./python_source/introduction_chaospy.py fromto: # quadrature in polychaos@# end quadrature in polychaos
+
+We will look at the following arguments of the method: _order_ is the order of the quadrature, _domain_ is
+the , _rule_ is the *name* or *key* of the quadrature rule to apply.
+
+In the following example we look at some quadrature nodes for the same uniform variables as for the sampling,
+for Optimal Gaussian quadrature and Clenshaw-Curtis quadrature.
+
+@@@CODE ./python_source/introduction_chaospy.py fromto: # example quadrature@# end example quadrature
+
+In the following all quadrature rules implemented in chaospy are highlighted:
+
+|---------------c---------------------------------c---------------------------------c-----------------|
+| Collection of quadrature rules  | Name                            | Key                             |
+|---------------c---------------------------------c---------------------------------c-----------------|
+| Optimal Gaussian quadrature     | Gaussian                        | G                               |
+| Gauss-Legendre quadrature       | Legendre                        | E                               |
+| Clenshaw-Curtis quadrature      | Clenshaw                        | C                               |
+| Leja quadrature                 | Leja                            | J                               |
+| Hermite Genz-Keizter 16 rule    | Genz                            | Z                               |
+| Gauss-Patterson quadrature rule | Patterson                       | P                               |
+|-----------------------------------------------------------------------------------------------------|
+
+It is also possible to use sparse grid quadrature. For this purpose Clenshaw-Curtis method is advised since it is nested.
+
+In the following example we show sparse vs. normal quadrature nodes:
+
+@@@CODE ./python_source/introduction_chaospy.py fromto: # example sparse grid quadrature@# end example sparse grid quadrature
+
+
+=== Step 4.c: Polynomial Chaos Expansion ===
+
+After the model is evaluated for all integration nodes, the polynomial chaos expansion can be generated with the following method:
+@@@CODE ./python_source/introduction_chaospy.py fromto: # spectral projection@# end spectral projection
+
+
+In the following we show again a complete example for polynomial chaos expansion using the pseudo spectral approach to calculate the
+expansion coefficients.
+The model applied the same simple mathematical expression as before:
+!bt
+\begin{equation}
+ y(z_1, z_2) = z_1 + z_1 z_2
+label{eq:dummy_model_repeat}
+\end{equation}
+!et
+The random variables for $Z_1, Z_2$ are defined as simple uniform random variables:
+!bt
+\begin{equation}
+Z_1 = \mbox{U}(0,1), \quad Z_2 = \mbox{U}(0,1)
+label{eq:dummy_rv_repeat}
+\end{equation}
+!et
+
+@@@CODE ./python_source/introduction_chaospy.py fromto: # example spectral projection@# end example spectral projection
+
+
+===== Step 5: Statistical Analysis =====
+label{sec:statistical_analysis}
+
+Once the polynomial chaos expansion is created either with _pseudo-spectral projection_ or with _regression_ method
+The calculation of statistics is straight forward.
+The following listing gives an overview of all available methods take all the same input parameter the _polynomial-expansion_ and
+the _joint-distribution_ (see also example below).
+
+Note, that one can also calculate uncertainty statistics on distributions only as well.
+
+=== Uncertainty quantification ===
+
+* Expected value: `cp.E`
+* Variance: `cp.Var`
+* Standard deviation: `cp.Std`
+* Curtosis: `cp.Kurt`
+* Skewness: `cp.Skew`
+* Distribution of Y: `cp.QoI_Dist`
+
+* Prediction intervals: `cp.Perc`, which is a method to calculate percentiles: an additional argument defining the percentiles needs to be passed.
+
+If multiple quantities of interest are available:
+
+* Covariance matrix: `cp.Cov`
+* Correlation matrix: `cp.Corr`
+* Spearman correlation: `cp.Spearman`
+* Auto-correlation function: `cp.Acf`
+
+@@@CODE ./python_source/introduction_chaospy.py fromto: # example uq@# end example uq
+
+=== Sensitivity analysis ===
+
+The variance bases sensitivity indices can be calculated directly from the expansion.
+The `chaospy` package provides the following methods:
+
+* first order indices: `cp.Sens_m`
+* second order indices: `cp.Sens_m2`
+* total indices: `cp.Sens_t`
+
+Here is an example for the first and total indices for both expansions:
+
+@@@CODE ./python_source/introduction_chaospy.py fromto: # example sens@# end example sens
+
+
+
+======= References =======
+
+BIBFILE: ./references/papers.pub
