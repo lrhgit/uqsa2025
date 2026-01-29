@@ -1,5 +1,11 @@
 # UQSA2025
 
+## Seminar landing page
+
+👉 **Start here:** [index.ipynb](index.ipynb)
+
+Open directly in Colab:
+https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/index.ipynb
 
 # UQSA: Methods and applications
 
