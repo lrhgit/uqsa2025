@@ -170,6 +170,12 @@ from monte_carlo import calculate_sensitivity_indices_mc
 
 Smc, Stmc = calculate_sensitivity_indices_mc(f_A, f_B, f_C)
 
-pretty_print_sobol_mc(Smc, Stmc, Nrv)
+labels = (
+    [f"Z_{i}" for i in range(1, Nrv+1)] +
+    [f"W_{i}" for i in range(1, Nrv+1)]
+)
+
+pretty_print_sobol_mc(Smc, Stmc, labels)
+
 
 # --- endcell: sobol_estimators ---

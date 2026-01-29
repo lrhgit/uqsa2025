@@ -2,9 +2,11 @@
 doconce format ipynb monte_carlo.do.txt --encoding=utf-8 --ipynb_admon=hrule --ipynb_disable_mpl_inline --ipynb_cite=latex-plain
 -->
 
-# Monte Carlo sensitivity analysis (Sobol indices)
+TITLE: A brief introduction to sensitivity analysis (Sobol indices) with the Monte Carlo method
+AUTHOR: Leif Rune Hellevik at NTNU
+DATE: today
+TOC: on
 
-**Leif Rune Hellevik**
 
 Date: **January 22, 2026**
 

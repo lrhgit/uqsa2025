@@ -1,9 +1,12 @@
 # UQSA2025
 
 
-# UQSA Practical Sensitivity Analysis
+# UQSA: Methods and applications
 
-Interactive notebooks and tools for uncertainty quantification and sensitivity analysis.
+
+This repository contains a collection of notebooks introducing methods
+and applications in uncertainty quantification and sensitivity
+analysis (UQSA).
 
 ---
 
