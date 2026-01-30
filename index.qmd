@@ -9,13 +9,12 @@ format:
 page-layout: full
 ---
 
-
-
-This page is the main entry point to the UQSA seminar, collecting the agenda, lecture slides, and interactive Jupyter notebooks.
-
 *Time and place:*
 Politecnico di Milano (PoliMi), Milan, Italy
 February 3–4, 2026
+
+This page is the main entry point to the UQSA seminar, collecting the agenda, lecture slides, and interactive Jupyter notebooks.
+
 
 *Format:*
 Lectures combined with hands-on sessions using interactive Jupyter notebooks (local execution and Google Colab).
