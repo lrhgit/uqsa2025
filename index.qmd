@@ -1,0 +1,72 @@
+---
+title: "🎓 Seminar on Uncertainty Quantification and Sensitivity Analysis (UQSA)"
+subtitle: "Methods and Applications"
+author: "Leif Rune Hellevik"
+date: 2026-02-03
+format:
+  html:
+    toc: false
+page-layout: full
+---
+
+
+
+This page is the main entry point to the UQSA seminar, collecting the agenda, lecture slides, and interactive Jupyter notebooks.
+
+*Time and place:*
+Politecnico di Milano (PoliMi), Milan, Italy
+February 3–4, 2026
+
+*Format:*
+Lectures combined with hands-on sessions using interactive Jupyter notebooks (local execution and Google Colab).
+
+## 🚀 Start here
+
+* 🗓️ [Seminar agenda](https://lrhgit.github.io/uqsa2025/seminar/agenda.html)
+* 📊 [Lecture slides (intro)](https://lrhgit.github.io/uqsa2025/slides/intro.html)
+* 💻 Interactive notebooks – overview below
+  (run locally in JupyterLab or open directly in Google Colab)
+
+## 📘 Notebook overview
+
+The notebooks below are ordered according to the seminar flow, starting from fundamental concepts and progressing to advanced methods and applications.
+
+### Preliminaries
+
+* GitHub: [https://github.com/lrhgit/uqsa2025/blob/main/preliminaries.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/preliminaries.ipynb)
+* Colab: [https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/preliminaries.ipynb](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/preliminaries.ipynb)
+* Presents the statistical relations and laws needed to derive the Sobol indices.
+
+### Introduction to sensitivity analysis
+
+* GitHub: [https://github.com/lrhgit/uqsa2025/blob/main/sensitivity_introduction.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/sensitivity_introduction.ipynb)
+* Colab: [https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/sensitivity_introduction.ipynb](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/sensitivity_introduction.ipynb)
+
+### Monte Carlo methods for UQSA
+
+* GitHub: [https://github.com/lrhgit/uqsa2025/blob/main/monte_carlo.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/monte_carlo.ipynb)
+* Colab: [https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/monte_carlo.ipynb](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/monte_carlo.ipynb)
+
+### Polynomial chaos expansion methods for UQSA
+
+* GitHub: [https://github.com/lrhgit/uqsa2025/blob/main/introduction_gpc.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/introduction_gpc.ipynb)
+* Colab: [https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/introduction_gpc.ipynb](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/introduction_gpc.ipynb)
+
+### Exercises
+
+* GitHub: [https://github.com/lrhgit/uqsa2025/blob/main/exercises.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/exercises.ipynb)
+* Colab: [https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/exercises.ipynb](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/exercises.ipynb)
+
+### UQSA of arterial wall models
+
+* GitHub: [https://github.com/lrhgit/uqsa2025/blob/main/wall_models.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/wall_models.ipynb)
+* Colab: [https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/wall_models.ipynb](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/wall_models.ipynb)
+
+### UQSA of the Ishigami function
+
+* GitHub: [https://github.com/lrhgit/uqsa2025/blob/main/ishigami_example.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/ishigami_example.ipynb)
+* Colab: [https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/ishigami_example.ipynb](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/ishigami_example.ipynb)
+
+## Acknowledgement
+
+The present notebooks build on earlier work developed with contributions from my former PhD-students Jacob Sturdy and Vinzenz Eck.
