@@ -2,8 +2,8 @@
 set -e
 
 # Base filename without extension
-name=preliminaries
-#name=index
+#name=preliminaries careful...can not be made completely by doconce
+name=index
 # name=interactive_gstar_function_v2
 #name=monte_carlo_v2
 #name=introduction_gpc_v2
