@@ -15,7 +15,7 @@ institute: "NTNU and Politecnico di Milano (PoliMi)"
 * Short conceptual introductions
 * Interactive notebook demonstrations
 * Discussion-oriented, not tool-heavy
-
+* Slides: https://lrhgit.github.io/uqsa2025/
 
 ::: notes
 Welcome everyone and thank them for coming.
@@ -30,6 +30,10 @@ Emphasize that notebooks are used as a medium for explanation and exploration,
 not something participants are expected to run line-by-line during the seminar.
 
 Set expectations for interaction and questions throughout the sessions.
+
+Before we go any further, please open the seminar slides in your browser.
+That way you can follow links and jump to notebooks when we get to the interactive parts.
+
 :::
 
 
@@ -166,57 +170,6 @@ In any complex model used for decisions, we need to know which uncertainties act
 
 :::
 
-
-## seminar structure
-
-The seminar is organised around three main components:
-
-- motivating the usefulness of Sobol sensitivity indices for model-based decision making,
-- showing how Monte Carlo sampling and polynomial chaos expansion (PCE) can be used to compute them,
-- demonstrating the methods on simple examples (benchmark functions and wall models), supported by interactive notebook-based exploration and discussion.
-
-The detailed and up-to-date agenda is available here:
-
-👉 **https://lrhgit.github.io/uqsa2025/seminar/agenda.html**
-
-## notebooks and colab
-
-Jupyter notebooks are interactive documents that combine
-
-- short explanations (text and equations),
-- executable code,
-- figures and tables.
-
-In this seminar, notebooks are used as a medium for explanation and exploration — not as a software tutorial.
-
-Google Colab lets you run the notebooks in a browser, without local installation:
-
-👉 open the notebook via the provided Colab link.
-
-## how to use the notebooks in this seminar
-
-To make a notebook your own in Colab:
-
-- File → Save a copy in Drive
-- add notes in text cells (your interpretation, reminders, questions),
-- change parameters (including sliders) to explore “what if?” scenarios,
-- run selected cells to reproduce key results.
-
-You do not need to run everything line-by-line during the sessions.
-
-The goal is to build intuition: how uncertainty propagates and why Sobol indices change.
-
-## colab workflow (practical notes)
-
-When opening a notebook in Colab:
-
-- use **File → Save a copy in Drive** before making changes,
-- if prompted, choose **Runtime → Run all** to initialise the notebook,
-- re-run a cell if you change parameters or sliders above it.
-
-If something breaks, simply reload the page and start from your saved copy.
-
-These notebooks are meant to be exploratory and robust — not fragile.
 
 
 ## What problem sensitivity analysis solves?
@@ -407,16 +360,78 @@ This is why they are so central in global sensitivity analysis, especially in co
 :::
 
 
+## seminar structure
+
+The seminar is organised around three main components:
+
+- motivating the usefulness of Sobol sensitivity indices for model-based decision making,
+- showing how Monte Carlo sampling and polynomial chaos expansion (PCE) can be used to compute them,
+- demonstrating the methods on simple examples (benchmark functions and wall models), supported by interactive notebook-based exploration and discussion.
+
+The detailed and up-to-date agenda is available here:
+
+👉 **https://lrhgit.github.io/uqsa2025/seminar/agenda.html**
+
+## notebooks and colab
+
+Jupyter notebooks are interactive documents that combine
+
+- short explanations (text and equations),
+- executable code,
+- figures and tables.
+
+In this seminar, notebooks are used as a medium for explanation and exploration — not as a software tutorial.
+
+Google Colab lets you run the notebooks in a browser, without local installation:
+
+- 👉 [open the notebook via the Colab-link](https://lrhgit.github.io/uqsa2025/)
+- or navigate to https://lrhgit.github.io/uqsa2025/
+
+::: notes
+    If you’re following along in the slides, click the link to the notebook index now…
+:::
+
+## how to use the notebooks in this seminar
+
+To make a notebook your own in Colab:
+
+- File → Save a copy in Drive
+- add notes in text cells (your interpretation, reminders, questions),
+- change parameters (including sliders) to explore “what if?” scenarios,
+- run selected cells to reproduce key results.
+
+You do not need to run everything line-by-line during the sessions.
+
+The goal is to build intuition: how uncertainty propagates and why Sobol indices change.
+
+## colab workflow (practical notes)
+
+When opening a notebook in Colab:
+
+- use **File → Save a copy in Drive** before making changes,
+- if prompted, choose **Runtime → Run all** to initialise the notebook,
+- re-run a cell if you change parameters or sliders above it.
+
+If something breaks, simply reload the page and start from your saved copy.
+
+These notebooks are meant to be exploratory and robust — not fragile.
+
+
+
+
 ## What notebooks will show
 
 * **Scatterplots and Sobol indices**
   Complementary ways to understand sensitivity
 
+* **How to compute Sobol indices with the Monte Carlo Method and Polynomial Chaos Expansions **
+
+
 * **Simple linear model (Saltelli)**
   Build intuition in the simplest case
 
 * **Benchmark nonlinear models**
-  G-function and Ishigami function
+  G-function and maybe other model functions
 
 * **Applied example**
   Wall model for blood flow simulation
