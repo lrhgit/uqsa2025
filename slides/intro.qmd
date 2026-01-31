@@ -1,5 +1,5 @@
 ---
-title: "Global Sensitivity Analysis for Cardiovascular Models"
+title: "Global sensitivity analysis for cardiovascular models"
 subtitle: "Motivation, concepts, and intuition -- Seminar at PoliMi 3–4 February 2026" 
 author: "Leif Rune Hellevik"
 institute: "NTNU and Politecnico di Milano (PoliMi)"
@@ -360,7 +360,7 @@ This is why they are so central in global sensitivity analysis, especially in co
 :::
 
 
-## seminar structure
+## Seminar structure
 
 The seminar is organised around three main components:
 
@@ -372,7 +372,7 @@ The detailed and up-to-date agenda is available here:
 
 👉 **https://lrhgit.github.io/uqsa2025/seminar/agenda.html**
 
-## notebooks and colab
+## Notebooks and colab
 
 Jupyter notebooks are interactive documents that combine
 
@@ -391,7 +391,7 @@ Google Colab lets you run the notebooks in a browser, without local installation
     If you’re following along in the slides, click the link to the notebook index now…
 :::
 
-## how to use the notebooks in this seminar
+## How to use the notebooks in this seminar
 
 To make a notebook your own in Colab:
 
@@ -404,7 +404,7 @@ You do not need to run everything line-by-line during the sessions.
 
 The goal is to build intuition: how uncertainty propagates and why Sobol indices change.
 
-## colab workflow (practical notes)
+## Colab workflow (practical notes)
 
 When opening a notebook in Colab:
 
