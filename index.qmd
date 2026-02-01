@@ -46,6 +46,14 @@ The notebooks below are ordered according to the seminar flow, starting from fun
 * GitHub: [https://github.com/lrhgit/uqsa2025/blob/main/monte_carlo.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/monte_carlo.ipynb)
 * Colab: [https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/monte_carlo.ipynb](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/monte_carlo.ipynb)
 
+
+### Higher-order sensitivity indices (interaction model)
+
+* GitHub: [https://github.com/lrhgit/uqsa2025/blob/main/sensitivity_higher_order.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/sensitivity_higher_order.ipynb)
+* Colab: [https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/sensitivity_higher_order.ipynb](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/sensitivity_higher_order.ipynb)
+* Demonstrates second- and higher-order (interaction) Sobol indices, compares analytical results with Monte Carlo and polynomial chaos, and discusses convergence and computational cost.
+
+
 ### Polynomial chaos expansion methods for UQSA
 
 * GitHub: [https://github.com/lrhgit/uqsa2025/blob/main/introduction_gpc.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/introduction_gpc.ipynb)
