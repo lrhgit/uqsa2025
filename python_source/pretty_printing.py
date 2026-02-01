@@ -9,19 +9,28 @@ from IPython.display import Math
 # Pretty print helpers
 # -----------------------------
 
-def section_title(text: str):
+def section_title(text: str, level: int = 3):
     """Nice section title as HTML in notebooks."""
-    return HTML(f"<h3 style='margin-top:1.2em'>{text}</h3>")
+    level = int(level)
+    level = max(2, min(level, 6))
+    return HTML(f"<h{level} style='margin-top:1.2em; font-weight:normal'>{text}</h{level}>")
 
 
-def pretty_table(df: pd.DataFrame, floatfmt: str = ".3f"):
-    """Render pandas DataFrame as HTML with compact styling."""
+def pretty_table(df: pd.DataFrame, floatfmt: str = None, decimals: int = None):
+    if floatfmt is None and decimals is not None:
+        floatfmt = f".{decimals}f"
+    if floatfmt is None:
+        floatfmt = ".3f"
+
     df2 = df.copy()
-    # Try to format floats nicely
     for c in df2.columns:
         if pd.api.types.is_numeric_dtype(df2[c]):
-            df2[c] = df2[c].map(lambda x: f"{x:{floatfmt}}" if pd.notnull(x) else x)
+            df2[c] = df2[c].map(
+                lambda x: f"{x:{floatfmt}}" if pd.notnull(x) else x
+            )
     display(HTML(df2.to_html(escape=False)))
+
+
 
 
 def pretty_print_sobol_mc(S, ST, labels=None, title="Monte Carlo Sobol indices", decimals=3):
@@ -81,3 +90,48 @@ def show_poly_basis(poly, title="", var="q", decimals=3):
     for k, pk in enumerate(poly):
         latex = _poly_to_latex_rounded(pk, var=var, decimals=decimals)
         display(Math(rf"\phi_{{{k}}}({var}) = {latex}"))
+
+
+import pandas as pd
+
+
+def sobol_summary_table(sobol_mc, sobol_pce, model_name, labels):
+    """
+    Create a comparison table of Sobol indices (MC vs PCE)
+    for a given model.
+    """
+    df = pd.DataFrame(
+        {
+            "S (MC)": sobol_mc[model_name]["S"],
+            "ST (MC)": sobol_mc[model_name]["ST"],
+            "S (PCE)": sobol_pce[model_name]["S"],
+            "ST (PCE)": sobol_pce[model_name]["ST"],
+        },
+        index=labels,
+    )
+    return df
+
+
+def uncertainty_summary_table(sobol_mc, sobol_pce):
+    """
+    Create a table summarizing mean and std (variance-weighted)
+    for MC and PCE.
+    """
+    rows = []
+    for name in sobol_mc.keys():
+        rows.append(
+            dict(
+                Model=name,
+                Method="MC",
+                **{"E(Y)": sobol_mc[name]["E"], "Std(Y)": sobol_mc[name]["Std"]},
+            )
+        )
+        rows.append(
+            dict(
+                Model=name,
+                Method="PCE",
+                **{"E(Y)": sobol_pce[name]["E"], "Std(Y)": sobol_pce[name]["Std"]},
+            )
+        )
+
+    return pd.DataFrame(rows).set_index(["Model", "Method"])

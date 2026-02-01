@@ -43,8 +43,11 @@ def generate_sample_matrices_mc(Ns, number_of_parameters, jpdf, sample_method='R
     C = np.empty((number_of_parameters, Ns, number_of_parameters))
     # create C sample matrices
     for i in range(number_of_parameters):
-        C[i, :, :] = B.copy()
-        C[i, :, i] = A[:, i].copy()
+        # C[i, :, :] = B.copy()
+        # C[i, :, i] = A[:, i].copy()
+        C[i, :, :] = A.copy()
+        C[i, :, i] = B[:, i].copy()
+
 
     return A, B, C
 # end sample matrices
