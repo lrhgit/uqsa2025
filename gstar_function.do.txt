@@ -1,0 +1,122 @@
+======= Sensitivity indices for Sobol's $G^{*}$ function  =======
+
+AUTHOR: Leif Rune Hellevik
+
+
+======= Setup  =======
+
+
+@@@CODE ./python_source/colab_setup.py fromto:^# --- cell: install_chaospy ---$@^# --- endcell: install_chaospy ---$
+
+@@@CODE ./python_source/colab_setup.py fromto:^# --- cell: repo_setup ---$@^# --- endcell: repo_setup ---$
+
+@@@CODE ./python_source/colab_setup.py fromto:^# --- cell: layout_and_numpy_patch ---$@^# --- endcell: layout_and_numpy_patch ---$
+
+
+
+======= Introduction =======
+
+The Sobol’ G* function is a canonical benchmark for variance-based
+global sensitivity analysis, introduced to study factor importance,
+interactions, and effective dimensionality under controlled
+conditions. Analytical Sobol’ indices are available, making the
+function particularly suitable for validation and interpretation.
+
+In this notebook, the G* function is used as an interactive test case
+to illustrate the meaning of first-order and total-effect indices in
+the sense of Saltelli et al. The focus is on understanding sensitivity
+measures, not on numerical optimisation or software details.
+
+Concepts, notation, and interpretation of Sobol’ indices are
+introduced in sensitivity_introduction.ipynb, which should be read
+first.
+
+Benchmark functions are central to sensitivity analysis methodology,
+as emphasised in recent function datasets for benchmarking sensitivity
+analysis methods. The Sobol’ G* function extends the original
+G-function by introducing shape and shift parameters, allowing
+systematic exploration of nonlinearity and interaction effects while
+retaining analytical reference solutions.
+
+Monte Carlo estimates shown here serve as a transparent baseline for
+comparison. Sampling strategies and estimator design are discussed in
+more detail in monte_carlo.ipynb.
+
+
+
+======= Sobol's $G^{*}$ function  =======
+
+The Sobol´ $G^{*}$ function has the mathematical representation:
+
+$$
+Y=G(X) =  G(X_1, X_2,\ldots,X_k,a_1, a_2,\ldots,a_k)  = \prod_{i=1}^{k} g_i 
+$$
+
+where the $g_i$ is given by:
+$$
+g_i = \frac{(1+\alpha_i) |2 \left (X_i+ \delta_i - I(X_i+\delta_i) \right ) -1 |^{\alpha_i}+a_i}{1+{a}_i} 
+$$
+
+and all the input factors $X_i$ are assumed to be uniformly
+distributed in the interval $[0,1]$, an the coefficients $a_i$ are
+assumed to be positive real numbers $(a_i \leq 0)$, $\delta_i \in
+[0,1]$, and $\alpha_i >0$. Finally, $ I(X_i+\delta_i)$ denotes the
+integer value for $X_i+\delta_i$. Note that for $\alpha_i=1$ and
+$\delta_i=0$ $g^*$ reduces to the $g$-function, another and simpler
+member of the benchmark funtions  cite{Azzini_func_2022}. The $\alpha_i$ and $\delta_i$ are
+curvature and shift parameters, respectively.
+
+The number of factors *k* can be varied as the reader pleases, but the
+minimum number to produce a meaningful inference is set at three.
+
+As you will be able to explore below, the sensitivity $S_i$ of $G^{*}$
+with respect to a specific input factor $X_i$, will depend on the
+value of the corresponding coefficient $a_i$; small values of $a_i$
+(e.g. $a_i=0$) will yield a high corresponding $S_i$, meaning that
+$X_i$ is an important/influential variable on the variance or
+uncertainty of $G$.
+
+
+
+We have implemented Sobol's  $G^*$ function in the code snippet below:
+@@@CODE ./python_source/chaospy_gstar_function.py fromto:# model function@# end model function
+
+@@@CODE ./python_source/colab_gstar_source.py fromto:# --- cell: gstar_statistics ---@# --- endcell: gstar_statistics
+
+
+
+**Note on the parameter $\delta$**
+
+The parameters $\delta_i$ are included only to keep the slider interface consistent with other Sobol test-function notebooks.
+For Sobol’s $G^*$ function, the sensitivity indices depend only on $(a_i,\alpha_i)$, and $\delta_i$ does **not** enter the analytical expressions for $S_i$ or $S_i^T$.
+
+@@@CODE ./python_source/colab_gstar_source.py fromto:^# --- cell: gstar_sliders_colab ---@# --- endcell: gstar_sliders_colab ---
+
+
+
+**Reflection**  
+Use the sliders to explore how the Sobol indices change.  
+ * Which parameters dominate the output uncertainty?  
+ * When do first-order and total indices differ?  
+ * What does this indicate about interactions?  
+
+
+
+@@@CODE ./python_source/colab_gstar_source.py fromto:^# chaospy G-function and pce-approx with sliders@# end chaospy G-function and pce-approx with sliders
+
+
+**Reflection** 
+
+Compare the analytical, Monte Carlo, and PCE estimates.
+
+Consider:
+
+* Are the rankings of parameters consistent across methods?
+* Which differences matter for decision-making — and which do not?
+* Would increasing sample size or polynomial order change your conclusions?
+
+
+
+======= References =======
+
+BIBFILE: ./references/papers.pub
