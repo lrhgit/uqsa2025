@@ -1,3 +1,32 @@
+---
+title: "🎓 Seminar on Uncertainty Quantification and Sensitivity Analysis (UQSA)"
+subtitle: "Methods and Applications"
+author: "Leif Rune Hellevik"
+date: 2026-02-03
+format:
+  html:
+    toc: false
+page-layout: full
+---
+
+*Time and place:*
+Politecnico di Milano (PoliMi), Milan, Italy
+February 3–4, 2026
+
+This page is the main entry point to the UQSA seminar, collecting the agenda, lecture slides, and interactive Jupyter notebooks.
+
+
+*Format:*
+Lectures combined with hands-on sessions using interactive Jupyter notebooks (local execution and Google Colab).
+
+## 🚀 Start here
+
+* 🗓️ [Seminar agenda](https://lrhgit.github.io/uqsa2025/seminar/agenda.html)
+* 📊 [Lecture slides (intro)](https://lrhgit.github.io/uqsa2025/slides/intro.html)
+* 💻 Interactive notebooks – overview below
+  (run locally in JupyterLab or open directly in Google Colab)
+
+
 ## 📘 Notebook overview
 
 Notebooks are ordered according to the seminar flow, starting from fundamental concepts and progressing to advanced methods and applications.
