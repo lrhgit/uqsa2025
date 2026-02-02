@@ -18,20 +18,26 @@ institute: "NTNU and Politecnico di Milano (PoliMi)"
 * Slides: https://lrhgit.github.io/uqsa2025/
 
 ::: notes
-Welcome everyone and thank them for coming.
+Welcome everyone, both students and faculty in Gliwice Poland, my postdoc Rahul in Trondheim,
+and to the group here at PoliMi (students, postdocs, and faculty), and in particular
+Francesco who is hosting me.
 
-Briefly introduce yourself and your affiliation with NTNU and PoliMi LaBS.
+and I am Leif Rune Hellevik, professor in biomechanics at NTNU, Trondheim
+and currently at PoliMi at a sabbatical. 
 
-Explain that this seminar is meant to be practical and concept-driven:
-not a full course, not a software tutorial, but a guided exploration of
-how global sensitivity analysis helps us reason about uncertainty in models.
+This seminar on GSA for cardiovascular models is meant to be practical
+and concept-driven: not a full course, not a software tutorial, but a
+guided exploration of how GSA helps us reason about uncertainty in models.
 
-Emphasize that notebooks are used as a medium for explanation and exploration,
+Emphasize: notebooks are used as a medium for explanation and exploration,
 not something participants are expected to run line-by-line during the seminar.
 
-Set expectations for interaction and questions throughout the sessions.
+For you as attendants I encourage and hope for interaction and
+questions throughout the sessions.
 
 Before we go any further, please open the seminar slides in your browser.
+https://lrhgit.github.io/uqsa2025/
+
 That way you can follow links and jump to notebooks when we get to the interactive parts.
 
 :::
@@ -39,6 +45,7 @@ That way you can follow links and jump to notebooks when we get to the interacti
 
 ## What we will do today
 
+- Frame and motivate the need for GSA
 - Revisit basic statistics
 - Introduce variance-based SA
 - Explore interactive notebooks
@@ -47,8 +54,9 @@ That way you can follow links and jump to notebooks when we get to the interacti
 
 ## From a VUCA world to uncertainty-aware modelling
 ::: {.incremental}
-* Engineering decisions are increasingly made in a **VUCA context**  
-  *(Volatility, Uncertainty, Complexity, Ambiguity)*  
+
+* VUCA (1990s → today): a world of Volatility, Uncertainty, Complexity, and Ambiguity where deterministic reasoning is insufficient
+* Implication for modelling: robust decisions require both uncertainty quantification (UQ) and sensitivity analysis (SA)
 * Models are essential tools for reasoning under uncertainty  
 * However, models are:  
   * based on uncertain inputs  
@@ -59,21 +67,37 @@ That way you can follow links and jump to notebooks when we get to the interacti
 :::
 
 ::: notes
-**VUCA** stands for **Volatility, Uncertainty, Complexity, and Ambiguity**.
-It describes the kind of world where many engineering and decision problems exist today.
+**note to bullet 1 — vuca**
 
-In a VUCA world, systems change over time, data are uncertain, and many factors interact in complex ways. Decisions often have to be made even when information is incomplete.
+VUCA was introduced in the early 1990s to describe the less
+predictable post–Cold War world. Today it captures key features of
+many engineering contexts: rapid change (volatility), imperfect
+information (uncertainty), interacting components (complexity), and
+multiple possible interpretations (ambiguity). In such settings,
+purely deterministic reasoning is often insufficient.
+
+**note to bullet 2 — implication for modelling**
+
+Models are essential in a VUCA world, but they are imperfect and
+depend on uncertain inputs and simplifying assumptions. Uncertainty
+quantification (UQ) tells us how uncertain model outputs are, while
+sensitivity analysis (SA) tells us which uncertainties matter
+most—making both crucial for robust decisions.
 
 Models help us reason in this situation, but models are never perfect.
-They are based on assumptions, simplified descriptions of reality, and uncertain inputs. This means model results are always uncertain.
+They are based on assumptions, simplified descriptions of reality, and
+uncertain inputs. This means model results are always uncertain.
 
-**Uncertainty quantification (UQ)** helps us describe and propagate this uncertainty. It tells us *how uncertain* the model output is.
+**Uncertainty quantification (UQ)** helps us describe and propagate
+  this uncertainty. It tells us *how uncertain* the model output is.
 
 But, as emphasized by **Saltelli**, this is not enough for decision-making.
 In practice, we also need to know **which uncertainties matter most**.
 
 This is why **sensitivity analysis** is essential in a VUCA context:
-it helps us understand which inputs drive the uncertainty in the results, and where modelling effort, data collection, or attention should be focused.
+it helps us understand which inputs drive the uncertainty in the
+results, and where modelling effort, data collection, or attention
+should be focused.
 :::
 
 
@@ -103,26 +127,46 @@ it helps us understand which inputs drive the uncertainty in the results, and wh
 :::
 
 ::: notes
-One key reason why uncertainty and sensitivity analysis have become so important is the rise of **in silico trials**.
 
-In many areas — especially medical devices and biomechanics — models increasingly support, or partially replace, physical experiments. This is driven by ethics, cost, time, and feasibility: we want to reduce animal testing, limit human exposure, and explore rare or infeasible scenarios.
+An important reason why UQSA analysis have
+become so important is the rise of **in silico trials**.
 
-This raises the key question on this slide: *when is a computational result credible — and why should we trust it?*
-Here, **credibility** is used in the ASME sense. A result is *credible* when there is sufficient evidence that the model is adequate for its **context of use**. **Trust** is the consequence — we trust a result because we understand why it is credible.
+In many areas — especially medical devices and biomechanics — models
+increasingly support, or partially replace, physical experiments. This
+is driven by ethics, cost, time, and feasibility: we want to reduce
+animal testing, limit human exposure, and explore rare or infeasible
+scenarios.
 
-Crucially, credibility is not about removing uncertainty everywhere. It is about understanding **which uncertainties matter for the decision**, and which do not. This point is central in ASME V&V and in Aldieri’s work on credibility assessment.
+**Key question** This raises the key question on this slide: *when is a computational
+result credible — and why should we trust it?* Here, **credibility**
+is used in the ASME sense. A result is *credible* when there is
+sufficient evidence that the model is adequate for its **context of
+use**. **Trust** is the consequence — we trust a result because we
+understand why it is credible.
 
-Uncertainty quantification tells us *how uncertain* a model result is.
-Global sensitivity analysis tells us *why* it is uncertain — by identifying the dominant sources of uncertainty and risk.
+Crucially, credibility is not about removing uncertainty
+everywhere.
 
-In this sense, **global sensitivity analysis operationalises credibility**: it links uncertainty to decision relevance and shows where evidence and modelling effort actually matter.
+It is about understanding **which uncertainties matter for
+the decision**, and which do not.
+This point is central in ASME V&V
+and in Aldieri’s work on credibility assessment.
+
+UQ tells us *how uncertain* a model result is.
+GSA tells us *why* it is uncertain — by
+identifying the dominant sources of uncertainty and risk.
+
+In this sense, **GSA operationalises credibility**:
+it links uncertainty to decision relevance and shows
+where evidence and modelling effort actually matter.
+
 :::
 
 
-## Digital twins need global sensitivity analysis
+## Digital twins need global sensitivity analysis (GSA)
 
 ::: {.incremental}
-* **Digital twins** rely on models for monitoring, prediction, and decision support
+* **DT** rely on models for monitoring, prediction, feedback and decision support
 
 * They operate continuously under uncertainty
 
@@ -134,7 +178,7 @@ In this sense, **global sensitivity analysis operationalises credibility**: it l
 
   * not all uncertainties can be reduced
 
-* **Global sensitivity analysis (GSA)** supports credible digital twins
+* **GSA** supports credible digital twins
 
   * identifies decision-relevant uncertainties
   * assesses robustness to uncertainty
@@ -147,26 +191,33 @@ In this sense, **global sensitivity analysis operationalises credibility**: it l
 :::
 
 ::: notes
-Digital twins are a useful example of why credibility under uncertainty really matters.
 
-A digital twin is a model used continuously to monitor, predict, or support decisions about a real system. Because of this, it operates under persistent uncertainty: data are noisy or incomplete, parameters are uncertain, and the system itself may evolve over time.
+Digital twins are a good example of why credibility under uncertainty
+matters.
 
-At the same time, decisions still have to be made. We cannot remove all uncertainty, so the key question again becomes: *which uncertainties matter for the decisions the digital twin is used to support?*
+A digital twin is a model that is used continuously to monitor a
+system, make predictions, and support decisions. Because of this, it
+always operates under uncertainty — in the data, in the model
+parameters, and because the real system itself may change over time.
 
-In the ASME sense, a digital twin is credible only if its results are robust for its **intended context of use**. Apparent precision is not enough.
+At the same time, decisions still have to be made. We cannot remove
+all uncertainty, so the key question becomes: which uncertainties
+actually matter for the decisions we care about?
 
-Global sensitivity analysis provides this link. It identifies which uncertainties are decision-relevant and where the model is sensitive or fragile. In that way, GSA supports credibility rather than just numerical accuracy.
+In the ASME sense, a digital twin is credible only if it is robust for
+its intended context of use — that is, if it is *fit for
+purpose*. Looking precise is not enough.
 
-This example sets the stage for the more general question: what problem sensitivity analysis actually solves.
+This is where global sensitivity analysis (GSA) comes in. GSA helps us
+identify the uncertainties that are decision-relevant and where the
+model is fragile. In this way, GSA supports credibility, not just
+numerical accuracy.
 
-Here, *precise* means producing sharp, detailed outputs, often with many digits.
-*Reliable* means that those outputs are robust to uncertainty in data, parameters, and assumptions.
+So, without GSA, a digital twin may look very precise but still be
+unreliable.
 
-Without GSA, a digital twin may look accurate, while being highly sensitive to **decision-relevant uncertainties**. Apparent precision can therefore be misleading.
-
-Transition to next slide: 
-Digital twins are just one example. The underlying issue is much more general.
-In any complex model used for decisions, we need to know which uncertainties actually matter.
+Transition: Digital twins are just one example — this issue applies to
+any complex model used for decision-making.
 
 :::
 
@@ -192,27 +243,25 @@ In any complex model used for decisions, we need to know which uncertainties act
 
 
 ::: notes
-We have already seen the first two points on earlier slides.
+We’ve already touched on the first two points before.
 
-We use models under uncertainty: inputs are not known exactly. And as
-models become nonlinear and high-dimensional, our intuition is no
-longer reliable. These points are important, but they are not very
-controversial.
+We use models under uncertainty — inputs are never known exactly. And
+as models become nonlinear and high-dimensional, our intuition often
+fails. These points are important, but not very controversial.
 
-The real motivation for sensitivity analysis lies in the last two
-points.
+The real motivation for sensitivity analysis is in the last two points.
 
-Decisions require prioritisation. In practice, we cannot reduce all
-uncertainties. We do not have unlimited time, data, or resources, so
-we must decide where effort actually matters.
+In practice, decisions require prioritisation. We don’t have unlimited
+time, data, or resources, so we cannot reduce all uncertainties. We
+have to focus our effort where it actually matters.
 
-This is why sensitivity analysis is fundamentally about **relevance**.
-It tells us which uncertainties really drive the uncertainty in the
-model output, and which ones matter less for the question we are
-asking.
+That is why sensitivity analysis is essentially about relevance. It
+helps us identify which uncertainties truly drive the uncertainty in
+the model output, and which ones matter less for the decision at hand.
 
-In other words, sensitivity analysis is not about explaining every
-detail of a model. It is about identifying what matters for decisions.
+So, sensitivity analysis is not about explaining every detail of a
+model — it is about understanding what matters for decision-making.
+
 :::
 
 
@@ -230,32 +279,30 @@ detail of a model. It is about identifying what matters for decisions.
 :::
 
 ::: notes
-Now that the problem is clear, let me be explicit about what
+
+Now that we know the problem, let me briefly summarise what
 sensitivity analysis is actually used for.
 
-The first objective is **factor prioritisation**.  Among all uncertain
-inputs, which ones contribute most to the uncertainty in the model
-output? These are the parameters that deserve attention, better data,
-or careful calibration.
+First, factor prioritisation. We want to find which uncertain inputs
+matter most for the output. These are the parameters that deserve
+better data, calibration, or closer attention.
 
-The second objective is **factor fixing**, also called screening.
-Here we identify inputs that have little influence on the output. If
-an input is not important, it can be fixed to a constant value without
-affecting the results, which simplifies the model.
+Second, factor fixing, or screening. Here we look for inputs that have
+little influence. If an input is unimportant, we can fix it to a
+constant value and simplify the model without changing the results.
 
-The third objective is **understanding model behaviour**.  Many models
-are nonlinear and include interactions between inputs. Sensitivity
-analysis helps reveal these effects and gives insight into how the
-model actually responds to uncertainty.
+Third, understanding model behaviour. Many models are nonlinear and
+include interactions between inputs. Sensitivity analysis helps reveal
+these effects and gives insight into how the model really behaves.
 
-The final objective is **supporting robust decisions**.  Instead of
-trying to improve everything, sensitivity analysis helps focus
-modelling, data collection, and validation effort where it matters
-most.
+Finally, supporting robust decisions. Instead of trying to improve
+everything, sensitivity analysis helps us focus modelling, data
+collection, and validation effort where it actually matters.
 
-These objectives will guide the rest of the seminar. Different
-sensitivity analysis methods support different objectives, and there
-is no single “best” method for all purposes.
+These objectives will guide the rest of the seminar — different
+sensitivity analysis methods serve different purposes, and there is no
+single “best” method for all problems.
+
 :::
 
 
@@ -271,8 +318,9 @@ The key message of this slide is very simple:
 **Local sensitivity looks at the model in one point.
 Global sensitivity looks at the model over the whole input space.**
 
-Local sensitivity methods use derivatives or small changes around a single reference point.
-They can be useful when the model is almost linear and uncertainty is very small.
+Local sensitivity methods use derivatives or small changes around a
+single reference point.  They can be useful when the model is almost
+linear and uncertainty is very small.
 
 But in most real problems:
 
@@ -280,11 +328,13 @@ But in most real problems:
 * models are nonlinear
 * parameters interact with each other
 
-In these cases, local methods can be misleading.
-They may say an input is unimportant just because the derivative is small at that one point.
+In these cases, local methods can be misleading.  They may say an
+input is unimportant just because the derivative is small at that one
+point.
 
-Global sensitivity analysis takes uncertainty seriously.
-Inputs are varied over their full ranges, and we study how they affect the output variability.
+Global sensitivity analysis takes uncertainty seriously.  Inputs are
+varied over their full ranges, and we study how they affect the output
+variability.
 
 So the important shift here is:
 we move from **“What happens if I change one parameter a little bit?”**
@@ -299,34 +349,32 @@ to **“Which uncertainties matter most for the overall behaviour of the model?�
 - Total variance decomposition
 
 ::: notes
-Variance is fundamental in global sensitivity analysis because it
-measures **uncertainty in the model output**.
 
-If a model output has large variance, it means the prediction is uncertain.
-If the variance is small, the prediction is more stable.
-So variance gives us a natural way to quantify how uncertain the model result is.
+Variance is central in GSA because it measures uncertainty in the model output.
 
-The key idea in sensitivity analysis is to ask:
-*How much of this output variance is caused by each input?*
+If the output variance is large, the prediction is uncertain. If it is
+small, the prediction is more stable. So variance gives us a clear way
+to quantify how uncertain our model results are.
 
-This is why variance is so useful.  It can be **decomposed** into
-contributions from individual inputs and from their interactions.
-This is a central idea in Saltelli’s work.
+The key question in sensitivity analysis is:
+How much of this output variance comes from each input?
 
-Conditional expectation and conditional variance help us formalize this.
-If fixing one input significantly reduces the output variance, then that input is important.
-If fixing it changes little, then it is not very important.
+This is why variance is so useful — it can be decomposed into
+contributions from individual inputs and from their interactions,
+which is a core idea in Saltelli’s work.
 
-So variance is not just a statistical choice.
-It directly connects uncertainty in the inputs to uncertainty in the output,
-and it allows us to rank inputs by how much they contribute to that uncertainty.
+Conditional expectation and conditional variance help formalise
+this. If fixing one input greatly reduces the output variance, that
+input is important. If it makes little difference, the input is less
+important.
 
-This is what makes variance the natural foundation for variance-based
-sensitivity measures, such as Sobol indices.
+So variance is not just a statistical choice — it directly links
+uncertainty in the inputs to uncertainty in the output, and allows us
+to rank inputs by importance.
 
-So once we agree that variance measures output uncertainty, the next
-step is to ask how this variance can be attributed to individual
-inputs  this is exactly what Sobol indices do.
+This provides the foundation for variance-based measures like Sobol
+indices, which we will look at next.
+
 
 :::
 
@@ -338,24 +386,26 @@ inputs  this is exactly what Sobol indices do.
 
 ::: notes
 
-Sobol indices are the most common variance-based sensitivity measures.
+Sobol indices are the most widely used variance-based sensitivity
+measures.
 
-The important point is not the formulas, but the **idea** behind them.
+The key point is not the formulas, but the idea behind them.
 
-The **first-order Sobol index** measures how much of the output variance is explained by one input *alone*, on average.
-If this value is large, the input has a strong direct effect on the output.
+The first-order Sobol index tells us how much of the output variance
+is explained by one input alone. A large value means that input has a
+strong direct effect.
 
-The **total Sobol index** measures the overall effect of an input.
-This includes both its direct effect and all interactions with other inputs.
-If the total index is much larger than the first-order index, it means interactions are important.
+The total Sobol index measures the overall effect of an input — both
+its direct effect and all its interactions with other inputs. If the
+total index is much larger than the first-order index, interactions
+are important.
 
-Sobol indices also allow us to quantify **interaction effects** explicitly.
-This is something local or one-factor-at-a-time methods cannot capture.
+Sobol indices also let us quantify interaction effects, which
+one-at-a-time or purely local methods cannot do.
 
-So Sobol indices give us a clear and interpretable answer to the key question:
-which inputs, alone or in interaction, drive the uncertainty in the model output?
-
-This is why they are so central in global sensitivity analysis, especially in complex and nonlinear models.
+In short, Sobol indices answer the central question in sensitivity
+analysis: which inputs — alone or in combination — really drive the
+uncertainty in the model output?
 
 :::
 
