@@ -69,13 +69,14 @@ Notebooks are ordered according to the seminar flow, starting from fundamental c
 * Colab: [https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/gstar_function.ipynb](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/gstar_function.ipynb)
 
 
-### Exercises  
-- without solutions  
-  - GitHub: https://github.com/lrhgit/uqsa2025/blob/main/exercises.ipynb  
-  - Colab: https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/exercises.ipynb  
+### Exercises
 
-- with solutions  
-  - GitHub: https://github.com/lrhgit/uqsa2025/blob/main/exercises_with_solutions.ipynb  
-  - Colab: https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/exercises_with_solutions.ipynb  
+* **without solutions**
 
+  * GitHub: [https://github.com/lrhgit/uqsa2025/blob/main/exercises.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/exercises.ipynb)
+  * Colab: [https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/exercises.ipynb](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/exercises.ipynb)
 
+* **with solutions**
+
+  * GitHub: [https://github.com/lrhgit/uqsa2025/blob/main/exercises_with_solutions.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/exercises_with_solutions.ipynb)
+  * Colab: [https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/exercises_with_solutions.ipynb](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/exercises_with_solutions.ipynb)
