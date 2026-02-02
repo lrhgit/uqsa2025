@@ -26,57 +26,55 @@ Lectures combined with hands-on sessions using interactive Jupyter notebooks (lo
 * 💻 Interactive notebooks – overview below
   (run locally in JupyterLab or open directly in Google Colab)
 
-
 ## 📘 Notebook overview
 
 Notebooks are ordered according to the seminar flow, starting from fundamental concepts and progressing to advanced methods and applications.
 
 ### Preliminaries
 
-* GitHub: [https://github.com/lrhgit/uqsa2025/blob/main/preliminaries.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/preliminaries.ipynb)
-* Colab: [https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/preliminaries.ipynb](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/preliminaries.ipynb)
+* GitHub: [preliminaries.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/preliminaries.ipynb)
+* Colab: [open in Google Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/preliminaries.ipynb)  
   Presents the statistical relations and laws needed to derive the Sobol indices.
 
 ### Introduction to sensitivity analysis
 
-* GitHub: [https://github.com/lrhgit/uqsa2025/blob/main/sensitivity_introduction.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/sensitivity_introduction.ipynb)
-* Colab: [https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/sensitivity_introduction.ipynb](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/sensitivity_introduction.ipynb)
+* GitHub: [sensitivity_introduction.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/sensitivity_introduction.ipynb)
+* Colab: [open in Google Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/sensitivity_introduction.ipynb)
 
 ### Monte Carlo methods for UQSA
 
-* GitHub: [https://github.com/lrhgit/uqsa2025/blob/main/monte_carlo.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/monte_carlo.ipynb)
-* Colab: [https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/monte_carlo.ipynb](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/monte_carlo.ipynb)
+* GitHub: [monte_carlo.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/monte_carlo.ipynb)
+* Colab: [open in Google Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/monte_carlo.ipynb)
 
 ### Higher-order sensitivity indices (interaction model)
 
-* GitHub: [https://github.com/lrhgit/uqsa2025/blob/main/sensitivity_higher_order.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/sensitivity_higher_order.ipynb)
-* Colab: [https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/sensitivity_higher_order.ipynb](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/sensitivity_higher_order.ipynb)
+* GitHub: [sensitivity_higher_order.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/sensitivity_higher_order.ipynb)
+* Colab: [open in Google Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/sensitivity_higher_order.ipynb)  
   Demonstrates second- and higher-order (interaction) Sobol indices, compares analytical results with Monte Carlo and polynomial chaos, and discusses convergence and computational cost.
 
 ### Polynomial chaos expansion methods for UQSA
 
-* GitHub: [https://github.com/lrhgit/uqsa2025/blob/main/introduction_gpc.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/introduction_gpc.ipynb)
-* Colab: [https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/introduction_gpc.ipynb](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/introduction_gpc.ipynb)
+* GitHub: [introduction_gpc.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/introduction_gpc.ipynb)
+* Colab: [open in Google Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/introduction_gpc.ipynb)
 
 ### UQSA of arterial wall models
 
-* GitHub: [https://github.com/lrhgit/uqsa2025/blob/main/wall_models.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/wall_models.ipynb)
-* Colab: [https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/wall_models.ipynb](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/wall_models.ipynb)
+* GitHub: [wall_models.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/wall_models.ipynb)
+* Colab: [open in Google Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/wall_models.ipynb)
 
 ### UQSA of the g*-function 
 
-* GitHub: [https://github.com/lrhgit/uqsa2025/blob/main/gstar_function.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/gstar_function.ipynb)
-* Colab: [https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/gstar_function.ipynb](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/gstar_function.ipynb)
-
+* GitHub: [gstar_function.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/gstar_function.ipynb)
+* Colab: [open in Google Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/gstar_function.ipynb)
 
 ### Exercises
 
 * **without solutions**
-
-  * GitHub: [https://github.com/lrhgit/uqsa2025/blob/main/exercises.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/exercises.ipynb)
-  * Colab: [https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/exercises.ipynb](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/exercises.ipynb)
+  * GitHub: [exercises.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/exercises.ipynb)
+  * Colab: [open in Google Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/exercises.ipynb)
 
 * **with solutions**
+  * GitHub: [exercises_with_solutions.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/exercises_with_solutions.ipynb)
+  * Colab: [open in Google Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/exercises_with_solutions.ipynb)
 
-  * GitHub: [https://github.com/lrhgit/uqsa2025/blob/main/exercises_with_solutions.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/exercises_with_solutions.ipynb)
-  * Colab: [https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/exercises_with_solutions.ipynb](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/exercises_with_solutions.ipynb)
+
