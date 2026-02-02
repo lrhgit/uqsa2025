@@ -1,85 +1,90 @@
+# Seminar agenda — UQSA
 
-*Organiser:* NTNU and Politecnico di Milano (PoliMi)  
-*Dates:* 3–4 February 2026  
-*Instructor:* Leif Rune Hellevik  
-*Location:* Politecnico di Milano, Milan, Italy (Natta-tav)  
+**Organiser:** NTNU and Politecnico di Milano (PoliMi)  
+**Dates:** 3–4 February 2026  
+**Instructor:** Leif Rune Hellevik  
+**Location:** Politecnico di Milano, Milan, Italy (Natta-tav)
 
-The seminar is structured over two half-days, combining conceptual lectures with interactive notebook-based demonstrations. The timetable respects the confirmed room reservations.
+The seminar is structured over two half-days, combining conceptual framing with guided, notebook-based exploration. The timetable respects the confirmed room reservations.
 
-### Day 1 — Tuesday 3 February 2026
+---
 
-Time: 10:00–15:00
+## Day 1 — Tuesday 3 February 2026
 
-| Time        | Block                                     | Duration |
-| ----------- | ----------------------------------------- | -------- |
-| 10:00–10:15 | Welcome and overview                      | 15 min   |
-| 10:15–11:00 | Motivation and context                    | 45 min   |
-| 11:00–11:30 | Probability and variance                  | 30 min   |
-| 11:30–11:45 | Coffee break                              | 15 min   |
-| 11:45–12:30 | From local to global sensitivity analysis | 45 min   |
-| 12:30–13:15 | Variance-based sensitivity indices        | 45 min   |
-| 13:15–14:00 | Lunch break                               | 45 min   |
-| 14:00–15:00 | Interactive notebook walkthrough (I)      | 60 min   |
+**Time: 10:00–15:00**
 
-### Day 2 — Wednesday 4 February 2026
+| Time | Block | What you do / material |
+|---|---|---|
+| **10:00–10:40** | **GSA for cardiovascular models (Welcome + framing)** | **Motivation, concepts, and intuition** (Lecture slides) |
+| **10:40–11:00** | Transition: from slides to statistics | Explain why variance is needed for Sobol indices |
+| **11:00–11:30** | Foundations: variance and total variance | *preliminaries.ipynb* (selected cells) |
+| **11:30–11:45** | Coffee break | — |
+| **11:45–12:30** | What does sensitivity mean in practice? | *sensitivity_introduction.ipynb* (Part 1) |
+| **12:30–13:15** | First-order Sobol indices | *sensitivity_introduction.ipynb* (Part 2) |
+| **13:15–14:00** | Lunch break | — |
+| **14:00–15:00** | What is missing in first-order indices? | *sensitivity_introduction.ipynb* (Part 3: total indices + interactions) |
 
-Time: 10:00–13:00
+### Day 1 — description of blocks
 
-| Time        | Block                                     | Duration |
-| ----------- | ----------------------------------------- | -------- |
-| 10:00–10:15 | Recap and framing of day 2                | 15 min   |
-| 10:15–11:00 | Interactive notebook walkthrough (II)     | 45 min   |
-| 11:00–11:30 | Methods and comparison                    | 30 min   |
-| 11:30–11:45 | Coffee break                              | 15 min   |
-| 11:45–12:30 | Discussion, interpretation, limitations   | 45 min   |
-| 12:30–13:00 | Pointers, outlook, and closing discussion | 30 min   |
+**GSA for cardiovascular models (Lecture slides)**  
+Conceptual framing of uncertainty, credibility, and global sensitivity analysis in the context of complex models and digital twins. Introduces key ideas without formulas and sets expectations for the notebook-based format.
 
+**Foundations: variance and total variance**  
+Selected parts of *preliminaries.ipynb* to recall variance and the law of total variance as the statistical foundation for Sobol indices.
 
-## Description of programme blocks
+**Sensitivity in practice (Part 1)**  
+Guided exploration of *sensitivity_introduction.ipynb*: scatterplots, conditional behaviour, and qualitative intuition about input–output relationships.
 
-### Welcome and overview
+**First-order Sobol indices (Part 2)**  
+Computation and interpretation of first-order Sobol indices within *sensitivity_introduction.ipynb*.
 
-Introduction to the seminar goals, structure, and practical information.
+**What is missing in first-order indices? (Part 3)**  
+Introduction of total Sobol indices and interaction effects within *sensitivity_introduction.ipynb*.
 
-### Motivation and context
+**Outcome of Day 1:**  
+Participants understand what Sobol indices mean and why interactions matter.
 
-Why uncertainty and sensitivity analysis matter in nonlinear and high-dimensional models, with examples from engineering and computational science.
+---
 
-### Probability and variance
+## Day 2 — Wednesday 4 February 2026
 
-A short refresher on random variables, variance, conditional variance, and the total law of variance — the statistical foundation underlying variance-based sensitivity analysis.
+**Time: 10:00–13:00**
 
-### From local to global sensitivity analysis
+| Time | Block | What you do / material |
+|---|---|---|
+| **10:00–10:15** | Recap and framing of Day 2 | From “what Sobol indices mean” → “how we compute them” |
+| **10:15–10:45** | Monte Carlo in practice | *monte_carlo.ipynb* |
+| **10:45–11:10** | Higher-order effects and interactions | *sensitivity_higher_order.ipynb* |
+| **11:10–11:25** | Coffee break | — |
+| **11:25–11:55** | Polynomial Chaos (PCE) approach | *introduction_gpc.ipynb* |
+| **11:55–12:25** | Application I: arterial wall models | *wall_models.ipynb* |
+| **12:25–13:00** | Application II: g\*-function + wrap-up | *gstar_function.ipynb* |
 
-Limitations of derivative-based (local) sensitivity measures and the intuition behind variance-based global methods.
+### Day 2 — description of blocks
 
-### Variance-based sensitivity indices
+**Recap and framing of Day 2**  
+Short synthesis: Day 1 focused on meaning and intuition; Day 2 focuses on computation and applications.
 
-Conceptual introduction to Sobol indices and what they measure (first-order and total effects), with emphasis on interpretation rather than formal derivations.
+**Monte Carlo in practice**  
+Demonstration of Sobol estimation via Monte Carlo, including sampling cost and convergence.
 
-### Interactive notebook walkthrough
+**Higher-order effects and interactions**  
+Exploration of interaction effects and interpretation of total vs. first-order indices.
 
-Guided exploration of selected Jupyter/Colab notebooks illustrating:
+**Polynomial Chaos approach**  
+Comparison of Monte Carlo and PCE: same quantities (variance and Sobol indices), but different efficiency and assumptions.
 
-* sampling of input parameter spaces
-* scatterplots and conditional behaviour
-* computation and interpretation of sensitivity indices
+**Application I — arterial wall models**  
+Realistic case study showing which parameters dominate uncertainty in arterial wall predictions and why this matters for credibility.
 
-Participants are welcome to run the notebooks, but this is not required.
-
-### Methods and comparison
-
-Brief comparison of Monte Carlo–based and polynomial chaos–based approaches for computing sensitivity indices.
-
-### Discussion and pointers
-
-Interpretation, limitations, and suggestions for further reading and practical use.
+**Application II — g\*-function + wrap-up**  
+Benchmark nonlinear example illustrating nonlinearity and interactions, followed by key take-home messages and pointers to materials.
 
 ---
 
 ## Practical information
 
-The seminar combines demonstration with interactive exploration. Participants who wish to run code will be provided with ready-to-use notebooks and instructions.
+The seminar combines guided demonstration with interactive exploration. Participants who wish to run code will be provided with ready-to-use notebooks and Colab links.
 
 Interactive notebooks and slides will be shared after the seminar.
 
