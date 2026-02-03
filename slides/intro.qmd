@@ -422,6 +422,7 @@ The detailed and up-to-date agenda is available here:
 
 👉 **https://lrhgit.github.io/uqsa2025/seminar/agenda.html**
 
+
 ## Notebooks and colab
 
 Jupyter notebooks are interactive documents that combine
