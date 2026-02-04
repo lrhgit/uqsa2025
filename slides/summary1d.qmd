@@ -1,0 +1,69 @@
+---
+title: "Global sensitivity analysis for cardiovascular models"
+subtitle: "Motivation, concepts, and intuition -- Seminar at PoliMi 3–4 February 2026" 
+author: "Leif Rune Hellevik"
+institute: "NTNU and Politecnico di Milano (PoliMi)"
+---
+
+
+
+
+## Welcome & framing
+
+**Format**
+
+* Short conceptual introductions
+* Interactive notebook demonstrations
+* Discussion-oriented, not tool-heavy
+* Slides: https://lrhgit.github.io/uqsa2025/
+
+::: notes
+Welcome everyone, both students and faculty in Gliwice Poland, my postdoc Rahul in Trondheim,
+and to the group here at PoliMi (students, postdocs, and faculty), and in particular
+Francesco who is hosting me.
+
+and I am Leif Rune Hellevik, professor in biomechanics at NTNU, Trondheim
+and currently at PoliMi at a sabbatical. 
+
+This seminar on GSA for cardiovascular models is meant to be practical
+and concept-driven: not a full course, not a software tutorial, but a
+guided exploration of how GSA helps us reason about uncertainty in models.
+
+Emphasize: notebooks are used as a medium for explanation and exploration,
+not something participants are expected to run line-by-line during the seminar.
+
+For you as attendants I encourage and hope for interaction and
+questions throughout the sessions.
+
+Before we go any further, please open the seminar slides in your browser.
+https://lrhgit.github.io/uqsa2025/
+
+That way you can follow links and jump to notebooks when we get to the interactive parts.
+
+:::
+
+
+## What we intended to do yesterday
+
+- Frame and motivate the need for GSA
+- Revisit basic statistics
+- Introduce variance-based SA
+- Explore interactive notebooks
+
+
+
+## Summary from day one
+- Frame and motivate the need for GSA
+- Revisit basic statistics
+  - Expectation $\mathbb{E}(X) = \int_{x_{\min}}^{x_{\max}} x\,p(x)\,\mathrm{d}x$
+  - Variance $\operatorname{Var}(X) = \mathbb{E}\!\left[(X-\mathbb{E}(X))^2\right] =\operatorname{Var}(X)= \mathbb{E}(X^2) - \mathbb{E}(X)^2$
+  - Total law of variance $\operatorname{Var}(Y) = \operatorname{Var}\left(\mathbb{E}(Y \mid X)\right) + \mathbb{E}\left(\operatorname{Var}(Y \mid X)\right)$
+- OAT vs GSA
+- Scatterplots and normalized derivatives
+- Demonstration of conditional variances with sliced scatterplots
+- Sobol indices as a variance based means to rank parameters according to their influence on output uncertainty
+- MC and PCE as computational methods to quantify the Sobol indices
+
+
+
+

@@ -23,6 +23,7 @@ Lectures combined with hands-on sessions using interactive Jupyter notebooks (lo
 
 * 🗓️ [Seminar agenda](https://lrhgit.github.io/uqsa2025/seminar/agenda.html)
 * 📊 [Lecture slides (intro)](https://lrhgit.github.io/uqsa2025/slides/intro.html)
+* 📊 [Summary day one](https://lrhgit.github.io/uqsa2025/slides/summary1d.html)
 * 💻 Interactive notebooks – overview below
   (run locally in JupyterLab or open directly in Google Colab)
 
