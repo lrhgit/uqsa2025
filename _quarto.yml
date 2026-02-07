@@ -23,3 +23,7 @@ format:
     controlsLayout: edges
     navigationMode: linear
     html-math-method: mathjax
+
+website:
+  google-analytics: "G-DR4JFS7C5B"
+
