@@ -8,12 +8,6 @@ format: html
 
 Seminar date: April 23, 2026
 
-Leif Rune Hellevik  
-Professor in Biomedical Engineering  
-Norwegian University of Science and Technology (NTNU), Trondheim, Norway  
-Visiting Scholar, University of Michigan, Ann Arbor  
-April – July 2026  
-
 
 This seminar presents concepts, methods, and applications of uncertainty quantification (UQ) and sensitivity analysis (SA), with a focus on cardiovascular modeling.
 
@@ -33,4 +27,22 @@ This seminar presents concepts, methods, and applications of uncertainty quantif
 
 [UQSA seminar hub](https://lrhgit.github.io/uqsa2025/)
 
+
+::: {.columns}
+
+::: {.column width="50%"}
+![](IMG_0690.jpeg)
+:::
+
+::: {.column width="50%"}
+![](IMG_0691.jpeg)
+:::
+
+:::
+
+Leif Rune Hellevik  
+Professor in Biomedical Engineering  
+Norwegian University of Science and Technology (NTNU), Trondheim, Norway  
+Visiting Scholar, University of Michigan, Ann Arbor  
+April – July 2026  
 
