@@ -1,0 +1,42 @@
+---
+title: "UQSA workshop – University of Michigan, 2026"
+format: html
+---
+
+## Workshop agenda — UQSA (3 hours)
+
+Organiser: NTNU and University of Michigan  
+Date: June 3, 2026  
+Instructor: Leif Rune Hellevik  
+Location: University of Michigan, NCRC/CVBL, Ann Arbor  
+
+Time: 09:00–12:00
+
+| Time        | Block                                   | What you do / material |
+|-------------|----------------------------------------|------------------------|
+| 09:00–09:15 | Setup + framing                         | Recap from seminar. From “what Sobol indices mean” → “how we use them”. MC vs PCE overview |
+| 09:15–09:55 | Intuition and sensitivity               | sensitivity_introduction.ipynb (selected sections) |
+| 09:55–10:25 | Monte Carlo in practice                 | monte_carlo.ipynb (Saltelli A, B, C_i + convergence) |
+| 10:25–10:35 | Break                                  | — |
+| 10:35–11:00 | Polynomial Chaos (PCE)                  | introduction_gpc.ipynb (core sections) |
+| 11:00–11:20 | PCE vs Monte Carlo                      | Comparison: accuracy vs cost |
+| 11:20–11:50 | Application                            | wall_models.ipynb or gstar_function.ipynb |
+| 11:50–12:00 | Wrap-up and discussion                  | Questions, connections to participant models |
+
+---
+
+## Description of blocks
+
+The workshop follows a guided path through selected sections of the Milan seminar notebooks. It moves from interpretation of Sobol indices to practical computation using Monte Carlo and polynomial chaos expansions (PCE), and concludes with application to representative cardiovascular models. The emphasis is on understanding trade-offs and identifying what drives uncertainty in practice.
+
+---
+
+## Outcome
+
+Participants move from interpretation of Sobol indices to practical computation and application using both Monte Carlo and PCE approaches.
+
+---
+
+## Interactive material
+
+[UQSA seminar hub](https://lrhgit.github.io/uqsa2025/)
