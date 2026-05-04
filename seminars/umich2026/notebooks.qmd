@@ -1,4 +1,10 @@
-## 📘 Notebook overview
+---
+title: "UQSA notebooks – University of Michigan, 2026"
+format:
+  html:
+    toc: false
+    page-layout: full
+---
 
 Notebooks are ordered according to the seminar flow, starting from fundamental concepts and progressing to advanced methods and applications.
 
