@@ -39,4 +39,4 @@ Participants move from interpretation of Sobol indices to practical computation 
 
 ## Interactive material
 
-[UQSA seminar hub](https://lrhgit.github.io/uqsa2025/seminars/umich2026/noteboobks.html)
+[Notebooks](https://lrhgit.github.io/uqsa2025/seminars/umich2026/notebooks.html)
