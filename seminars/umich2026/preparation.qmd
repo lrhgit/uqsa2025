@@ -1,0 +1,60 @@
+---
+title: "Preparation for the UQSA workshop"
+format:
+  html:
+    toc: false
+    page-layout: full
+---
+
+# Preparation before the workshop
+
+To make the workshop as interactive and productive as possible, we ask participants to complete a small amount of preparation beforehand.
+
+Estimated preparation time: **30–45 minutes**.
+
+## Notebook access
+
+The workshop notebooks are intended to be runnable directly in **Google Colab**, allowing participants to work in a browser without needing a local Python installation.
+
+Benefits of this approach include:
+
+- no local software installation required
+- no dependency management
+- a common environment for all participants
+- easier troubleshooting during the workshop
+
+For participants who prefer working locally in Jupyter, downloadable notebook versions are also available from GitHub, together with a `requirements.txt` file for dependency installation.
+
+---
+
+## Required preparation
+
+### Preliminaries notebook
+
+Please work through the **preliminaries notebook** before the workshop.
+
+The goal is *not* to master all details in advance, but to:
+
+- refresh key statistical concepts used during the workshop
+- expectation and variance
+- conditional expectation
+- variance decomposition
+- become familiar with running notebook cells
+- verify that your working environment functions properly
+
+Access:
+
+* **Google Colab (recommended):**  
+  [Open preliminaries.ipynb in Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/preliminaries.ipynb)
+
+* **GitHub / local Jupyter:**  
+  [preliminaries.ipynb on GitHub](https://github.com/lrhgit/uqsa2025/blob/main/preliminaries.ipynb)
+
+For local installation:
+
+```bash
+git clone https://github.com/lrhgit/uqsa2025.git
+cd uqsa2025
+pip install -r requirements.txt
+jupyter lab
+

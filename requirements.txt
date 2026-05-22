@@ -1,7 +1,14 @@
-numpy
+numpy<2.3
 scipy
 pandas
 matplotlib
-ipywidgets
-chaospy
+sympy
 
+chaospy>=4.3.20,<4.4
+numpoly>=1.3.6,<1.4
+
+ipython
+ipywidgets
+nbformat
+jupyterlab
+notebook
