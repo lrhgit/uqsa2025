@@ -58,3 +58,29 @@ cd uqsa2025
 pip install -r requirements.txt
 jupyter lab
 
+
+---
+
+## Optional preview
+
+### Interactive Sobol G* notebook
+
+Participants who would like a short optional preview of the workshop themes may also explore the interactive Sobol G* notebook.
+
+This notebook provides intuition for:
+
+- first-order Sobol sensitivity indices
+- total-effect sensitivity indices
+- interaction effects
+- factor importance
+
+The notebook will also be used during the workshop.
+
+Access:
+
+* **Google Colab:**  
+  [Open gstar_function.ipynb in Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/gstar_function.ipynb)
+
+* **GitHub / local Jupyter:**  
+  [gstar_function.ipynb on GitHub](https://github.com/lrhgit/uqsa2025/blob/main/gstar_function.ipynb)
+
