@@ -3,48 +3,54 @@ title: "UQSA workshop – University of Michigan, 2026"
 format: html
 ---
 
-## Workshop agenda — UQSA (3 hours)
+# Hands-on workshop: uncertainty quantification and sensitivity analysis in cardiovascular modelling
 
-Organiser: NTNU and University of Michigan  
-Date: June 3, 2026  
-Instructor: Leif Rune Hellevik  
-Location: University of Michigan, NCRC/CVBL, Ann Arbor  
+**Leif Rune Hellevik**  
+NTNU / University of Michigan
 
-Time: 09:00–12:00
+**June 1, 2026 • 12:30–3:30 pm**  
+University of Michigan, NCRC/CVBL, Ann Arbor
 
-| Time        | Block                                   | What you do / material |
-|-------------|----------------------------------------|------------------------|
-| 09:00–09:15 | Setup + framing                         | Recap from seminar. From “what Sobol indices mean” → “how we use them”. MC vs PCE overview |
-| 09:15–09:55 | Intuition and sensitivity               | sensitivity_introduction.ipynb (selected sections) |
-| 09:55–10:25 | Monte Carlo in practice                 | monte_carlo.ipynb (Saltelli A, B, C_i + convergence) |
-| 10:25–10:35 | Break                                  | — |
-| 10:35–11:00 | Polynomial Chaos (PCE)                  | introduction_gpc.ipynb (core sections) |
-| 11:00–11:20 | PCE vs Monte Carlo                      | Comparison: accuracy vs cost |
-| 11:20–11:50 | Application                            | wall_models.ipynb or gstar_function.ipynb |
-| 11:50–12:00 | Wrap-up and discussion                  | Questions, connections to participant models |
+Optional discussion / questions until 4:00 pm.
 
----
+## Workshop agenda
 
-## Description of blocks
+| Time | Session | Material |
+|------|---------|----------|
+| 12:30–12:45 | Welcome, setup, and workshop framing | Goals, workflow, practical setup |
+| 12:45–1:25 | Interactive exploration of sensitivity concepts | `gstar_function.ipynb` |
+| 1:25–1:55 | Sensitivity analysis concepts and interpretation | Guided discussion / selected examples |
+| 1:55–2:10 | Break | — |
+| 2:10–2:50 | Uncertainty propagation with Monte Carlo methods | `monte_carlo.ipynb` |
+| 2:50–3:25 | Polynomial chaos expansions in practice | `introduction_gpc.ipynb` |
+| 3:25–3:30 | Wrap-up | Key takeaways |
+| 3:30–4:00 | Optional discussion | Questions / participant applications |
 
-The workshop follows a guided path through selected sections of the Milan seminar notebooks. It moves from interpretation of Sobol indices to practical computation using Monte Carlo and polynomial chaos expansions (PCE), and concludes with application to representative cardiovascular models. The emphasis is on understanding trade-offs and identifying what drives uncertainty in practice.
+## Workshop description
 
----
+This hands-on workshop introduces practical methods for uncertainty quantification and sensitivity analysis (UQSA) in computational modelling, with examples drawn from cardiovascular applications.
 
-## Outcome
+The workshop follows an intuition-first progression:
 
-Participants move from interpretation of Sobol indices to practical computation and application using both Monte Carlo and PCE approaches.
+- interactive exploration of sensitivity concepts
+- interpretation of Sobol sensitivity indices
+- uncertainty propagation using Monte Carlo simulation
+- practical introduction to polynomial chaos expansions (PCE)
 
----
+Participants will work directly with Jupyter notebooks throughout the session.
+
+## Learning outcomes
+
+After the workshop, participants should be able to:
+
+- interpret first-order and total Sobol sensitivity indices
+- understand how uncertainty propagates through computational models
+- implement basic Monte Carlo approaches for uncertainty analysis
+- understand the rationale and practical use of polynomial chaos expansions
+- identify strengths and limitations of different UQSA approaches
 
 ## Interactive material
 
-## Interactive material
+The workshop is supported by a set of interactive Jupyter notebooks used during the hands-on sessions.
 
-The workshop is supported by a collection of Jupyter notebooks
-covering the main steps from interpretation of Sobol indices to
-practical UQSA using Monte Carlo and polynomial chaos methods. These
-notebooks form the backbone of the hands-on parts of the session.
-
-[Notebooks](notebooks.html)
-
+[Workshop notebooks](notebooks.html)
