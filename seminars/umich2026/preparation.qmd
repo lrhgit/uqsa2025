@@ -6,8 +6,6 @@ format:
     page-layout: full
 ---
 
-# Preparation before the workshop
-
 ## Hands-on workshop: uncertainty quantification and sensitivity analysis in cardiovascular modelling
 
 **Leif Rune Hellevik**  
