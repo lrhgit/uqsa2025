@@ -135,3 +135,39 @@ def uncertainty_summary_table(sobol_mc, sobol_pce):
         )
 
     return pd.DataFrame(rows).set_index(["Model", "Method"])
+
+
+def relative_error(estimate, reference, eps=1e-12):
+    return 100.0 * np.abs(estimate - reference) / (np.abs(reference) + eps)
+
+
+def parameter_array(kwargs, name, k=4):
+    return np.array([kwargs[f"{name}{i}"] for i in range(1, k + 1)], dtype=float)
+
+
+def sobol_table(reference, mc, pce, labels):
+    return pd.DataFrame({
+        "analytical": reference,
+        "MC": mc,
+        "err% MC": relative_error(mc, reference),
+        "PCE": pce,
+        "err% PCE": relative_error(pce, reference),
+    }, index=labels)
+
+
+
+def display_side_by_side_tables(tables):
+    html = """
+    <div style="display:flex; gap:40px; align-items:flex-start;">
+    """
+    for title, df in tables:
+        html += f"""
+        <div>
+            <h4>{title}</h4>
+            {df.to_html(float_format=lambda x: f"{x:.3f}")}
+        </div>
+        """
+    html += "</div>"
+    display(HTML(html))
+
+
