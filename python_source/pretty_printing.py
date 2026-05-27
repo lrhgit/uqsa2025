@@ -171,3 +171,13 @@ def display_side_by_side_tables(tables):
     display(HTML(html))
 
 
+def sensitivity_table(values, row_labels, column_name="sensitivity"):
+    df = pd.DataFrame(
+        values,
+        columns=[column_name],
+        index=row_labels,
+    )
+
+    pretty_table(df)
+
+    
