@@ -2,9 +2,9 @@
 
 title: "Notebook overview"
 format:
-html:
-toc: false
-page-layout: full
+  html:
+    toc: false
+    page-layout: full
 ---
 
 The notebooks are ordered according to the seminar flow, progressing from fundamental concepts to practical computational methods.
