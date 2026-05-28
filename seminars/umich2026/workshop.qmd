@@ -26,6 +26,7 @@ Optional discussion / questions until 4:00 pm.
 | 3:25–3:30 | Wrap-up | Key takeaways |
 | 3:30–4:00 | Optional discussion | Questions / participant applications |
 
+
 ## Workshop description
 
 This hands-on workshop introduces practical methods for uncertainty quantification and sensitivity analysis (UQSA) in computational modelling, with examples drawn from cardiovascular applications.
@@ -49,8 +50,9 @@ After the workshop, participants should be able to:
 - understand the rationale and practical use of polynomial chaos expansions
 - identify strengths and limitations of different UQSA approaches
 
+
 ## Interactive material
 
 The workshop is supported by a set of interactive Jupyter notebooks used during the hands-on sessions.
 
-[Workshop notebooks](notebooks.html)
+[Workshop notebooks](notebooks_umich2026.html)

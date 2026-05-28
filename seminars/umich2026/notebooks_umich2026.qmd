@@ -1,0 +1,62 @@
+---
+
+title: "Notebook overview"
+format:
+html:
+toc: false
+page-layout: full
+-----------------
+
+The notebooks are ordered according to the seminar flow, progressing from fundamental concepts to practical computational methods.
+
+## 1. Preliminaries
+
+* GitHub: [preliminaries.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/preliminaries.ipynb)
+* Colab: [Open in Google Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/preliminaries.ipynb)
+
+Introduces the statistical concepts and variance relations underlying uncertainty quantification and sensitivity analysis.
+
+---
+
+## 2. Sensitivity concepts
+
+* GitHub: [sensitivity_concepts.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/sensitivity_concepts.ipynb)
+* Colab: [Open in Google Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/sensitivity_concepts.ipynb)
+
+Introduces additive and interaction models, first-order and total-effect Sobol indices, and the interpretation of variance-based sensitivity measures.
+
+---
+
+## 3. Monte Carlo methods for UQSA
+
+* GitHub: [monte_carlo.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/monte_carlo.ipynb)
+* Colab: [Open in Google Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/monte_carlo.ipynb)
+
+Introduces Monte Carlo estimation of uncertainty measures and Sobol sensitivity indices using sampling-based methods.
+
+---
+
+## 4. Polynomial chaos expansion methods for UQSA
+
+* GitHub: [introduction_gpc.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/introduction_gpc.ipynb)
+* Colab: [Open in Google Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/introduction_gpc.ipynb)
+
+Introduces polynomial chaos expansions for surrogate modeling and efficient computation of Sobol indices.
+
+---
+
+## 5. Interactive exploration with Sobol's $G^{*}$ function
+
+* GitHub: [gstar_function.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/gstar_function.ipynb)
+* Colab: [Open in Google Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/gstar_function.ipynb)
+
+Interactive exploration of factor importance, nonlinear effects, and interaction effects using Sobol’s benchmark function.
+
+---
+
+## Optional: Higher-order interaction indices
+
+* GitHub: [sensitivity_higher_order.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/sensitivity_higher_order.ipynb)
+* Colab: [Open in Google Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/sensitivity_higher_order.ipynb)
+
+Illustrates second-order and higher-order Sobol indices for interaction models.
