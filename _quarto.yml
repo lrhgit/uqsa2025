@@ -16,7 +16,6 @@ format:
       - assets/ntnu.scss
 
     logo: assets/ntnu-logo.svg
-    footer: "NTNU • Global Sensitivity Analysis • 3–4 Feb 2026"
     slide-number: true
 
     progress: true

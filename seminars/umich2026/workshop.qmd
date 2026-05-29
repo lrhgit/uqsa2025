@@ -56,3 +56,4 @@ After the workshop, participants should be able to:
 The workshop is supported by a set of interactive Jupyter notebooks used during the hands-on sessions.
 
 [Workshop notebooks](notebooks_umich2026.html)
+

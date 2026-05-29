@@ -1,0 +1,137 @@
+---
+title: "UQSA workshop"
+subtitle: "From concepts to exploration"
+author: "Leif Rune Hellevik"
+date: "2026-06-01"
+format:
+  revealjs:
+    footer: "NTNU • CVBL WS • June 1, 2026"
+---
+
+## Welcome back
+
+On April 23rd we discussed:
+
+- uncertainty quantification (UQ)
+- sensitivity analysis (SA)
+- Sobol sensitivity indices
+- Monte Carlo methods
+- polynomial chaos expansions
+
+Today we revisit these ideas through interactive notebooks.
+
+::: notes
+
+The seminar in April focused on motivation, concepts, and applications.
+
+Today's workshop is different.
+
+Rather than introducing new theory, we will explore the ideas through notebooks and discussion.
+
+The emphasis is on intuition and interpretation rather than derivations.
+
+:::
+
+## Today's approach
+
+We begin hands-on with a simple interactive model.
+
+The purpose is not realism.
+
+The purpose is to build intuition and experience with:
+
+- parameter importance
+- interactions
+- first-order Sobol indices
+- total-effect Sobol indices
+
+using the G-star notebook.
+
+::: notes
+
+Rather than starting with algorithms, we start with intuition.
+
+The G-star notebook serves as a laboratory where we can directly observe how parameter importance and interactions influence model behaviour.
+
+Think of this notebook as the conceptual anchor for the rest of the workshop.
+
+:::
+
+## Workshop progression
+
+Once the sensitivity concepts become intuitive, we will revisit them through:
+
+1. guided interpretation and discussion
+2. uncertainty propagation with Monte Carlo
+3. polynomial chaos expansions in practice
+4. wrap-up and participant questions
+
+::: notes
+
+The order is deliberate.
+
+First we build intuition for what sensitivity indices mean.
+
+Then we look at how uncertainty is propagated and how the same sensitivity quantities can be estimated using Monte Carlo and polynomial chaos.
+
+:::
+
+## How we will work
+
+- interactive notebook demonstrations
+- guided exploration
+- discussion-oriented sessions
+- questions throughout
+
+The goal is not to run every cell.
+
+The goal is to understand what drives uncertainty in a model.
+
+::: notes
+
+Please interrupt with questions whenever something is unclear.
+
+In many cases the discussion is more valuable than obtaining the correct numerical answer.
+
+:::
+
+## Colab workflow
+
+Before modifying a notebook:
+
+**File → Save a copy in Drive**
+
+General recommendations:
+
+- modify parameters and sliders freely
+- re-run cells when inputs change
+- if something breaks, reload and continue from your saved copy
+
+The notebooks are intended to be exploratory and robust.
+
+::: notes
+
+The most important practical step is saving your own copy before editing.
+
+Then you can experiment freely without worrying about breaking anything.
+
+:::
+
+## First notebook: G-star model
+
+We start with `gstar_function.ipynb`.
+
+This notebook helps us explore:
+
+- how input parameters affect output variability
+- how parameter importance changes
+- how interactions appear
+- how first-order and total-effect Sobol indices differ
+
+::: notes
+
+This first notebook is where we reconnect the concepts from the April seminar to hands-on exploration.
+
+We will use it to develop a shared intuition before moving to Monte Carlo and polynomial chaos.
+
+:::
