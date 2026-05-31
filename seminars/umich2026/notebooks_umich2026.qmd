@@ -6,7 +6,7 @@ format:
     page-layout: full
 ---
 
-The notebooks are ordered according to the seminar flow, progressing from fundamental concepts to practical computational methods.
+The notebooks are ordered according to the workshop flow, progressing from intuition and concepts to computational methods and a practical application example.
 
 ## 1. Preliminaries
 
@@ -17,45 +17,45 @@ Introduces the statistical concepts and variance relations underlying uncertaint
 
 ---
 
-## 2. Sensitivity concepts
-
-* GitHub: [sensitivity_concepts.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/sensitivity_concepts.ipynb)
-* Colab: [Open in Google Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/sensitivity_concepts.ipynb)
-
-Introduces additive and interaction models, first-order and total-effect Sobol indices, and the interpretation of variance-based sensitivity measures.
-
----
-
-## 3. Monte Carlo methods for UQSA
-
-* GitHub: [monte_carlo.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/monte_carlo.ipynb)
-* Colab: [Open in Google Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/monte_carlo.ipynb)
-
-Introduces Monte Carlo estimation of uncertainty measures and Sobol sensitivity indices using sampling-based methods.
-
----
-
-## 4. Polynomial chaos expansion methods for UQSA
-
-* GitHub: [introduction_gpc.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/introduction_gpc.ipynb)
-* Colab: [Open in Google Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/introduction_gpc.ipynb)
-
-Introduces polynomial chaos expansions for surrogate modeling and efficient computation of Sobol indices.
-
----
-
-## 5. Interactive exploration with Sobol's $G^{*}$ function
+## 2. G-star benchmark function
 
 * GitHub: [gstar_function.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/gstar_function.ipynb)
 * Colab: [Open in Google Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/gstar_function.ipynb)
 
-Interactive exploration of factor importance, nonlinear effects, and interaction effects using Sobol’s benchmark function.
+Uses Sobol's G-star function to build intuition for parameter importance, interaction effects, and the interpretation of first-order and total-effect Sobol indices.
 
 ---
 
-## Optional: Higher-order interaction indices
+## 3. Sensitivity concepts
 
-* GitHub: [sensitivity_higher_order.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/sensitivity_higher_order.ipynb)
-* Colab: [Open in Google Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/sensitivity_higher_order.ipynb)
+* GitHub: [sensitivity_concepts.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/sensitivity_concepts.ipynb)
+* Colab: [Open in Google Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/sensitivity_concepts.ipynb)
 
-Illustrates second-order and higher-order Sobol indices for interaction models.
+Develops the concepts underlying variance-based sensitivity analysis through interactive examples and visualizations.
+
+---
+
+## 4. Monte Carlo methods
+
+* GitHub: [monte_carlo.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/monte_carlo.ipynb)
+* Colab: [Open in Google Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/monte_carlo.ipynb)
+
+Introduces Monte Carlo uncertainty propagation and Saltelli-based estimation of Sobol sensitivity indices.
+
+---
+
+## 5. Polynomial chaos expansions
+
+* GitHub: [introduction_gpc.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/introduction_gpc.ipynb)
+* Colab: [Open in Google Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/introduction_gpc.ipynb)
+
+Introduces polynomial chaos expansions for uncertainty propagation and sensitivity analysis, and compares them with Monte Carlo methods.
+
+---
+
+## 6. Arterial wall model example
+
+* GitHub: [wall_models.ipynb](https://github.com/lrhgit/uqsa2025/blob/main/wall_models.ipynb)
+* Colab: [Open in Google Colab](https://colab.research.google.com/github/lrhgit/uqsa2025/blob/main/wall_models.ipynb)
+
+Applies Monte Carlo and polynomial chaos methods to arterial wall models and demonstrates uncertainty propagation and sensitivity analysis in an engineering context.
