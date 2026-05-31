@@ -85,10 +85,11 @@ Then you can experiment freely without worrying about breaking anything.
 ## Today's workshop
 
 - G-star: building intuition for importance and interactions
--  uncertainty propagation with Monte Carlo
-- polynomial chaos expansions
-- comparison of methods
+- Sobol sensitivity analysis with Monte Carlo
+- Sobol sensitivity analysis with polynomial chaos
+- wall models: a practical example (if time)
 - discussion and wrap-up
+
 
 ::: notes
 
@@ -97,9 +98,9 @@ The order is deliberate.
 We begin with a simple model that allows us to explore parameter
 importance and interactions in an intuitive way.
 
-We then move on to uncertainty propagation and polynomial chaos,
-before comparing the different approaches and discussing
-interpretation.
+We then move on to Monte Carlo estimation of Sobol sensitivity
+indices and polynomial chaos expansions.
+
+If time permits, we conclude with a practical wall-model example.
 
 :::
-
