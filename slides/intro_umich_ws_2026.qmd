@@ -72,11 +72,6 @@ General recommendations:
 
 The notebooks are intended to be exploratory and robust.
 
-A note on navigation:
-
-- The notebooks include a table of contents for quick navigation.
-- You can jump directly to the section we are discussing.
-- Hidden setup sections can normally be ignored.
 
 ::: notes
 
@@ -84,6 +79,12 @@ The most important practical step is saving your own copy before editing.
 
 Then you can experiment freely without worrying about breaking anything.
 
+
+A note on navigation:
+
+- The notebooks include a table of contents for quick navigation.
+- You can jump directly to the section we are discussing.
+- Hidden setup sections can normally be ignored.
 
 
 :::
