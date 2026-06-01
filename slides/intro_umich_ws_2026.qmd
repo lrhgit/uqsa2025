@@ -90,26 +90,35 @@ A note on navigation:
 :::
 
 
-
 ## Today's workshop
 
 - G-star: building intuition for importance and interactions
+
+- Sensitivity concepts:
+  from scatterplots and conditional variance to Sobol indices
+
 - Sobol sensitivity analysis with Monte Carlo
+
 - Sobol sensitivity analysis with polynomial chaos
-- wall models: a practical example (if time)
-- discussion and wrap-up
+
+- Wall models: a practical example (if time)
+
+- Discussion and wrap-up
 
 
 ::: notes
 
 The order is deliberate.
 
-We begin with a simple model that allows us to explore parameter
-importance and interactions in an intuitive way.
-
-We then move on to Monte Carlo estimation of Sobol sensitivity
-indices and polynomial chaos expansions.
+We begin with a simple model that allows us
+to explore parameter importance and interactions in an intuitive
+way.
+We then build the concepts behind Sobol indices before moving on
+to Monte Carlo and polynomial chaos estimation.
 
 If time permits, we conclude with a practical wall-model example.
-
 :::
+
+
+
+
